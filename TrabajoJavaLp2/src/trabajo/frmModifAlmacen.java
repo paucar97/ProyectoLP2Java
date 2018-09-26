@@ -12,12 +12,12 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
  *
  * @author alulab14
  */
-public class frmAddAlmacen extends javax.swing.JDialog {
+public class frmModifAlmacen extends javax.swing.JDialog {
 
     /**
-     * Creates new form frmAddAlmacen
+     * Creates new form frmModifAlmacen
      */
-    public frmAddAlmacen(java.awt.Frame parent, boolean modal) {
+    public frmModifAlmacen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -37,19 +37,19 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Añadir nuevo almacen");
+        setTitle("Modificar almacen");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Direccion:");
+        jLabel1.setText("Direccion");
 
-        jButton1.setText("Añadir");
+        jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -61,31 +61,29 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(20, 20, 20))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,14 +91,14 @@ public class frmAddAlmacen extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, 
-                  "Se añadio el almacen correctamente","Aviso",
-                  INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, 
+                  "Se modifico el almacen correctamente","Aviso",
+                  INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -121,20 +119,20 @@ public class frmAddAlmacen extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmAddAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmModifAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmAddAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmModifAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmAddAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmModifAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmAddAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmModifAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmAddAlmacen dialog = new frmAddAlmacen(new javax.swing.JFrame(), true);
+                frmModifAlmacen dialog = new frmModifAlmacen(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

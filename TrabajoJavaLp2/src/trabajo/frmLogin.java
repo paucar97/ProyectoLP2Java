@@ -144,7 +144,6 @@ public class frmLogin extends javax.swing.JFrame {
                 
             }
             else{
-                System.out.println(txtPass.getPassword().toString());
                 JOptionPane.showMessageDialog(this, 
                   "Contraseña incorrecta","Advertencia",
                   WARNING_MESSAGE);

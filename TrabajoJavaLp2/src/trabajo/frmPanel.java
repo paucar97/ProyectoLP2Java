@@ -35,7 +35,7 @@ public class frmPanel extends javax.swing.JDialog {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        mnProveedores = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -51,6 +51,7 @@ public class frmPanel extends javax.swing.JDialog {
         jMenuItem9 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Menu");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,13 +88,13 @@ public class frmPanel extends javax.swing.JDialog {
         jMenuItem4.setText("Transportistas");
         jMenu1.add(jMenuItem4);
 
-        mnProveedores.setText("Proveedores");
-        mnProveedores.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem10.setText("Proveedores");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnProveedoresActionPerformed(evt);
+                jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu1.add(mnProveedores);
+        jMenu1.add(jMenuItem10);
 
         jMenuBar1.add(jMenu1);
 
@@ -183,12 +184,6 @@ public class frmPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void mnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProveedoresActionPerformed
-        // TODO add your handling code here:
-        frmProveedores prov=new frmProveedores(null,true);
-        prov.setVisible(true);
-    }//GEN-LAST:event_mnProveedoresActionPerformed
-
     private void mnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProductosActionPerformed
         // TODO add your handling code here:
         frmProductos prod=new frmProductos(null,true);
@@ -214,9 +209,16 @@ public class frmPanel extends javax.swing.JDialog {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
         frmLogin log= new frmLogin();
-        log.setVisible(true);
         this.dispose();
+        log.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        frmProveedores prov=new frmProveedores(null,true);
+        prov.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +274,7 @@ public class frmPanel extends javax.swing.JDialog {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -282,6 +285,5 @@ public class frmPanel extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mnProductos;
-    private javax.swing.JMenuItem mnProveedores;
     // End of variables declaration//GEN-END:variables
 }

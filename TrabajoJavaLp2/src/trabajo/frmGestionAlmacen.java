@@ -5,6 +5,9 @@
  */
 package trabajo;
 
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+
 /**
  *
  * @author alulab14
@@ -33,6 +36,7 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,6 +50,11 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         });
 
         jButton2.setText("Modificar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,19 +66,27 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -78,7 +95,8 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                 .addContainerGap())
@@ -96,10 +114,10 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(194, 194, 194)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,12 +133,25 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        frmAddAlmacen addA=new frmAddAlmacen(null,true);
+        addA.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el almacen?","Aviso",WARNING_MESSAGE);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        frmModifAlmacen mod=new frmModifAlmacen(null,true);
+        mod.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +199,7 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

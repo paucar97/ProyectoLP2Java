@@ -34,10 +34,10 @@ public class frmProductos extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -53,10 +53,6 @@ public class frmProductos extends javax.swing.JDialog {
 
         jTextField1.setText("...");
 
-        jCheckBox1.setText("RUC");
-
-        jCheckBox2.setText("Nombre");
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -67,6 +63,10 @@ public class frmProductos extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jRadioButton1.setText("Codigo");
+
+        jRadioButton2.setText("Nombre");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -76,22 +76,21 @@ public class frmProductos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jRadioButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85)
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(29, 29, 29)
-                                .addComponent(jCheckBox2)))
-                        .addGap(0, 10, Short.MAX_VALUE)))
+                                .addComponent(jRadioButton2))
+                            .addComponent(jTextField1))
+                        .addGap(0, 36, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -105,9 +104,9 @@ public class frmProductos extends javax.swing.JDialog {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118))
@@ -195,9 +194,9 @@ public class frmProductos extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
