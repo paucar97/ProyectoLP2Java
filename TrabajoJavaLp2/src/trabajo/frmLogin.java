@@ -139,7 +139,9 @@ public class frmLogin extends javax.swing.JFrame {
         if(txtUser.getText().compareTo("")!=0 && txtUser.getText().compareTo(usuario)==0){
             if(passString.equals(contra)){
                 frmPanel panel=new frmPanel(this,true);
+                this.dispose();
                 panel.setVisible(true);
+                
             }
             else{
                 System.out.println(txtPass.getPassword().toString());
