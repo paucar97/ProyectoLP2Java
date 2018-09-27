@@ -5,7 +5,6 @@
  */
 package trabajo;
 
-import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -20,7 +19,6 @@ public class frmLogin extends javax.swing.JFrame {
      */
     public frmLogin() {
         initComponents();
-        
     }
 
     /**
@@ -63,25 +61,17 @@ public class frmLogin extends javax.swing.JFrame {
         lblPass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPass.setText("Contraseña:");
 
+        txtUser.setText("Usuario1");
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
-            }
-        });
-        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtUserKeyPressed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Iniciar Sesion");
 
-        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPassKeyPressed(evt);
-            }
-        });
+        txtPass.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,22 +132,29 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        login();
+        String usuario="administrador";
+        String contra="admin123";
+        char[] pass=txtPass.getPassword();
+        String passString=new String(pass);
+        if(txtUser.getText().compareTo("")!=0 && txtUser.getText().compareTo(usuario)==0){
+            if(passString.equals(contra)){
+                frmPanel panel=new frmPanel(this,true);
+                this.dispose();
+                panel.setVisible(true);
+                
+            }
+            else{
+                JOptionPane.showMessageDialog(this, 
+                  "Contraseña incorrecta","Advertencia",
+                  WARNING_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, 
+                  "Usuario incorrecto","Advertencia",
+                  WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            login();
-        }
-    }//GEN-LAST:event_txtUserKeyPressed
-
-    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            login();
-        }
-    }//GEN-LAST:event_txtPassKeyPressed
 
     /**
      * @param args the command line arguments
@@ -192,32 +189,6 @@ public class frmLogin extends javax.swing.JFrame {
                 new frmLogin().setVisible(true);
             }
         });
-    }
-    public void login(){
-        String usuario="admin";
-        String contra="admin123";
-        
-        char[] pass=txtPass.getPassword();
-        String passString=new String(pass);
-        if(txtUser.getText().compareTo("")!=0 && txtUser.getText().compareTo(usuario)==0){
-            if(passString.equals(contra)){
-                frmPanel panel=new frmPanel(this,true);
-                this.dispose();
-                panel.setVisible(true);
-                
-            }
-            else{
-                JOptionPane.showMessageDialog(this, 
-                  "Contraseña incorrecta","Advertencia",
-                  WARNING_MESSAGE);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, 
-                  "Usuario incorrecto","Advertencia",
-                  WARNING_MESSAGE);
-            
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
