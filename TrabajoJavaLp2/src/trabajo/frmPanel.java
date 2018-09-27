@@ -53,11 +53,13 @@ public class frmPanel extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 718, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,9 +152,11 @@ public class frmPanel extends javax.swing.JDialog {
         jMenu7.setText("                                                                                                          ");
         jMenuBar1.add(jMenu7);
 
+        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/001-user.png"))); // NOI18N
         btnLogOut.setText("Usuario");
 
-        jMenuItem9.setText("Log Out");
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/006-exit.png"))); // NOI18N
+        jMenuItem9.setText("Cerrar Sesión");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);

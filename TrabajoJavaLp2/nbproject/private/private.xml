@@ -3,16 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmModifProveedor.java</file>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddAlmacen.java</file>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddDir.java</file>
             <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmModifAlmacen.java</file>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmGestionAlmacen.java</file>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddProd.java</file>
-            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddProveedor.java</file>
             <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmModProd.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmProveedores.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmLogin.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmModifProveedor.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmGestionAlmacen.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/fmrMovimientoAlmacen.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddProd.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmModDir.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddDir.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddProveedor.java</file>
             <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmPanel.java</file>
             <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmProductos.java</file>
+            <file>file:/D:/NetbeansC++/LP2/ProyectoLP2Java/TrabajoJavaLp2/src/trabajo/frmAddAlmacen.java</file>
         </group>
     </open-files>
 </project-private>
