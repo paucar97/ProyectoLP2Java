@@ -13,6 +13,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  * @author alulab14
  */
 public class frmProveedores extends javax.swing.JDialog {
+    public static int i=0;
 
     /**
      * Creates new form frmProveedores
@@ -61,7 +62,7 @@ public class frmProveedores extends javax.swing.JDialog {
 
         jButton3.setBackground(new java.awt.Color(0, 122, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
-        jButton3.setText("Eliminar");
+        jButton3.setText(" Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +73,7 @@ public class frmProveedores extends javax.swing.JDialog {
 
         jButton4.setBackground(new java.awt.Color(0, 122, 204));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png/015-search.png"))); // NOI18N
-        jButton4.setText("Buscar");
+        jButton4.setText(" Buscar");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -96,6 +97,11 @@ public class frmProveedores extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         lblBusqueda.setText("...");
+        lblBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBusquedaMouseClicked(evt);
+            }
+        });
         lblBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lblBusquedaActionPerformed(evt);
@@ -104,13 +110,23 @@ public class frmProveedores extends javax.swing.JDialog {
 
         jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton1.setText("RUC");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton2.setText("Nombre");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 122, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/003-plus.png"))); // NOI18N
-        jButton1.setText("Agregar");
+        jButton1.setText(" Agregar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,9 +135,11 @@ public class frmProveedores extends javax.swing.JDialog {
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(255, 204, 204));
+        btnCancel.setBackground(new java.awt.Color(0, 122, 204));
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
-        btnCancel.setText("Cancelar");
+        btnCancel.setText(" Cancelar");
+        btnCancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnCancel.setContentAreaFilled(false);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -145,8 +163,8 @@ public class frmProveedores extends javax.swing.JDialog {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jButton4)
+                                .addGap(60, 60, 60)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -156,7 +174,7 @@ public class frmProveedores extends javax.swing.JDialog {
                                     .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(361, 361, 361)
-                        .addComponent(btnCancel)))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(82, 82, 82))
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,7 +223,6 @@ public class frmProveedores extends javax.swing.JDialog {
 
     private void lblBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblBusquedaActionPerformed
         // TODO add your handling code here:
-        lblBusqueda.setText("");
     }//GEN-LAST:event_lblBusquedaActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -228,6 +245,29 @@ public class frmProveedores extends javax.swing.JDialog {
         frmModifProveedor modP= new frmModifProveedor(null,true);
         modP.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButton2.isSelected()==true){
+            jRadioButton1.setSelected(true);
+            jRadioButton2.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButton1.isSelected()==true){
+            jRadioButton2.setSelected(true);
+            jRadioButton1.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void lblBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedaMouseClicked
+        // TODO add your handling code here:
+        if(i==0)
+        lblBusqueda.setText("");
+        i++;
+    }//GEN-LAST:event_lblBusquedaMouseClicked
 
     /**
      * @param args the command line arguments

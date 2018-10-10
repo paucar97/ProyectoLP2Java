@@ -69,9 +69,11 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblUser);
         lblUser.setBounds(70, 80, 57, 17);
 
-        btnIngresar.setBackground(new java.awt.Color(204, 255, 204));
+        btnIngresar.setBackground(new java.awt.Color(0, 122, 204));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/006-exit.png"))); // NOI18N
         btnIngresar.setText("Ingresar");
+        btnIngresar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnIngresar.setContentAreaFilled(false);
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -91,6 +93,12 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblPass);
         lblPass.setBounds(70, 150, 85, 17);
 
+        txtUser.setText("usuarioDeEjemplo_123");
+        txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserMouseClicked(evt);
+            }
+        });
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -104,6 +112,17 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(txtUser);
         txtUser.setBounds(70, 100, 289, 35);
 
+        txtPass.setText("Contraseña");
+        txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPassMouseClicked(evt);
+            }
+        });
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPassKeyPressed(evt);
@@ -145,6 +164,20 @@ public class frmLogin extends javax.swing.JFrame {
             login();
         }
     }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
+
+    private void txtUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserMouseClicked
+        // TODO add your handling code here:
+        txtUser.setText("");
+    }//GEN-LAST:event_txtUserMouseClicked
+
+    private void txtPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPassMouseClicked
+        // TODO add your handling code here:
+        txtPass.setText("");
+    }//GEN-LAST:event_txtPassMouseClicked
 
     /**
      * @param args the command line arguments

@@ -88,7 +88,7 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
 
         btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Regresar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnCancelar.setContentAreaFilled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {

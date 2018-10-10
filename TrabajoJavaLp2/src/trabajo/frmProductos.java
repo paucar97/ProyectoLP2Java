@@ -13,6 +13,7 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  * @author alulab14
  */
 public class frmProductos extends javax.swing.JDialog {
+    public static int i=0;
 
     /**
      * Creates new form frmProductos
@@ -87,6 +88,11 @@ public class frmProductos extends javax.swing.JDialog {
         jButton4.setContentAreaFilled(false);
 
         jTextField1.setText("...");
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -103,9 +109,19 @@ public class frmProductos extends javax.swing.JDialog {
 
         jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton1.setText("Codigo");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton2.setText("Nombre");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
@@ -204,6 +220,30 @@ public class frmProductos extends javax.swing.JDialog {
         frmModProd prod=new frmModProd(null,true);
         prod.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButton2.isSelected()==true){
+            jRadioButton1.setSelected(true);
+            jRadioButton2.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButton1.isSelected()==true){
+            jRadioButton2.setSelected(true);
+            jRadioButton1.setSelected(false);
+        }
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        // TODO add your handling code here:
+        
+        if(i==0)
+        jTextField1.setText("");
+        i++;
+    }//GEN-LAST:event_jTextField1MouseClicked
 
     /**
      * @param args the command line arguments
