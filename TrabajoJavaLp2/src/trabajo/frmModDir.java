@@ -43,7 +43,7 @@ public class frmModDir extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ModificarDireccion");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
         jLabel1.setText("Departamento:");
 

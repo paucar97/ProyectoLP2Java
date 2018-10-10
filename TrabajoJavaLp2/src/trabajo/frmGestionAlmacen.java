@@ -42,19 +42,23 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion de Almacenes");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setBackground(new java.awt.Color(0, 122, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setBackground(new java.awt.Color(0, 122, 204));
         jButton2.setText("Modificar");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -71,18 +75,22 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setBackground(new java.awt.Color(0, 122, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
         jButton3.setText("Eliminar");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(255, 204, 204));
+        btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnCancelar.setContentAreaFilled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);

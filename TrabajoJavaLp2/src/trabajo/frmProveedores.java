@@ -46,29 +46,35 @@ public class frmProveedores extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proveedores");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
         jPanel1.setToolTipText("");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setBackground(new java.awt.Color(0, 122, 204));
         jButton2.setText("Modificar");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setBackground(new java.awt.Color(0, 122, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
         jButton3.setText("Eliminar");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton3.setContentAreaFilled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
+        jButton4.setBackground(new java.awt.Color(0, 122, 204));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png/015-search.png"))); // NOI18N
         jButton4.setText("Buscar");
+        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton4.setContentAreaFilled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -77,7 +83,7 @@ public class frmProveedores extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 204));
+        jTable1.setBackground(new java.awt.Color(0, 122, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -86,6 +92,7 @@ public class frmProveedores extends javax.swing.JDialog {
                 "Nombre", "RUC", "E-mail", "Teléfono", "Direcciones"
             }
         ));
+        jTable1.setGridColor(new java.awt.Color(0, 122, 204));
         jScrollPane1.setViewportView(jTable1);
 
         lblBusqueda.setText("...");
@@ -95,15 +102,17 @@ public class frmProveedores extends javax.swing.JDialog {
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton1.setText("RUC");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton2.setText("Nombre");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setBackground(new java.awt.Color(0, 122, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Agregar");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -157,7 +166,7 @@ public class frmProveedores extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(lblBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addComponent(lblBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioButton1)
@@ -169,7 +178,6 @@ public class frmProveedores extends javax.swing.JDialog {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)

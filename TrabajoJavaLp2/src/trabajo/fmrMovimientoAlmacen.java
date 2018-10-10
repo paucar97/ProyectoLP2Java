@@ -51,7 +51,7 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
         setBackground(new java.awt.Color(255, 255, 204));
         setForeground(new java.awt.Color(255, 255, 204));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Elija el almacén:");
@@ -61,7 +61,7 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
 
         jLabel2.setText("Elija el producto:");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton1.setText("ID");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,12 +69,14 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton2.setText("Nombre");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
+        jButton3.setBackground(new java.awt.Color(0, 122, 204));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png/015-search.png"))); // NOI18N
         jButton3.setText("Buscar");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton3.setContentAreaFilled(false);
 
         jTextField1.setText("...");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,18 +107,22 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Coloque el aumento de stock:");
 
-        jButton2.setBackground(new java.awt.Color(255, 204, 204));
+        jButton2.setBackground(new java.awt.Color(0, 122, 204));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/004-error.png"))); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setBackground(new java.awt.Color(0, 122, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trabajo/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Aumentar");
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
