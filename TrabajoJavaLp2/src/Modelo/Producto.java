@@ -23,6 +23,16 @@ public class Producto {
         this.minimoStock = minimoStock;
         this.stock=0;
     }
+    public Producto(String codigo, String nombre, String descripcion, double precio, Medida um, int tipo, int minimoStock, int stock) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.um = um;
+        this.tipo = tipo;
+        this.minimoStock = minimoStock;
+        this.stock=stock;
+    }
     
     public Producto(){
         this.stock=0;

@@ -5,8 +5,17 @@
  */
 package Vista;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import modelo.Almacen;
+import modelo.Medida;
+import modelo.Producto;
 
 /**
  *
@@ -19,7 +28,43 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
      */
     public frmGestionAlmacen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
         initComponents();
+        
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        try{
+            almacenes=listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+    }
+public ArrayList<Almacen> listarAlmacenes()throws Exception{
+        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+            Statement cadena=con.createStatement();
+            String sql="SELECT * FROM n_almacen";
+            ResultSet rs=cadena.executeQuery(sql);
+            Medida med;
+            while(rs.next()){
+                int codigo=rs.getInt("id_almacen");
+                String direccion=rs.getString("direccion");
+                int num = rs.getInt("numProdDif");
+                Almacen almacen=new Almacen(codigo,direccion,num);
+                almacenes.add(almacen);
+               
+            }
+            con.close();
+       
+        return almacenes;
     }
 
     /**

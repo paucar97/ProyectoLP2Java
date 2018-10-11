@@ -5,8 +5,17 @@
  */
 package Vista;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import modelo.Almacen;
+import modelo.Medida;
+import modelo.Producto;
 
 /**
  *
@@ -19,7 +28,99 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
      */
     public fmrMovimientoAlmacen(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
+        ArrayList<Producto> productos=new ArrayList<Producto>();
         initComponents();
+        
+        DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
+        try{
+            productos=listarProductos();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<productos.size();i++){
+                rowData[0]=productos.get(i).getCodigo();
+                rowData[1]=productos.get(i).getNombre();
+                rowData[2]=productos.get(i).getStock();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+        
+        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();        
+        try{
+            almacenes=listarAlmacenes();
+            for(Almacen almacen:almacenes){
+                jComboBox1.addItem(almacen.getDireccion());
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+    }
+public ArrayList<Almacen> listarAlmacenes()throws Exception{
+        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+            Statement cadena=con.createStatement();
+            String sql="SELECT * FROM n_almacen";
+            ResultSet rs=cadena.executeQuery(sql);
+            Medida med;
+            while(rs.next()){
+                int codigo=rs.getInt("id_almacen");
+                String direccion=rs.getString("direccion");
+                int num = rs.getInt("numProdDif");
+                Almacen almacen=new Almacen(codigo,direccion,num);
+                almacenes.add(almacen);
+               
+            }
+            con.close();
+       
+        return almacenes;
+    
+    }
+public ArrayList<Producto> listarProductos()throws Exception{
+        ArrayList<Producto> productos=new ArrayList<Producto>();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+            Statement cadena=con.createStatement();
+            String sql="SELECT * FROM n_producto";
+            ResultSet rs=cadena.executeQuery(sql);
+            Medida med;
+            while(rs.next()){
+                String codigo=rs.getString("id_producto");
+                String nombre=rs.getString("nombre");
+                double precio=rs.getFloat("precio");
+                String desc=rs.getString("descripcion");
+                int stock=rs.getInt("stock");
+                int tipo=rs.getInt("tipo");
+                int stockMin=rs.getInt("stokcMinimo");
+                String unidad=rs.getString("UnidMedida");
+            
+                
+                if(unidad.compareTo("UNIDAD")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock);
+                    productos.add(prod);
+                }else if(unidad.compareTo("CENTENA")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock);
+                    productos.add(prod);
+                }else if(unidad.compareTo("METRO")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock);
+                    productos.add(prod);
+                }else if(unidad.compareTo("BOLSA")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock);
+                    productos.add(prod);
+                }else if(unidad.compareTo("DOCENA")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock);
+                    productos.add(prod);
+                }else if(unidad.compareTo("KILOGRAMO")==0){
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock);
+                    productos.add(prod);
+                }            
+            }
+            con.close();
+       
+        return productos;
     }
 
     /**
@@ -60,7 +161,7 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, -1));
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Almacen A", "Almacen B", "Almacen C" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 228, -1));
 
         jLabel2.setText("Elija el Filtro:");
@@ -121,6 +222,7 @@ public class fmrMovimientoAlmacen extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane3.setViewportView(jTable3);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 296, 200));

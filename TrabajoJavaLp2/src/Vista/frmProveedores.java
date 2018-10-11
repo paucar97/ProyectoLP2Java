@@ -5,8 +5,16 @@
  */
 package Vista;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import modelo.Almacen;
+import modelo.Medida;
+import modelo.Proveedor;
 
 /**
  *
@@ -20,7 +28,46 @@ public class frmProveedores extends javax.swing.JDialog {
      */
     public frmProveedores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
         initComponents();
+        
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        try{
+            proveedores=listarProveedores();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<proveedores.size();i++){
+                rowData[0]=proveedores.get(i).getRazonSoc();
+                rowData[1]=proveedores.get(i).getRuc();
+                rowData[2]=proveedores.get(i).getEmail();
+                rowData[3]=proveedores.get(i).getTelefono();
+                rowData[4]=proveedores.get(i).getDireccion();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+    }
+public ArrayList<Proveedor> listarProveedores()throws Exception{
+        ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+            Statement cadena=con.createStatement();
+            String sql="SELECT * FROM n_proveedores";
+            ResultSet rs=cadena.executeQuery(sql);
+            while(rs.next()){
+                String razon=rs.getString("nombre_empresa");
+                String email=rs.getString("email");
+                int ruc = rs.getInt("ruc");
+                int telefono=rs.getInt("telefono");
+                String direccion=rs.getString("direccion");
+                Proveedor proveedor=new Proveedor(ruc,razon,direccion,telefono,email);
+                proveedores.add(proveedor);
+               
+            }
+            con.close();
+       
+        return proveedores;
     }
 
     /**
@@ -85,13 +132,13 @@ public class frmProveedores extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
-        jTable1.setBackground(new java.awt.Color(0, 122, 204));
+        jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "RUC", "E-mail", "Teléfono", "Direcciones"
+                "Razon Social", "RUC", "E-mail", "Teléfono", "Direccion"
             }
         ));
         jTable1.setGridColor(new java.awt.Color(0, 122, 204));

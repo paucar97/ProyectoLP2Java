@@ -175,7 +175,6 @@ public class frmAddProveedor extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this,
             "Se añadio el proveedor correctamente","Aviso",
             INFORMATION_MESSAGE);
-        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

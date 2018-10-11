@@ -73,22 +73,22 @@ public ArrayList<Producto> listarProductos()throws Exception{
             
                 
                 if(unidad.compareTo("UNIDAD")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock);
                     productos.add(prod);
                 }else if(unidad.compareTo("CENTENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock);
                     productos.add(prod);
                 }else if(unidad.compareTo("METRO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock);
                     productos.add(prod);
                 }else if(unidad.compareTo("BOLSA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock);
                     productos.add(prod);
                 }else if(unidad.compareTo("DOCENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock);
                     productos.add(prod);
                 }else if(unidad.compareTo("KILOGRAMO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock);
                     productos.add(prod);
                 }            
             }

@@ -192,6 +192,7 @@ public class frmModProd extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, 
                   "Se modificó el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

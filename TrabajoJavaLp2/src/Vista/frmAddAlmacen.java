@@ -5,8 +5,13 @@
  */
 package Vista;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
 /**
  *
@@ -115,10 +120,28 @@ public class frmAddAlmacen extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, 
-                  "Se añadio el almacen correctamente","Aviso",
-                  INFORMATION_MESSAGE);
-        this.dispose();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        
+            Connection con=DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+            System.out.println("Se ha establecido la conexion");
+        
+            //Statement sentencia=con.createStatement();
+            String dir=jTextField1.getText();
+            String sql="insert into n_almacen(direccion) values (?);";
+            //sql=sql.replaceAll("\\\\", "");
+            PreparedStatement pstmt=con.prepareStatement(sql);
+            pstmt.setString(1,dir);
+            pstmt.executeUpdate();
+            //sentencia.executeUpdate(sql);
+            
+            JOptionPane.showMessageDialog(this, 
+                                        "Se añadio el almacen correctamente","Aviso",
+                                        INFORMATION_MESSAGE);
+            con.close();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Error de insercion","Error",WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
