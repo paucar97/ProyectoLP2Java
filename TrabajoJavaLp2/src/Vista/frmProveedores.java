@@ -99,6 +99,7 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
         jPanel1.setToolTipText("");
 
         jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton2.setContentAreaFilled(false);

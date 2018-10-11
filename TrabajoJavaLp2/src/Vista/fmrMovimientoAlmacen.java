@@ -165,7 +165,7 @@ public ArrayList<Producto> listarProductos()throws Exception{
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 228, -1));
 
         jLabel2.setText("Elija el Filtro:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, 20));
 
         jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
         jRadioButton1.setText("ID");

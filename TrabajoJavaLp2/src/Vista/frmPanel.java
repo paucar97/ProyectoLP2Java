@@ -94,6 +94,7 @@ public class frmPanel extends javax.swing.JDialog {
         jButton12.setBackground(new java.awt.Color(0, 122, 204));
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/016-plus-1.png"))); // NOI18N
         jButton12.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton12.setBorderPainted(false);
         jButton12.setContentAreaFilled(false);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,31 +104,31 @@ public class frmPanel extends javax.swing.JDialog {
         panel0.add(jButton12);
 
         jButton1.setBackground(new java.awt.Color(0, 122, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-code.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         panel0.add(jButton1);
 
         jButton2.setBackground(new java.awt.Color(0, 122, 204));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/009-pdf.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/005-box.png"))); // NOI18N
         jButton2.setBorder(null);
         jButton2.setContentAreaFilled(false);
         panel0.add(jButton2);
 
         jButton3.setBackground(new java.awt.Color(0, 122, 204));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/006-exit.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-shop.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.setContentAreaFilled(false);
         panel0.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(0, 122, 204));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/011-man.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/007-cash.png"))); // NOI18N
         jButton4.setBorder(null);
         jButton4.setContentAreaFilled(false);
         panel0.add(jButton4);
 
         jButton10.setBackground(new java.awt.Color(0, 122, 204));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/005-lock.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-report.png"))); // NOI18N
         jButton10.setBorder(null);
         jButton10.setContentAreaFilled(false);
         panel0.add(jButton10);
