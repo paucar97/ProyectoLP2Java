@@ -24,6 +24,22 @@ public class Almacen {
     private int idalmacen;
     private String direccion;
     private int numDifProd;
+    private int estado;
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Almacen(int idalmacen, String direccion, int numDifProd, int estado) {
+        this.idalmacen = idalmacen;
+        this.direccion = direccion;
+        this.numDifProd = numDifProd;
+        this.estado = estado;
+    }
 
     public int getNumDifProd() {
         return numDifProd;

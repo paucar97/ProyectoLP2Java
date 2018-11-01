@@ -5,13 +5,18 @@
  */
 package Vista;
 
+import LogicaDeNegocio.AlmacenesBL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
+import javafx.scene.chart.PieChart;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -121,27 +126,23 @@ public class frmAddAlmacen extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        
-            Connection con=DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
-            System.out.println("Se ha establecido la conexion");
-        
-            //Statement sentencia=con.createStatement();
+            AlmacenesBL almacenBL=new AlmacenesBL();
             String dir=jTextField1.getText();
-            String sql="insert into n_almacen(direccion) values (?);";
-            //sql=sql.replaceAll("\\\\", "");
-            PreparedStatement pstmt=con.prepareStatement(sql);
-            pstmt.setString(1,dir);
-            pstmt.executeUpdate();
-            //sentencia.executeUpdate(sql);
-            
+            Date fecha=new Date();
+            Calendar cal=Calendar.getInstance();
+            cal.setTime(fecha);
+            String anho=String.valueOf(cal.get(Calendar.YEAR));
+            String mes=String.valueOf(cal.get(Calendar.MONTH)+1);
+            String dia=String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+            String fechaS=anho+"-"+mes+"-"+dia;
+            almacenBL.insertarAlmacen(fechaS, dir);
             JOptionPane.showMessageDialog(this, 
                                         "Se añadio el almacen correctamente","Aviso",
                                         INFORMATION_MESSAGE);
-            con.close();
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,"Error de insercion","Error",WARNING_MESSAGE);
         }
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

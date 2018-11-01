@@ -19,6 +19,9 @@ import modelo.Producto;
  * @author MARTIN RAMIREZ
  */
 public class ProductosDA {
+    public ProductosDA(){
+        
+    }
     public ArrayList<Producto> listarProductos()throws Exception{
         ArrayList<Producto> productos=new ArrayList<Producto>();
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -37,25 +40,31 @@ public class ProductosDA {
                 int tipo=rs.getInt("tipo");
                 int stockMin=rs.getInt("stokcMinimo");
                 String unidad=rs.getString("UnidMedida");
-            
+                int estado=rs.getInt("estado");
                 
                 if(unidad.compareTo("UNIDAD")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("CENTENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("METRO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("BOLSA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("DOCENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("KILOGRAMO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock);
+                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock,estado);
+                    if(prod.getEstado()==1)
                     productos.add(prod);
                 }            
             }

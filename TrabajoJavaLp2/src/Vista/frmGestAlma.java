@@ -5,8 +5,12 @@
  */
 package Vista;
 
+import LogicaDeNegocio.AlmacenesBL;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import modelo.Almacen;
 
 /**
  *
@@ -18,7 +22,22 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
      * Creates new form frmGestAlma
      */
     public frmGestAlma() {
+        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
         initComponents();
+        AlmacenesBL almacenBL=new AlmacenesBL();
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
     }
 
     /**
@@ -38,7 +57,8 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(500, 369));
+        setMinimumSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(650, 450));
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -64,6 +84,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -116,7 +137,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
+                .addGap(254, 254, 254))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,8 +148,8 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -151,6 +172,27 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         frmAddAlmacen addA=new frmAddAlmacen(null,true);
         addA.setVisible(true);
+        if(addA.isVisible()==false){
+//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+            
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
