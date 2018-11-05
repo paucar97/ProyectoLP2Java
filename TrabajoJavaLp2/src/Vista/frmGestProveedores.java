@@ -5,11 +5,14 @@
  */
 package Vista;
 
+import LogicaDeNegocio.ProductosBL;
 import LogicaDeNegocio.ProveedoresBL;
 import static Vista.frmPanel.i;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
+import modelo.Producto;
 import modelo.Proveedor;
 
 /**
@@ -21,7 +24,9 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmGestProveedores
      */
+    public Proveedor proveedor;
     public frmGestProveedores() {
+        proveedor=new Proveedor();
         ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
         initComponents();
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
@@ -237,13 +242,79 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        frmModifProveedor modP= new frmModifProveedor(null,true);
+       int row;
+        if(jTable1.getSelectedRow()!=-1){
+            row = jTable1.getSelectedRow();
+            String razon=jTable1.getModel().getValueAt(row,0).toString();
+            String ruc=jTable1.getModel().getValueAt(row,1).toString();
+            String email=jTable1.getModel().getValueAt(row,2).toString();
+            int telefono=Integer.parseInt(jTable1.getModel().getValueAt(row,3).toString());
+            String dir=jTable1.getModel().getValueAt(row,4).toString();
+
+            proveedor.setRazonSoc(razon);
+            proveedor.setEmail(email);
+            proveedor.setTelefono(telefono);
+            proveedor.setDireccion(dir);
+            
+        frmModifProveedor modP= new frmModifProveedor(null,true,proveedor,ruc);
         modP.setVisible(true);
+        
+        if(modP.isVisible()==false){
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+            ProveedoresBL proveedorBL=new ProveedoresBL();
+            try{
+                model.setRowCount(0);
+                ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+                proveedores=proveedorBL.listarProveedores();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+                System.out.println("Error de bd");
+            }
+        }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el proveedor","Advertencia",WARNING_MESSAGE);   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el proveedor?","Aviso",2);
+        int result=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el proveedor?");
+        if(result==JOptionPane.YES_OPTION){
+            int column=1;
+            int row=jTable1.getSelectedRow();
+            String ruc=jTable1.getModel().getValueAt(row, column).toString();
+            
+            ProveedoresBL provBL=new ProveedoresBL();
+            try{
+                provBL.eliminarProveedor(ruc);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            
+            ArrayList<Proveedor>proveedores=new ArrayList<Proveedor>();
+            try{
+            proveedores=provBL.listarProveedores();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<proveedores.size();i++){
+                rowData[0]=proveedores.get(i).getRazonSoc();
+                rowData[1]=proveedores.get(i).getRuc();
+                rowData[2]=proveedores.get(i).getEmail();
+                rowData[3]=proveedores.get(i).getTelefono();
+                rowData[4]=proveedores.get(i).getDireccion();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+           System.out.println("Error de bd");
+        }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

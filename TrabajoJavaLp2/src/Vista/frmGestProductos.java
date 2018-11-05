@@ -264,52 +264,52 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int row;
         if(tblProd.getSelectedRow()!=-1){
-        row = tblProd.getSelectedRow();
-        String cod=tblProd.getModel().getValueAt(row,0).toString();
-        String nombre=tblProd.getModel().getValueAt(row,1).toString();
-        String desc=tblProd.getModel().getValueAt(row,2).toString();
-        double precio=Double.parseDouble(tblProd.getModel().getValueAt(row,3).toString());
-        String unidad=tblProd.getModel().getValueAt(row,4).toString();
-        int tipo=Integer.parseInt(tblProd.getModel().getValueAt(row,5).toString());
-        int stock=Integer.parseInt(tblProd.getModel().getValueAt(row,6).toString());
-        int stockMin=Integer.parseInt(tblProd.getModel().getValueAt(row,7).toString());
-        
-        producto.setCodigo(cod);
-        producto.setNombre(nombre);
-        producto.setDescripcion(desc);
-        producto.setPrecio(precio);
-        producto.setTipo(tipo);
-        producto.setStock(stock);
-        producto.setMinimoStock(stockMin);
-        
-        frmModProd prod=new frmModProd(null,true,producto,unidad);
-        prod.setVisible(true);
-        
-        if(prod.isVisible()==false){
-//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
-            DefaultTableModel model=(DefaultTableModel)tblProd.getModel();
-            model.setRowCount(0);
-            ProductosBL prodBL=new ProductosBL();
-            ArrayList<Producto>productos=new ArrayList<Producto>();
-            try{
-            productos=prodBL.listarProductos();
-            Object rowData[]=new Object[8];
-            for(int i=0;i<productos.size();i++){
-                rowData[0]=productos.get(i).getCodigo();
-                rowData[1]=productos.get(i).getNombre();
-                rowData[2]=productos.get(i).getDescripcion();
-                rowData[3]=productos.get(i).getPrecio();
-                rowData[4]=productos.get(i).getUm();
-                rowData[5]=productos.get(i).getTipo();
-                rowData[6]=productos.get(i).getStock();
-                rowData[7]=productos.get(i).getMinimoStock();    
-                model.addRow(rowData);
+            row = tblProd.getSelectedRow();
+            String cod=tblProd.getModel().getValueAt(row,0).toString();
+            String nombre=tblProd.getModel().getValueAt(row,1).toString();
+            String desc=tblProd.getModel().getValueAt(row,2).toString();
+            double precio=Double.parseDouble(tblProd.getModel().getValueAt(row,3).toString());
+            String unidad=tblProd.getModel().getValueAt(row,4).toString();
+            int tipo=Integer.parseInt(tblProd.getModel().getValueAt(row,5).toString());
+            int stock=Integer.parseInt(tblProd.getModel().getValueAt(row,6).toString());
+            int stockMin=Integer.parseInt(tblProd.getModel().getValueAt(row,7).toString());
+
+            producto.setCodigo(cod);
+            producto.setNombre(nombre);
+            producto.setDescripcion(desc);
+            producto.setPrecio(precio);
+            producto.setTipo(tipo);
+            producto.setStock(stock);
+            producto.setMinimoStock(stockMin);
+
+            frmModProd prod=new frmModProd(null,true,producto,unidad);
+            prod.setVisible(true);
+
+            if(prod.isVisible()==false){
+    //            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+                DefaultTableModel model=(DefaultTableModel)tblProd.getModel();
+                model.setRowCount(0);
+                ProductosBL prodBL=new ProductosBL();
+                ArrayList<Producto>productos=new ArrayList<Producto>();
+                try{
+                productos=prodBL.listarProductos();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=productos.get(i).getCodigo();
+                    rowData[1]=productos.get(i).getNombre();
+                    rowData[2]=productos.get(i).getDescripcion();
+                    rowData[3]=productos.get(i).getPrecio();
+                    rowData[4]=productos.get(i).getUm();
+                    rowData[5]=productos.get(i).getTipo();
+                    rowData[6]=productos.get(i).getStock();
+                    rowData[7]=productos.get(i).getMinimoStock();    
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+               System.out.println("Error de bd");
             }
-        }catch (Exception e){
-           System.out.println("Error de bd");
         }
-            
-        }}else        JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);
+    }else        JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

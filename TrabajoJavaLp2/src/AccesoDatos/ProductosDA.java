@@ -102,12 +102,12 @@ public class ProductosDA {
         comando.execute();
         con.close();
     }
-    public void modificarProducto(Producto prod, String unidad)throws Exception{
+    public void modificarProducto(Producto prod, String unidad, String idBuscar)throws Exception{
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
         
         CallableStatement comando=con.prepareCall("{call modificarProducto(?,"
-                                                    + "?,?,?,?,?,?,?)}");
+                                                    + "?,?,?,?,?,?,?,?)}");
         comando.setString("_id_producto",prod.getCodigo());
         comando.setString("_nombre",prod.getNombre());
         comando.setString("_UnidMedida",unidad);
@@ -118,6 +118,7 @@ public class ProductosDA {
         comando.setInt("_stock",prod.getStock());
         comando.setInt("_tipo", prod.getTipo());
         comando.setInt("_stokcMinimo", prod.getMinimoStock());
+        comando.setString("_idB", idBuscar);
         comando.execute();
         con.close();
     }

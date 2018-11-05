@@ -59,4 +59,28 @@ public class ProveedoresDA {
         comando.execute();
         con.close();
    }
+   public void eliminarProveedor(String ruc)throws Exception{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call eliminarProveedor(?)}");
+        comando.setString("_ruc",ruc);
+        comando.execute();
+        con.close();
+   }
+   public void modificarProveedor(Proveedor prov,String rucB,String ruc)throws Exception{
+       Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call modificarProveedor(?,"
+                                                    + "?,?,?,?,?)}");
+        comando.setString("_ruc",ruc);
+        comando.setString("_nombre_empresa",prov.getRazonSoc().toUpperCase());
+        comando.setString("_direccion",prov.getDireccion().toUpperCase());
+        comando.setInt("_telefono", prov.getTelefono());
+        comando.setString("_email", prov.getEmail());
+        comando.setString("_rucModif", rucB);
+        comando.execute();
+        con.close();
+   }
 }

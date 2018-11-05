@@ -28,8 +28,8 @@ public class ProductosBL {
     public void eliminarProducto(String id)throws Exception{
         productoDA.eliminarProducto(id);
     }
-    public void modificarProducto(Producto prod,String unidad)throws Exception{
-        productoDA.modificarProducto(prod, unidad);
+    public void modificarProducto(Producto prod,String unidad,String idBuscar)throws Exception{
+        productoDA.modificarProducto(prod, unidad,idBuscar);
     }
             
 }

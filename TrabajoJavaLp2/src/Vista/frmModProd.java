@@ -224,7 +224,7 @@ public class frmModProd extends javax.swing.JDialog {
 
             Producto product=new Producto(id, nombre, desc,precio,Medida.unidad, tipo, stockMin, stockP);
             
-            prodBL.modificarProducto(product,unidad);
+            prodBL.modificarProducto(product,unidad,this.id);
             JOptionPane.showMessageDialog(this, 
                   "Se modificó el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);

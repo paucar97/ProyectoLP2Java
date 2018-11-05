@@ -24,4 +24,10 @@ public class ProveedoresBL {
     public void insertarProveedor(Proveedor prov)throws Exception{
         provedorDA.insertarProveedor(prov);
     }
+    public void eliminarProveedor(String ruc)throws Exception{
+        provedorDA.eliminarProveedor(ruc);
+    }
+    public void modificarProveedor(Proveedor prov,String rucB,String ruc)throws Exception{
+        provedorDA.modificarProveedor(prov,rucB,ruc);
+    }
 }
