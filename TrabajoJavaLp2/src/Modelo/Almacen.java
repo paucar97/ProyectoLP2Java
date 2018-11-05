@@ -26,6 +26,9 @@ public class Almacen {
     private int numDifProd;
     private int estado;
 
+    public Almacen() {
+    }
+
     public int getEstado() {
         return estado;
     }

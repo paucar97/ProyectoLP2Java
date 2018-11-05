@@ -21,4 +21,15 @@ public class ProductosBL {
     public ArrayList<Producto> listarProductos()throws Exception{
         return productoDA.listarProductos();
     }
+    public void insertarProducto(String id, String nombre, String medida, 
+            double precio, String desc, int stock, int tipo, int stockMin, int estado)throws Exception{
+        productoDA.insertarProducto(id, nombre, medida, precio, desc, stock, tipo, stockMin, estado);
+    }
+    public void eliminarProducto(String id)throws Exception{
+        productoDA.eliminarProducto(id);
+    }
+    public void modificarProducto(Producto prod,String unidad)throws Exception{
+        productoDA.modificarProducto(prod, unidad);
+    }
+            
 }

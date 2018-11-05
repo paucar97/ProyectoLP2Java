@@ -281,6 +281,26 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         frmAddProveedor addP= new frmAddProveedor(null, true);
         addP.setVisible(true);
+        if (addP.isVisible()==false){
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+            ProveedoresBL proveedorBL=new ProveedoresBL();
+            try{
+                model.setRowCount(0);
+                ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+                proveedores=proveedorBL.listarProveedores();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+                System.out.println("Error de bd");
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

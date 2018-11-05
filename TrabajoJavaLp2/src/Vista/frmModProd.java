@@ -5,8 +5,13 @@
  */
 package Vista;
 
+import LogicaDeNegocio.ProductosBL;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static jdk.nashorn.internal.objects.NativeMath.round;
+import modelo.Medida;
+import modelo.Producto;
 
 /**
  *
@@ -17,9 +22,22 @@ public class frmModProd extends javax.swing.JDialog {
     /**
      * Creates new form frmModProd
      */
-    public frmModProd(java.awt.Frame parent, boolean modal) {
+    private String id;
+    private int stockP;
+    public frmModProd(java.awt.Frame parent, boolean modal,Producto prod, String unidad) {
         super(parent, modal);
         initComponents();
+        txtnombre.setText(prod.getNombre());
+        txtcod.setText(prod.getCodigo());
+        txtdesc.setText(prod.getDescripcion());
+        txtmin.setText(Integer.toString(prod.getMinimoStock()));
+        txtprecio.setText(Double.toString(prod.getPrecio()));
+        cbounidad.setSelectedItem(0);
+        if(prod.getTipo()==1)
+            radalta.setSelected(true);
+        else rarreg.setSelected(true);
+        id=prod.getCodigo();
+        stockP=prod.getStock();
     }
 
     /**
@@ -38,18 +56,18 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtnombre = new javax.swing.JTextField();
+        txtdesc = new javax.swing.JTextField();
+        txtprecio = new javax.swing.JTextField();
+        txtmin = new javax.swing.JTextField();
+        cbounidad = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radalta = new javax.swing.JRadioButton();
+        rarreg = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtcod = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar Producto");
@@ -83,30 +101,30 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel6.setText("Stock Mínimo:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(50, 260, 90, 14);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(160, 10, 200, 30);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(160, 90, 200, 30);
+        jPanel1.add(txtnombre);
+        txtnombre.setBounds(160, 10, 200, 30);
+        jPanel1.add(txtdesc);
+        txtdesc.setBounds(160, 90, 200, 30);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtprecioActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(160, 130, 35, 30);
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(160, 250, 60, 30);
+        jPanel1.add(txtprecio);
+        txtprecio.setBounds(160, 130, 50, 30);
+        jPanel1.add(txtmin);
+        txtmin.setBounds(160, 250, 60, 30);
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbounidad.setBackground(new java.awt.Color(255, 255, 204));
+        cbounidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
+        cbounidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbounidadActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(160, 180, 80, 20);
+        jPanel1.add(cbounidad);
+        cbounidad.setBounds(160, 180, 80, 20);
 
         jButton1.setBackground(new java.awt.Color(0, 122, 204));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
@@ -134,25 +152,25 @@ public class frmModProd extends javax.swing.JDialog {
         jPanel1.add(jButton2);
         jButton2.setBounds(60, 310, 100, 33);
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton1.setText("Alta demanda");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radalta.setBackground(new java.awt.Color(0, 122, 204));
+        radalta.setText("Alta demanda");
+        radalta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radaltaActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1);
-        jRadioButton1.setBounds(160, 220, 110, 23);
+        jPanel1.add(radalta);
+        radalta.setBounds(160, 220, 110, 23);
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton2.setText("Regular");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        rarreg.setBackground(new java.awt.Color(0, 122, 204));
+        rarreg.setText("Regular");
+        rarreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rarregActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton2);
-        jRadioButton2.setBounds(270, 220, 90, 23);
+        jPanel1.add(rarreg);
+        rarreg.setBounds(270, 220, 90, 23);
 
         jLabel7.setText("S/.");
         jPanel1.add(jLabel7);
@@ -161,8 +179,8 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel8.setText("Codigo:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(50, 60, 80, 14);
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(160, 50, 90, 30);
+        jPanel1.add(txtcod);
+        txtcod.setBounds(160, 50, 90, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,37 +201,57 @@ public class frmModProd extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbounidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbounidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbounidadActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, 
+        
+        try{
+            ProductosBL prodBL=new ProductosBL();           
+            String nombre=txtnombre.getText();
+            String desc=txtdesc.getText();
+            String id=txtcod.getText().toUpperCase();
+            String unidad=cbounidad.getSelectedItem().toString().toUpperCase();
+            double precio=Double.parseDouble(txtprecio.getText());
+            
+            int tipo;
+            if(radalta.isSelected()==true)
+                tipo=1;
+            else tipo=0;
+            int stockMin=Integer.parseInt(txtmin.getText());
+
+            Producto product=new Producto(id, nombre, desc,precio,Medida.unidad, tipo, stockMin, stockP);
+            
+            prodBL.modificarProducto(product,unidad);
+            JOptionPane.showMessageDialog(this, 
                   "Se modificó el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);
+        }catch(Exception ex){}
         this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radaltaActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton2.isSelected()==true){
-            jRadioButton1.setSelected(true);
-            jRadioButton2.setSelected(false);
+        if(rarreg.isSelected()==true){
+            radalta.setSelected(true);
+            rarreg.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radaltaActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rarregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rarregActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton1.isSelected()==true){
-            jRadioButton2.setSelected(true);
-            jRadioButton1.setSelected(false);
+        if(radalta.isSelected()==true){
+            rarreg.setSelected(true);
+            radalta.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rarregActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtprecioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,7 +283,7 @@ public class frmModProd extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmModProd dialog = new frmModProd(new javax.swing.JFrame(), true);
+                frmModProd dialog = new frmModProd(new javax.swing.JFrame(), true,null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -258,9 +296,9 @@ public class frmModProd extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbounidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -270,12 +308,12 @@ public class frmModProd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JRadioButton radalta;
+    private javax.swing.JRadioButton rarreg;
+    private javax.swing.JTextField txtcod;
+    private javax.swing.JTextField txtdesc;
+    private javax.swing.JTextField txtmin;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
 }

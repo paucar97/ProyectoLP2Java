@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import LogicaDeNegocio.ProductosBL;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
@@ -33,23 +34,23 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtdesc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtprecio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbunidad = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtStockMin = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radAlta = new javax.swing.JRadioButton();
+        radRegular = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtcodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
@@ -61,29 +62,29 @@ public class frmAddProd extends javax.swing.JDialog {
         jLabel2.setText("Nombre:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 30, 60, 20);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(150, 20, 200, 30);
+        jPanel1.add(txtnombre);
+        txtnombre.setBounds(150, 20, 200, 30);
 
         jLabel3.setText("Descripción:");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(40, 104, 80, 20);
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(150, 100, 200, 30);
+        jPanel1.add(txtdesc);
+        txtdesc.setBounds(150, 100, 200, 30);
 
         jLabel4.setText("Precio:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 144, 60, 20);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(150, 140, 50, 30);
+        jPanel1.add(txtprecio);
+        txtprecio.setBounds(150, 140, 50, 30);
 
         jLabel5.setText("Unidad de Medida:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(40, 190, 110, 14);
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(150, 190, 100, 20);
+        cmbunidad.setBackground(new java.awt.Color(255, 255, 204));
+        cmbunidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
+        jPanel1.add(cmbunidad);
+        cmbunidad.setBounds(150, 190, 100, 20);
 
         jLabel6.setText("Tipo:");
         jPanel1.add(jLabel6);
@@ -92,8 +93,8 @@ public class frmAddProd extends javax.swing.JDialog {
         jLabel7.setText("Stock Mínimo:");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(40, 270, 90, 14);
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(150, 260, 50, 30);
+        jPanel1.add(txtStockMin);
+        txtStockMin.setBounds(150, 260, 50, 30);
 
         jButton2.setBackground(new java.awt.Color(0, 122, 204));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
@@ -121,25 +122,25 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(jButton1);
         jButton1.setBounds(60, 310, 100, 29);
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton1.setText("Alta demanda");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radAlta.setBackground(new java.awt.Color(0, 122, 204));
+        radAlta.setText("Alta demanda");
+        radAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radAltaActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton1);
-        jRadioButton1.setBounds(150, 230, 110, 23);
+        jPanel1.add(radAlta);
+        radAlta.setBounds(150, 230, 110, 23);
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton2.setText("Regular");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radRegular.setBackground(new java.awt.Color(0, 122, 204));
+        radRegular.setText("Regular");
+        radRegular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radRegularActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton2);
-        jRadioButton2.setBounds(270, 230, 80, 23);
+        jPanel1.add(radRegular);
+        radRegular.setBounds(270, 230, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("S/.");
@@ -150,13 +151,13 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(jLabel8);
         jLabel8.setBounds(40, 70, 70, 20);
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtcodigoActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(150, 60, 90, 30);
+        jPanel1.add(txtcodigo);
+        txtcodigo.setBounds(150, 60, 90, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,30 +180,48 @@ public class frmAddProd extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String nombre=txtnombre.getText();
+        String desc=txtdesc.getText();
+        String id=txtcodigo.getText().toUpperCase();
+        String unidad=cmbunidad.getSelectedItem().toString().toUpperCase();
+        double precio=Double.parseDouble(txtprecio.getText());
+        int stock=0;
+        int tipo;
+        if(radAlta.isSelected()==true)
+            tipo=1;
+        else tipo=0;
+        int stockMin=Integer.parseInt(txtStockMin.getText());
+        
+        ProductosBL prodBL=new ProductosBL();
+        try{
+            prodBL.insertarProducto(id, nombre, unidad, precio, desc, stock, tipo, stockMin, 1);
+        }catch(Exception ex){}
+        
         JOptionPane.showMessageDialog(this, 
                   "Se añadio el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtcodigoActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAltaActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton2.isSelected()==true){
-            jRadioButton1.setSelected(true);
-            jRadioButton2.setSelected(false);
+        if(radRegular.isSelected()==true){
+            radAlta.setSelected(true);
+            radRegular.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radAltaActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radRegularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radRegularActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton1.isSelected()==true){
-            jRadioButton2.setSelected(true);
-            jRadioButton1.setSelected(false);
+        if(radAlta.isSelected()==true){
+            radRegular.setSelected(true);
+            radAlta.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_radRegularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,9 +266,9 @@ public class frmAddProd extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbunidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -259,12 +278,12 @@ public class frmAddProd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JRadioButton radAlta;
+    private javax.swing.JRadioButton radRegular;
+    private javax.swing.JTextField txtStockMin;
+    private javax.swing.JTextField txtcodigo;
+    private javax.swing.JTextField txtdesc;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
 }

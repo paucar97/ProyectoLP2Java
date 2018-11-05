@@ -21,7 +21,10 @@ public class AlmacenesBL {
     public ArrayList<Almacen> listarAlmacenes()throws Exception{
         return almacenDA.listarAlmacenes();
     }
-    public void insertarAlmacen(String fecha, String direccion)throws Exception{
-        almacenDA.insertarAlmacen(fecha,direccion);
+    public void insertarAlmacen(String fecha, String direccion,int num)throws Exception{
+        almacenDA.insertarAlmacen(fecha,direccion,num);
+    }
+    public void eliminarAlmacen(int id)throws Exception{
+        almacenDA.eliminarAlmacen(id);
     }
 }

@@ -8,7 +8,6 @@ package Vista;
 import LogicaDeNegocio.AlmacenesBL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
 
@@ -21,9 +20,19 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmGestAlma
      */
+    public Almacen almacenG;
+    public Almacen getAlmacen() {
+        return almacenG;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacenG = almacen;
+    }
     public frmGestAlma() {
+        almacenG=new Almacen();
         ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
         initComponents();
+        
         AlmacenesBL almacenBL=new AlmacenesBL();
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         try{
@@ -197,13 +206,72 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        frmModifAlmacen mod=new frmModifAlmacen(null,true);
+        int row;
+        row = jTable1.getSelectedRow();
+        
+        int id=Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
+        int numDif=Integer.parseInt(jTable1.getModel().getValueAt(row,2).toString());
+        String dir=jTable1.getModel().getValueAt(row,1).toString();
+        
+        almacenG.setDireccion(dir);
+        almacenG.setEstado(1);
+        almacenG.setIdalmacen(id);
+        almacenG.setNumDifProd(numDif);
+        
+        frmModifAlmacen mod=new frmModifAlmacen(null,true,almacenG);
         mod.setVisible(true);
+        if(mod.isVisible()==false){
+//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el almacen?","Aviso",WARNING_MESSAGE);
+        int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el almacen?");
+        if(resultado==JOptionPane.YES_OPTION){
+            int column=0;
+            int row=jTable1.getSelectedRow();
+            int id=Integer.parseInt(jTable1.getModel().getValueAt(row, column).toString());
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            try{
+                almacenBL.eliminarAlmacen(id);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

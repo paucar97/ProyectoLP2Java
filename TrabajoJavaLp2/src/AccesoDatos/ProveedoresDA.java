@@ -5,6 +5,7 @@
  */
 package AccesoDatos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -44,4 +45,18 @@ public class ProveedoresDA {
        
         return proveedores;
     } 
+   public void insertarProveedor(Proveedor prov)throws Exception{
+       Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call insertarProveedor(?,"
+                                                    + "?,?,?,?)}");
+        comando.setString("_ruc",Integer.toString(prov.getRuc()));
+        comando.setString("_nombre_empresa",prov.getRazonSoc().toUpperCase());
+        comando.setString("_direccion",prov.getDireccion().toUpperCase());
+        comando.setInt("_telefono", prov.getTelefono());
+        comando.setString("_email", prov.getEmail());
+        comando.execute();
+        con.close();
+   }
 }

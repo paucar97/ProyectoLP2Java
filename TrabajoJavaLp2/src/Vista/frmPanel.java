@@ -490,6 +490,7 @@ public class frmPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(panel1.isVisible()==false){
             panel1.setVisible(true);
+            panel5.setLocation(180,0);
             panel5.setVisible(true);
         }
         else{
@@ -507,6 +508,7 @@ public class frmPanel extends javax.swing.JDialog {
         if(panel1.isVisible()==true&& (panel2.isVisible()==true || panel3.isVisible()==true)){
             panel2.setVisible(false);
             panel3.setVisible(false);
+            panel5.setLocation(180,0);
             panel5.setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -515,6 +517,7 @@ public class frmPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(panel1.isVisible()==false){
             panel1.setVisible(true);
+            panel3.setLocation(180,0);
             panel3.setVisible(true);
         }
         else{
@@ -532,6 +535,7 @@ public class frmPanel extends javax.swing.JDialog {
         if(panel1.isVisible()==true&& (panel2.isVisible()==true || panel5.isVisible()==true)){
             panel2.setVisible(false);
             panel5.setVisible(false);
+            panel3.setLocation(180,0);
             panel3.setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed

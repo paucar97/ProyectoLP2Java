@@ -21,4 +21,7 @@ public class ProveedoresBL {
     public ArrayList<Proveedor>listarProveedores()throws Exception{
         return provedorDA.listarProveedores();
     }
+    public void insertarProveedor(Proveedor prov)throws Exception{
+        provedorDA.insertarProveedor(prov);
+    }
 }
