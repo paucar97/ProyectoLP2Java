@@ -12,6 +12,13 @@ import java.util.ArrayList;
  * @author PC
  */
 public class Proveedor extends AgenteExterno{
+    private int ruc;
+    private String razonSoc;
+    private String direccion;
+    private int telefono;
+    private String email;
+    private ArrayList<String> listaProductos;
+    private int estado;
 
     public Proveedor() {
     }
@@ -22,6 +29,14 @@ public class Proveedor extends AgenteExterno{
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
+    }
+    public Proveedor(int ruc, String razonSoc, String direccion, int telefono, String email, int estado) {
+        this.ruc = ruc;
+        this.razonSoc = razonSoc;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.estado=estado;
     }
 
     public int getRuc() {
@@ -71,10 +86,22 @@ public class Proveedor extends AgenteExterno{
     public void setListaProductos(ArrayList<String> listaProductos) {
         this.listaProductos = listaProductos;
     }
-    private int ruc;
-    private String razonSoc;
-    private String direccion;
-    private int telefono;
-    private String email;
-    private ArrayList<String> listaProductos;
+    
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public Proveedor(int ruc, String razonSoc, String direccion, int telefono, String email, ArrayList<String> listaProductos, int estado) {
+        this.ruc = ruc;
+        this.razonSoc = razonSoc;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+        this.listaProductos = listaProductos;
+        this.estado = estado;
+    }
 }

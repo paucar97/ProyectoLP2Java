@@ -5,37 +5,37 @@
  */
 package Vista;
 
+import LogicaDeNegocio.AlmacenesBL;
+import LogicaDeNegocio.ProductosBL;
+import static Vista.frmPanel.i;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
+import modelo.Almacen;
 import modelo.Producto;
-import AccesoDatos.ProductosDA;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import modelo.Medida;
 
 /**
  *
- * @author alulab14
+ * @author Usuario
  */
-public class frmProductos extends javax.swing.JDialog {
-    public static int i=0;
-    private ProductosDA productoDA;
-    
+public class frmGestProductos extends javax.swing.JInternalFrame {
+
     /**
-     * Creates new form frmProductos
+     * Creates new form frmGestProductos
      */
-    public frmProductos(java.awt.Frame parent, boolean modal)throws Exception{
-        super(parent, modal);
-        ArrayList<Producto> productos=new ArrayList<Producto>();
+    public Producto producto;
+    public frmGestProductos() {
+        producto=new Producto();
         initComponents();
+        ArrayList<Producto>productos=new ArrayList<Producto>();
+        ProductosBL productoBL=new ProductosBL();
         
         DefaultTableModel model=(DefaultTableModel) tblProd.getModel();
-        //try{
-            productos=listarProductos();
+        try{
+            productos=productoBL.listarProductos();
             Object rowData[]=new Object[8];
             for(int i=0;i<productos.size();i++){
                 rowData[0]=productos.get(i).getCodigo();
@@ -48,71 +48,12 @@ public class frmProductos extends javax.swing.JDialog {
                 rowData[7]=productos.get(i).getMinimoStock();    
                 model.addRow(rowData);
             }
-        //}catch (Exception e){
-          //  System.out.println("Error de bd");
-        //}
+        }catch (Exception e){
+           System.out.println("Error de bd");
+        }
     }
-public ArrayList<Producto> listarProductos()throws Exception{
-        ArrayList<Producto> productos=new ArrayList<Producto>();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
-        
-            Statement cadena=con.createStatement();
-            String sql="SELECT * FROM n_producto";
-            ResultSet rs=cadena.executeQuery(sql);
-            Medida med;
-            while(rs.next()){
-                String codigo=rs.getString("id_producto");
-                String nombre=rs.getString("nombre");
-                double precio=rs.getFloat("precio");
-                String desc=rs.getString("descripcion");
-                int stock=rs.getInt("stock");
-                int tipo=rs.getInt("tipo");
-                int stockMin=rs.getInt("stokcMinimo");
-                String unidad=rs.getString("UnidMedida");
-            
-                
-                if(unidad.compareTo("UNIDAD")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock);
-                    productos.add(prod);
-                }else if(unidad.compareTo("CENTENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock);
-                    productos.add(prod);
-                }else if(unidad.compareTo("METRO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock);
-                    productos.add(prod);
-                }else if(unidad.compareTo("BOLSA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock);
-                    productos.add(prod);
-                }else if(unidad.compareTo("DOCENA")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock);
-                    productos.add(prod);
-                }else if(unidad.compareTo("KILOGRAMO")==0){
-                    Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock);
-                    productos.add(prod);
-                }            
-            }
-            con.close();
-       
-        return productos;
-    }
-//    public void addRowToTable()throws Exception{
-//        DefaultTableModel model=(DefaultTableModel) tblProd.getModel();
-//        ArrayList<Producto> productos=productoDA.listarProductos();
-//        Object rowData[]=new Object[8];
-//        for(int i=0;i<productos.size();i++){
-//            rowData[0]=productos.get(i).getCodigo();
-//            rowData[1]=productos.get(i).getNombre();
-//            rowData[2]=productos.get(i).getDescripcion();
-//            rowData[3]=productos.get(i).getPrecio();
-//            rowData[4]=productos.get(i).getUm();
-//            rowData[5]=productos.get(i).getTipo();
-//            rowData[6]=productos.get(i).getStock();
-//            rowData[7]=productos.get(i).getMinimoStock();
-//        }
-//   }
-//        
     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,9 +75,7 @@ public ArrayList<Producto> listarProductos()throws Exception{
         jRadioButton2 = new javax.swing.JRadioButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de Productos");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(650, 450));
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -230,31 +169,30 @@ public ArrayList<Producto> listarProductos()throws Exception{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2))
-                            .addComponent(jTextField1))
-                        .addGap(0, 44, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(302, 302, 302))
+                .addGap(255, 255, 255))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButton2))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,10 +209,10 @@ public ArrayList<Producto> listarProductos()throws Exception{
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(137, 137, 137))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,33 +223,139 @@ public ArrayList<Producto> listarProductos()throws Exception{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el producto?","Aviso",WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         frmAddProd prod=new frmAddProd(null, true);
         prod.setVisible(true);
+        if(prod.isVisible()==false){
+//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+            DefaultTableModel model=(DefaultTableModel)tblProd.getModel();
+            model.setRowCount(0);
+            ProductosBL prodBL=new ProductosBL();
+            ArrayList<Producto>productos=new ArrayList<Producto>();
+            try{
+            productos=prodBL.listarProductos();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<productos.size();i++){
+                rowData[0]=productos.get(i).getCodigo();
+                rowData[1]=productos.get(i).getNombre();
+                rowData[2]=productos.get(i).getDescripcion();
+                rowData[3]=productos.get(i).getPrecio();
+                rowData[4]=productos.get(i).getUm();
+                rowData[5]=productos.get(i).getTipo();
+                rowData[6]=productos.get(i).getStock();
+                rowData[7]=productos.get(i).getMinimoStock();    
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+           System.out.println("Error de bd");
+        }
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        frmModProd prod=new frmModProd(null,true);
-        prod.setVisible(true);
+        int row;
+        if(tblProd.getSelectedRow()!=-1){
+            row = tblProd.getSelectedRow();
+            String cod=tblProd.getModel().getValueAt(row,0).toString();
+            String nombre=tblProd.getModel().getValueAt(row,1).toString();
+            String desc=tblProd.getModel().getValueAt(row,2).toString();
+            double precio=Double.parseDouble(tblProd.getModel().getValueAt(row,3).toString());
+            String unidad=tblProd.getModel().getValueAt(row,4).toString();
+            int tipo=Integer.parseInt(tblProd.getModel().getValueAt(row,5).toString());
+            int stock=Integer.parseInt(tblProd.getModel().getValueAt(row,6).toString());
+            int stockMin=Integer.parseInt(tblProd.getModel().getValueAt(row,7).toString());
+
+            producto.setCodigo(cod);
+            producto.setNombre(nombre);
+            producto.setDescripcion(desc);
+            producto.setPrecio(precio);
+            producto.setTipo(tipo);
+            producto.setStock(stock);
+            producto.setMinimoStock(stockMin);
+
+            frmModProd prod=new frmModProd(null,true,producto,unidad);
+            prod.setVisible(true);
+
+            if(prod.isVisible()==false){
+    //            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+                DefaultTableModel model=(DefaultTableModel)tblProd.getModel();
+                model.setRowCount(0);
+                ProductosBL prodBL=new ProductosBL();
+                ArrayList<Producto>productos=new ArrayList<Producto>();
+                try{
+                productos=prodBL.listarProductos();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=productos.get(i).getCodigo();
+                    rowData[1]=productos.get(i).getNombre();
+                    rowData[2]=productos.get(i).getDescripcion();
+                    rowData[3]=productos.get(i).getPrecio();
+                    rowData[4]=productos.get(i).getUm();
+                    rowData[5]=productos.get(i).getTipo();
+                    rowData[6]=productos.get(i).getStock();
+                    rowData[7]=productos.get(i).getMinimoStock();    
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+               System.out.println("Error de bd");
+            }
+        }
+    }else        JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);   
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el producto?");
+        if(resultado==JOptionPane.YES_OPTION){
+            int column=0;
+            int row=tblProd.getSelectedRow();
+            String id=tblProd.getModel().getValueAt(row, column).toString();
+            ProductosBL prodBL=new ProductosBL();
+            try{
+                prodBL.eliminarProducto(id);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            DefaultTableModel model=(DefaultTableModel)tblProd.getModel();
+            model.setRowCount(0);
+            
+            ArrayList<Producto>productos=new ArrayList<Producto>();
+            try{
+            productos=prodBL.listarProductos();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<productos.size();i++){
+                rowData[0]=productos.get(i).getCodigo();
+                rowData[1]=productos.get(i).getNombre();
+                rowData[2]=productos.get(i).getDescripcion();
+                rowData[3]=productos.get(i).getPrecio();
+                rowData[4]=productos.get(i).getUm();
+                rowData[5]=productos.get(i).getTipo();
+                rowData[6]=productos.get(i).getStock();
+                rowData[7]=productos.get(i).getMinimoStock();    
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+           System.out.println("Error de bd");
+        }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        // TODO add your handling code here:
+
+        if(i==0)
+        jTextField1.setText("");
+        i++;
+    }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
@@ -329,59 +373,11 @@ public ArrayList<Producto> listarProductos()throws Exception{
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        
-        if(i==0)
-        jTextField1.setText("");
-        i++;
-    }//GEN-LAST:event_jTextField1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]){
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try{
-                frmProductos dialog = new frmProductos(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-                }catch(Exception e){
-                    System.out.println("Error en el proceso");
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

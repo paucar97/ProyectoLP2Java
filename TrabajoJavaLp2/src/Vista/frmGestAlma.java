@@ -5,35 +5,38 @@
  */
 package Vista;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import LogicaDeNegocio.AlmacenesBL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
-import modelo.Medida;
-import modelo.Producto;
 
 /**
  *
  * @author alulab14
  */
-public class frmGestionAlmacen extends javax.swing.JDialog {
+public class frmGestAlma extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmGestionAlmacen
+     * Creates new form frmGestAlma
      */
-    public frmGestionAlmacen(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Almacen almacenG;
+    public Almacen getAlmacen() {
+        return almacenG;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacenG = almacen;
+    }
+    public frmGestAlma() {
+        almacenG=new Almacen();
         ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
         initComponents();
         
+        AlmacenesBL almacenBL=new AlmacenesBL();
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         try{
-            almacenes=listarAlmacenes();
+            almacenes=almacenBL.listarAlmacenes();
             Object rowData[]=new Object[8];
             for(int i=0;i<almacenes.size();i++){
                 rowData[0]=almacenes.get(i).getIdalmacen();
@@ -44,27 +47,6 @@ public class frmGestionAlmacen extends javax.swing.JDialog {
         }catch (Exception e){
             System.out.println("Error de bd");
         }
-    }
-public ArrayList<Almacen> listarAlmacenes()throws Exception{
-        ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
-        
-            Statement cadena=con.createStatement();
-            String sql="SELECT * FROM n_almacen";
-            ResultSet rs=cadena.executeQuery(sql);
-            Medida med;
-            while(rs.next()){
-                int codigo=rs.getInt("id_almacen");
-                String direccion=rs.getString("direccion");
-                int num = rs.getInt("numProdDif");
-                Almacen almacen=new Almacen(codigo,direccion,num);
-                almacenes.add(almacen);
-               
-            }
-            con.close();
-       
-        return almacenes;
     }
 
     /**
@@ -84,9 +66,8 @@ public ArrayList<Almacen> listarAlmacenes()throws Exception{
         jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestion de Almacenes");
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(650, 450));
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -112,6 +93,7 @@ public ArrayList<Almacen> listarAlmacenes()throws Exception{
             }
         });
 
+        jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -152,17 +134,19 @@ public ArrayList<Almacen> listarAlmacenes()throws Exception{
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(108, 108, 108)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(189, 189, 189))
+                .addGap(254, 254, 254))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,9 +157,9 @@ public ArrayList<Almacen> listarAlmacenes()throws Exception{
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -197,65 +181,104 @@ public ArrayList<Almacen> listarAlmacenes()throws Exception{
         // TODO add your handling code here:
         frmAddAlmacen addA=new frmAddAlmacen(null,true);
         addA.setVisible(true);
+        if(addA.isVisible()==false){
+//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+            
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int row;
+        row = jTable1.getSelectedRow();
+        
+        int id=Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
+        int numDif=Integer.parseInt(jTable1.getModel().getValueAt(row,2).toString());
+        String dir=jTable1.getModel().getValueAt(row,1).toString();
+        
+        almacenG.setDireccion(dir);
+        almacenG.setEstado(1);
+        almacenG.setIdalmacen(id);
+        almacenG.setNumDifProd(numDif);
+        
+        frmModifAlmacen mod=new frmModifAlmacen(null,true,almacenG);
+        mod.setVisible(true);
+        if(mod.isVisible()==false){
+//            JOptionPane.showConfirmDialog(this,"cerro","Aviso",WARNING_MESSAGE);
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el almacen?");
+        if(resultado==JOptionPane.YES_OPTION){
+            int column=0;
+            int row=jTable1.getSelectedRow();
+            int id=Integer.parseInt(jTable1.getModel().getValueAt(row, column).toString());
+            AlmacenesBL almacenBL=new AlmacenesBL();
+            try{
+                almacenBL.eliminarAlmacen(id);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            ArrayList<Almacen>almacenes=new ArrayList<Almacen>();
+            try{
+            almacenes=almacenBL.listarAlmacenes();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<almacenes.size();i++){
+                rowData[0]=almacenes.get(i).getIdalmacen();
+                rowData[1]=almacenes.get(i).getDireccion();
+                rowData[2]=almacenes.get(i).getNumDifProd();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el almacen?","Aviso",WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        frmModifAlmacen mod=new frmModifAlmacen(null,true);
-        mod.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmGestionAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmGestionAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmGestionAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmGestionAlmacen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                frmGestionAlmacen dialog = new frmGestionAlmacen(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

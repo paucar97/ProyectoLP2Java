@@ -5,35 +5,34 @@
  */
 package Vista;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import LogicaDeNegocio.ProductosBL;
+import LogicaDeNegocio.ProveedoresBL;
+import static Vista.frmPanel.i;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
-import modelo.Almacen;
-import modelo.Medida;
+import modelo.Producto;
 import modelo.Proveedor;
 
 /**
  *
- * @author alulab14
+ * @author Usuario
  */
-public class frmProveedores extends javax.swing.JDialog {
-    public static int i=0;
+public class frmGestProveedores extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form frmProveedores
+     * Creates new form frmGestProveedores
      */
-    public frmProveedores(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Proveedor proveedor;
+    public frmGestProveedores() {
+        proveedor=new Proveedor();
         ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
         initComponents();
-        
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        ProveedoresBL proveedorBL=new ProveedoresBL();
         try{
-            proveedores=listarProveedores();
+            proveedores=proveedorBL.listarProveedores();
             Object rowData[]=new Object[8];
             for(int i=0;i<proveedores.size();i++){
                 rowData[0]=proveedores.get(i).getRazonSoc();
@@ -46,28 +45,6 @@ public class frmProveedores extends javax.swing.JDialog {
         }catch (Exception e){
             System.out.println("Error de bd");
         }
-    }
-public ArrayList<Proveedor> listarProveedores()throws Exception{
-        ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
-        
-            Statement cadena=con.createStatement();
-            String sql="SELECT * FROM n_proveedores";
-            ResultSet rs=cadena.executeQuery(sql);
-            while(rs.next()){
-                String razon=rs.getString("nombre_empresa");
-                String email=rs.getString("email");
-                int ruc = rs.getInt("ruc");
-                int telefono=rs.getInt("telefono");
-                String direccion=rs.getString("direccion");
-                Proveedor proveedor=new Proveedor(ruc,razon,direccion,telefono,email);
-                proveedores.add(proveedor);
-               
-            }
-            con.close();
-       
-        return proveedores;
     }
 
     /**
@@ -91,9 +68,8 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
         jButton1 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Proveedores");
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(650, 450));
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
         jPanel1.setToolTipText("");
@@ -201,52 +177,49 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 779, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton2))
-                                    .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(361, 361, 361)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(82, 82, 82))
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioButton2))
+                            .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(270, 270, 270))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -255,7 +228,9 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,36 +239,98 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void lblBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblBusquedaActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblBusquedaActionPerformed
+       int row;
+        if(jTable1.getSelectedRow()!=-1){
+            row = jTable1.getSelectedRow();
+            String razon=jTable1.getModel().getValueAt(row,0).toString();
+            String ruc=jTable1.getModel().getValueAt(row,1).toString();
+            String email=jTable1.getModel().getValueAt(row,2).toString();
+            int telefono=Integer.parseInt(jTable1.getModel().getValueAt(row,3).toString());
+            String dir=jTable1.getModel().getValueAt(row,4).toString();
+
+            proveedor.setRazonSoc(razon);
+            proveedor.setEmail(email);
+            proveedor.setTelefono(telefono);
+            proveedor.setDireccion(dir);
+            
+        frmModifProveedor modP= new frmModifProveedor(null,true,proveedor,ruc);
+        modP.setVisible(true);
+        
+        if(modP.isVisible()==false){
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+            ProveedoresBL proveedorBL=new ProveedoresBL();
+            try{
+                model.setRowCount(0);
+                ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+                proveedores=proveedorBL.listarProveedores();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+                System.out.println("Error de bd");
+            }
+        }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el proveedor","Advertencia",WARNING_MESSAGE);   
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int result=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el proveedor?");
+        if(result==JOptionPane.YES_OPTION){
+            int column=1;
+            int row=jTable1.getSelectedRow();
+            String ruc=jTable1.getModel().getValueAt(row, column).toString();
+            
+            ProveedoresBL provBL=new ProveedoresBL();
+            try{
+                provBL.eliminarProveedor(ruc);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            
+            ArrayList<Proveedor>proveedores=new ArrayList<Proveedor>();
+            try{
+            proveedores=provBL.listarProveedores();
+            Object rowData[]=new Object[8];
+            for(int i=0;i<proveedores.size();i++){
+                rowData[0]=proveedores.get(i).getRazonSoc();
+                rowData[1]=proveedores.get(i).getRuc();
+                rowData[2]=proveedores.get(i).getEmail();
+                rowData[3]=proveedores.get(i).getTelefono();
+                rowData[4]=proveedores.get(i).getDireccion();
+                model.addRow(rowData);
+            }
+        }catch (Exception e){
+           System.out.println("Error de bd");
+        }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void lblBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedaMouseClicked
         // TODO add your handling code here:
-         JOptionPane.showConfirmDialog(this,"¿Seguro que desea eliminar el proveedor?","Aviso",2);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if(i==0)
+        lblBusqueda.setText("");
+        i++;
+    }//GEN-LAST:event_lblBusquedaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void lblBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblBusquedaActionPerformed
         // TODO add your handling code here:
-        frmAddProveedor addP= new frmAddProveedor(null, true);
-        addP.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        frmModifProveedor modP= new frmModifProveedor(null,true);
-        modP.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_lblBusquedaActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
@@ -311,54 +348,37 @@ public ArrayList<Proveedor> listarProveedores()throws Exception{
         }
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void lblBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedaMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(i==0)
-        lblBusqueda.setText("");
-        i++;
-    }//GEN-LAST:event_lblBusquedaMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        frmAddProveedor addP= new frmAddProveedor(null, true);
+        addP.setVisible(true);
+        if (addP.isVisible()==false){
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+            ProveedoresBL proveedorBL=new ProveedoresBL();
+            try{
+                model.setRowCount(0);
+                ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+                proveedores=proveedorBL.listarProveedores();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
                 }
+            }catch (Exception e){
+                System.out.println("Error de bd");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmProveedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                frmProveedores dialog = new frmProveedores(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
