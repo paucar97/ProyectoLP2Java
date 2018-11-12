@@ -10,6 +10,7 @@ import LogicaDeNegocio.ProductosBL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
 import modelo.Producto;
@@ -231,9 +232,9 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -283,9 +284,38 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this,
+        int row;
+        DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
+        if(jTable3.getSelectedRow()!=-1){
+            row = jTable3.getSelectedRow();
+            String cod=jTable3.getModel().getValueAt(row,0).toString();
+            Integer stock=(Integer)jTable3.getModel().getValueAt(row,2);
+            int stockNuevo=(Integer)jSpinner1.getValue();
+            ProductosBL prodBL=new ProductosBL();
+            stockNuevo=stock+stockNuevo;
+            try{
+                prodBL.incrementarStock(stockNuevo, cod);
+                JOptionPane.showMessageDialog(this,
             "Se modificó el stock","Aviso",
             INFORMATION_MESSAGE);
+            }catch (Exception ex){}
+            try{
+                model.setRowCount(0);
+                ArrayList<Producto>productos=new ArrayList<Producto>();
+                productos=prodBL.listarProductos();
+                Object rowData[]=new Object[8];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=productos.get(i).getCodigo();
+                    rowData[1]=productos.get(i).getNombre();
+                    rowData[2]=productos.get(i).getStock();
+                    model.addRow(rowData);
+                }
+            }catch (Exception e){
+            System.out.println("Error de bd");
+        }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE); 
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

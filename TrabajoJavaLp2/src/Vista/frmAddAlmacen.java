@@ -6,6 +6,8 @@
 package Vista;
 
 import LogicaDeNegocio.AlmacenesBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javafx.scene.chart.PieChart;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
@@ -55,6 +58,12 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Dirección:");
@@ -171,6 +180,20 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments

@@ -31,5 +31,7 @@ public class ProductosBL {
     public void modificarProducto(Producto prod,String unidad,String idBuscar)throws Exception{
         productoDA.modificarProducto(prod, unidad,idBuscar);
     }
-            
+    public void incrementarStock(int stock, String cod)throws Exception{
+        productoDA.incrementarStock(stock, cod);
+    }
 }

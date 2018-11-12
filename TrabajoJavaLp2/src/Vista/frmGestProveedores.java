@@ -284,6 +284,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow()!=-1){
         int result=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el proveedor?");
         if(result==JOptionPane.YES_OPTION){
             int column=1;
@@ -315,6 +316,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
            System.out.println("Error de bd");
         }
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el proveedor","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

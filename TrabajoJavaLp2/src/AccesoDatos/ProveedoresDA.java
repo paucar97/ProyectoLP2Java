@@ -32,7 +32,7 @@ public class ProveedoresDA {
             while(rs.next()){
                 String razon=rs.getString("nombre_empresa");
                 String email=rs.getString("email");
-                int ruc = rs.getInt("ruc");
+                long ruc = rs.getLong("ruc");
                 int telefono=rs.getInt("telefono");
                 String direccion=rs.getString("direccion");
                 int estado=rs.getInt("estado");
@@ -51,7 +51,7 @@ public class ProveedoresDA {
         
         CallableStatement comando=con.prepareCall("{call insertarProveedor(?,"
                                                     + "?,?,?,?)}");
-        comando.setString("_ruc",Integer.toString(prov.getRuc()));
+        comando.setString("_ruc",Long.toString(prov.getRuc()));
         comando.setString("_nombre_empresa",prov.getRazonSoc().toUpperCase());
         comando.setString("_direccion",prov.getDireccion().toUpperCase());
         comando.setInt("_telefono", prov.getTelefono());

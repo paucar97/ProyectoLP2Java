@@ -8,6 +8,7 @@ package Vista;
 import LogicaDeNegocio.AlmacenesBL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
 
@@ -207,6 +208,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int row;
+        if(jTable1.getSelectedRow()!=-1){
         row = jTable1.getSelectedRow();
         
         int id=Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
@@ -240,10 +242,12 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         }
             
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el almacen","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow()!=-1){
         int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el almacen?");
         if(resultado==JOptionPane.YES_OPTION){
             int column=0;
@@ -272,6 +276,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             System.out.println("Error de bd");
         }
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el almacen","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

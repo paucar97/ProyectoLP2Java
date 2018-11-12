@@ -189,12 +189,21 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtraz">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtrazKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtruc">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtrucKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtemail">
         </Component>
         <Component class="javax.swing.JTextField" name="txttelf">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txttelfKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -238,6 +247,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtdir">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtdirKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

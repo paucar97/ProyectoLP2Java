@@ -6,7 +6,10 @@
 package Vista;
 
 import LogicaDeNegocio.ProductosBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 /**
@@ -62,18 +65,36 @@ public class frmAddProd extends javax.swing.JDialog {
         jLabel2.setText("Nombre:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 30, 60, 20);
+
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnombre);
         txtnombre.setBounds(150, 20, 200, 30);
 
         jLabel3.setText("Descripción:");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(40, 104, 80, 20);
+
+        txtdesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdescKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtdesc);
         txtdesc.setBounds(150, 100, 200, 30);
 
         jLabel4.setText("Precio:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 144, 60, 20);
+
+        txtprecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtprecio);
         txtprecio.setBounds(150, 140, 50, 30);
 
@@ -93,6 +114,12 @@ public class frmAddProd extends javax.swing.JDialog {
         jLabel7.setText("Stock Mínimo:");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(40, 270, 90, 14);
+
+        txtStockMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockMinKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtStockMin);
         txtStockMin.setBounds(150, 260, 50, 30);
 
@@ -156,6 +183,11 @@ public class frmAddProd extends javax.swing.JDialog {
                 txtcodigoActionPerformed(evt);
             }
         });
+        txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodigoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtcodigo);
         txtcodigo.setBounds(150, 60, 90, 30);
 
@@ -180,6 +212,23 @@ public class frmAddProd extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(txtcodigo.getText().trim().compareTo("")==0||txtdesc.getText().trim().compareTo("")==0||
+           txtStockMin.getText().trim().compareTo("")==0
+           ||txtnombre.getText().trim().compareTo("")==0||txtprecio.getText().trim().compareTo("")==0){
+            JOptionPane.showMessageDialog(this,
+                "Hay campos vacios","Error",
+                ERROR_MESSAGE);
+        }else if(txtcodigo.getText().length()!=5){
+            JOptionPane.showMessageDialog(this,
+                "El codigo debe tener 6 caracteres","Error",
+                ERROR_MESSAGE);
+        
+        }
+        else if(radAlta.isSelected()==false&&radRegular.isSelected()==false)
+            JOptionPane.showMessageDialog(this,
+                "Elija un tipo","Error",
+                ERROR_MESSAGE);
+        else{
         String nombre=txtnombre.getText();
         String desc=txtdesc.getText();
         String id=txtcodigo.getText().toUpperCase();
@@ -201,6 +250,7 @@ public class frmAddProd extends javax.swing.JDialog {
                   "Se añadio el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);
         this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
@@ -222,6 +272,89 @@ public class frmAddProd extends javax.swing.JDialog {
             radAlta.setSelected(false);
         }
     }//GEN-LAST:event_radRegularActionPerformed
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten letras a-z","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtcodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtcodigo.getText().length()>=5){
+                evt.consume();
+            }
+            if(!s1.matches("[aA-zZ0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtcodigoKeyTyped
+
+    private void txtdescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtdescKeyTyped
+
+    private void txtprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(!s1.matches("[0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+            if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+                evt.consume();
+            }
+            if(evt.getKeyChar()=='.'&&txtprecio.getText().contains(".")){
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtprecioKeyTyped
+
+    private void txtStockMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockMinKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtStockMin.getText().length()>=5){
+                evt.consume();
+            
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtStockMinKeyTyped
 
     /**
      * @param args the command line arguments

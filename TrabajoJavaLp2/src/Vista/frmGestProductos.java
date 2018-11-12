@@ -314,6 +314,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(tblProd.getSelectedRow()!=-1){
         int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el producto?");
         if(resultado==JOptionPane.YES_OPTION){
             int column=0;
@@ -347,6 +348,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
            System.out.println("Error de bd");
         }
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked

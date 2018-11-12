@@ -6,9 +6,11 @@
 package Vista;
 
 import LogicaDeNegocio.ProveedoresBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import modelo.Proveedor;
 
 /**
@@ -57,8 +59,20 @@ public class frmAddProveedor extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Razón Social:");
 
+        txtrazon.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrazonKeyTyped(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("RUC:");
+
+        txtruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrucKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("E-Mail:");
@@ -71,6 +85,12 @@ public class frmAddProveedor extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Teléfono:");
+
+        txttelf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelfKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel5.setText("Dirección:");
@@ -97,6 +117,12 @@ public class frmAddProveedor extends javax.swing.JDialog {
             }
         });
 
+        txtdir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdirKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,8 +143,8 @@ public class frmAddProveedor extends javax.swing.JDialog {
                             .addComponent(txttelf, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtrazon)
                             .addComponent(txtemail)
-                            .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,20 +200,42 @@ public class frmAddProveedor extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Proveedor prov=new Proveedor();
-        ProveedoresBL provBL=new ProveedoresBL();
-        prov.setDireccion(txtdir.getText());
-        prov.setEmail(txtemail.getText());
-        prov.setRazonSoc(txtrazon.getText());
-        prov.setRuc(Integer.parseInt(txtruc.getText()));
-        prov.setTelefono(Integer.parseInt(txttelf.getText()));
-        try{
-            provBL.insertarProveedor(prov);
-        }catch(Exception ex){}
-        JOptionPane.showMessageDialog(this,
-            "Se añadio el proveedor correctamente","Aviso",
-            INFORMATION_MESSAGE);
-        this.dispose();
+        if(txtdir.getText().trim().compareTo("")==0||txtemail.getText().trim().compareTo("")==0||
+           txtrazon.getText().trim().compareTo("")==0
+           ||txtruc.getText().trim().compareTo("")==0||txttelf.getText().trim().compareTo("")==0){
+            JOptionPane.showMessageDialog(this,
+                "Hay campos vacios","Error",
+                ERROR_MESSAGE);
+        }else if(txtruc.getText().length()!=11){
+            JOptionPane.showMessageDialog(this,
+                "El ruc debe tener 11 digitos","Error",
+                ERROR_MESSAGE);
+        
+        }else if(!txtemail.getText().matches("^.+@.+(\\.[^\\.]+)+$")){
+            JOptionPane.showMessageDialog(this,
+                "Email incorrecto","Error",
+                ERROR_MESSAGE);
+        }else if(txttelf.getText().length()!=7&&txttelf.getText().length()!=9){
+            JOptionPane.showMessageDialog(this,
+                "El telefono debe tener 7 digitos (fijo) o 9 (celular)","Error",
+                ERROR_MESSAGE);
+        }
+        else{
+            Proveedor prov=new Proveedor();
+            ProveedoresBL provBL=new ProveedoresBL();
+            prov.setDireccion(txtdir.getText());
+            prov.setEmail(txtemail.getText());
+            prov.setRazonSoc(txtrazon.getText());
+            prov.setRuc(Long.parseLong(txtruc.getText()));
+            prov.setTelefono(Integer.parseInt(txttelf.getText()));
+            try{
+                provBL.insertarProveedor(prov);
+            }catch(Exception ex){}
+            JOptionPane.showMessageDialog(this,
+                "Se añadio el proveedor correctamente","Aviso",
+                INFORMATION_MESSAGE);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -198,6 +246,70 @@ public class frmAddProveedor extends javax.swing.JDialog {
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemailActionPerformed
+
+    private void txtrazonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrazonKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten letras a-z","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtrazonKeyTyped
+
+    private void txtrucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrucKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtruc.getText().length()>=11){
+                evt.consume();
+                
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtrucKeyTyped
+
+    private void txttelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelfKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txttelf.getText().length()>=9){
+                evt.consume();
+            
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txttelfKeyTyped
+
+    private void txtdirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdirKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtdirKeyTyped
 
     /**
      * @param args the command line arguments
