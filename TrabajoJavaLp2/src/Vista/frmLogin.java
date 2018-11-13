@@ -5,7 +5,10 @@
  */
 package Vista;
 
+import LogicaDeNegocio.UsuarioBL;
+import Modelo.Usuario;
 import com.sun.glass.events.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -218,30 +221,40 @@ public class frmLogin extends javax.swing.JFrame {
         });
     }
     public void login(){
-        String usuario="admin";
-        String contra="admin123";
-        
-        char[] pass=txtPass.getPassword();
-        String passString=new String(pass);
-        if(txtUser.getText().compareTo("")!=0 && txtUser.getText().compareTo(usuario)==0){
-            if(passString.equals(contra)){
-                frmPanel panel=new frmPanel(this,true);
-                this.dispose();
-                panel.setVisible(true);
+        String usuario=txtUser.getText().toString();
+        char[]pass=txtPass.getPassword();
+        String contra=String.copyValueOf(pass);
+        boolean encontrado=false;
+        ArrayList<Usuario>usuarios=new ArrayList<Usuario>();
+        UsuarioBL userBL=new UsuarioBL();  
+        try{    
+            usuarios=userBL.listarUsuarios();
+            for(int i=0;i<usuarios.size();i++){
+                if(usuario.compareTo("")!=0 && usuario.compareTo(usuarios.get(i).getIdUsuario())==0){
+                    encontrado=true;
+                    if(contra.equals(usuarios.get(i).getContraseña())){
+                    frmPanel panel=new frmPanel(this,true);
+                    this.dispose();
+                    panel.setVisible(true);
                 
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, 
+                        "Contraseña incorrecta","Advertencia",
+                        WARNING_MESSAGE);
+                        break;
+                    }
+                }
             }
-            else{
+            if(!encontrado){
                 JOptionPane.showMessageDialog(this, 
-                  "Contraseña incorrecta","Advertencia",
-                  WARNING_MESSAGE);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, 
                   "Usuario incorrecto","Advertencia",
                   WARNING_MESSAGE);
-            
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
