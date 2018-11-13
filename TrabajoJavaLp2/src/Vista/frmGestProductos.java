@@ -77,9 +77,9 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
 
         setPreferredSize(new java.awt.Dimension(650, 450));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -90,7 +90,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -101,7 +101,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -112,7 +112,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 122, 204));
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/015-search.png"))); // NOI18N
         jButton4.setText("Buscar");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -127,6 +127,11 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
+        tblProd=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tblProd.setBackground(new java.awt.Color(255, 255, 204));
         tblProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,9 +141,10 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
                 "Codigo", "Nombre", "Descripcion", "Precio", "U. Medida", "Tipo", "Stock", "Stock Minimo"
             }
         ));
+        tblProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblProd);
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton1.setText("Codigo");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +152,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton2.setText("Nombre");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,7 +160,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
+        btnCancelar.setBackground(new java.awt.Color(0, 0, 0));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         btnCancelar.setText("Regresar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -223,7 +229,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, Short.MAX_VALUE)
         );
 
         pack();

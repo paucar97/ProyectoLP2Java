@@ -49,7 +49,7 @@ public class ProductosDA {
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock,estado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
-                }else if(unidad.compareTo("CENTENA")==0){
+                }else if(unidad.compareTo("CIENTO")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock,estado);
                     if(prod.getEstado()==1)
                     productos.add(prod);

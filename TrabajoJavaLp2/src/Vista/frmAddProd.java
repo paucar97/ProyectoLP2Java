@@ -59,7 +59,7 @@ public class frmAddProd extends javax.swing.JDialog {
         setTitle("Agregar Producto");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(null);
 
         jLabel2.setText("Nombre:");
@@ -123,7 +123,7 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(txtStockMin);
         txtStockMin.setBounds(150, 260, 50, 30);
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -136,7 +136,7 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(jButton2);
         jButton2.setBounds(220, 310, 100, 29);
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -149,7 +149,7 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(jButton1);
         jButton1.setBounds(60, 310, 100, 29);
 
-        radAlta.setBackground(new java.awt.Color(0, 122, 204));
+        radAlta.setBackground(new java.awt.Color(204, 204, 204));
         radAlta.setText("Alta demanda");
         radAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +159,7 @@ public class frmAddProd extends javax.swing.JDialog {
         jPanel1.add(radAlta);
         radAlta.setBounds(150, 230, 110, 23);
 
-        radRegular.setBackground(new java.awt.Color(0, 122, 204));
+        radRegular.setBackground(new java.awt.Color(204, 204, 204));
         radRegular.setText("Regular");
         radRegular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,11 +244,12 @@ public class frmAddProd extends javax.swing.JDialog {
         ProductosBL prodBL=new ProductosBL();
         try{
             prodBL.insertarProducto(id, nombre, unidad, precio, desc, stock, tipo, stockMin, 1);
-        }catch(Exception ex){}
-        
-        JOptionPane.showMessageDialog(this, 
+            JOptionPane.showMessageDialog(this, 
                   "Se añadio el producto correctamente","Aviso",
                   INFORMATION_MESSAGE);
+        }catch(Exception ex){}
+        
+        
         this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

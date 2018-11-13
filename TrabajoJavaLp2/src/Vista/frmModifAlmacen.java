@@ -58,7 +58,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
         setTitle("Modificar almacen");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Dirección:");
@@ -69,7 +69,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -80,7 +80,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
         jButton2.setText("Aceptar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -157,6 +157,16 @@ public class frmModifAlmacen extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int val = -1;
+        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
+            val=(Integer)jSpinner1.getValue();
+        }
+        if(jTextField1.getText().trim().compareTo("")==0)
+            JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
+        else if(val<0){
+            JOptionPane.showMessageDialog(this,"Ingrese un numero positivo","Error",ERROR_MESSAGE);
+        }
+        else{
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             almacenBL.eliminarAlmacen(idA);
@@ -175,6 +185,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
                   INFORMATION_MESSAGE);
         }catch(Exception ex){}
         this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped

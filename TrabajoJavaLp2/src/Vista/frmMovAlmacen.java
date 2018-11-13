@@ -81,7 +81,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(650, 450));
         setPreferredSize(new java.awt.Dimension(650, 450));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Elija el almacén:");
@@ -96,7 +96,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Elija el Filtro:");
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton1.setText("ID");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +104,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton2.setText("Nombre");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/015-search.png"))); // NOI18N
         jButton3.setText("Buscar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -130,6 +130,11 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable3=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable3.setBackground(new java.awt.Color(255, 255, 204));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -148,12 +153,13 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
         jTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Coloque el aumento/decremento de stock:");
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton2.setText("Regresar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -164,7 +170,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Modificar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());

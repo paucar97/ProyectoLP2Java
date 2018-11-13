@@ -70,9 +70,9 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(650, 450));
         setPreferredSize(new java.awt.Dimension(650, 450));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -83,7 +83,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -94,6 +94,11 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,9 +108,11 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
                 "ID_Almacen", "Dirección", "Num. distintos prod"
             }
         ));
+        jTable1.setSurrendersFocusOnKeystroke(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -116,7 +123,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
+        btnCancelar.setBackground(new java.awt.Color(0, 0, 0));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         btnCancelar.setText("Regresar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());

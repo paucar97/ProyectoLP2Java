@@ -71,10 +71,10 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(650, 450));
         setPreferredSize(new java.awt.Dimension(650, 450));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setToolTipText("");
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -85,7 +85,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText(" Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -96,7 +96,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 122, 204));
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/015-search.png"))); // NOI18N
         jButton4.setText(" Buscar");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -109,6 +109,11 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
+        jTable1=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,6 +124,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         ));
         jTable1.setGridColor(new java.awt.Color(0, 122, 204));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         lblBusqueda.setText("...");
@@ -133,7 +139,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton1.setText("RUC");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +147,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
         jRadioButton2.setText("Nombre");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +155,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText(" Agregar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -160,7 +166,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(0, 122, 204));
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         btnCancel.setText("Regresar");
         btnCancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());

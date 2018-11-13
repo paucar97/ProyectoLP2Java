@@ -69,7 +69,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblUser);
         lblUser.setBounds(70, 80, 57, 17);
 
-        btnIngresar.setBackground(new java.awt.Color(0, 122, 204));
+        btnIngresar.setBackground(new java.awt.Color(0, 0, 0));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/006-exit.png"))); // NOI18N
         btnIngresar.setText("Ingresar");
         btnIngresar.setBorder(javax.swing.BorderFactory.createEtchedBorder());

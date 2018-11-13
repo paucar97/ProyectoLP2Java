@@ -57,7 +57,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         setBackground(new java.awt.Color(255, 255, 204));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -68,7 +68,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Dirección:");
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -79,7 +79,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -155,6 +155,16 @@ public class frmAddAlmacen extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int val = -1;
+        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
+            val=(Integer)jSpinner1.getValue();
+        }
+        if(jTextField1.getText().trim().compareTo("")==0)
+            JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
+        else if(val<0){
+            JOptionPane.showMessageDialog(this,"Ingrese un numero positivo","Error",ERROR_MESSAGE);
+        }
+        else{
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             String dir=jTextField1.getText();
@@ -174,6 +184,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this,"Error de insercion","Error",WARNING_MESSAGE);
         }
         this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

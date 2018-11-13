@@ -78,7 +78,7 @@ public class frmModProd extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(414, 362));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(null);
 
         jLabel1.setText("Nombre:");
@@ -157,7 +157,7 @@ public class frmModProd extends javax.swing.JDialog {
         jPanel1.add(cbounidad);
         cbounidad.setBounds(160, 180, 80, 20);
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -170,7 +170,7 @@ public class frmModProd extends javax.swing.JDialog {
         jPanel1.add(jButton1);
         jButton1.setBounds(200, 310, 100, 33);
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -183,7 +183,7 @@ public class frmModProd extends javax.swing.JDialog {
         jPanel1.add(jButton2);
         jButton2.setBounds(60, 310, 100, 33);
 
-        radalta.setBackground(new java.awt.Color(0, 122, 204));
+        radalta.setBackground(new java.awt.Color(204, 204, 204));
         radalta.setText("Alta demanda");
         radalta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +193,7 @@ public class frmModProd extends javax.swing.JDialog {
         jPanel1.add(radalta);
         radalta.setBounds(160, 220, 110, 23);
 
-        rarreg.setBackground(new java.awt.Color(0, 122, 204));
+        rarreg.setBackground(new java.awt.Color(204, 204, 204));
         rarreg.setText("Regular");
         rarreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
