@@ -6,9 +6,12 @@
 package Vista;
 
 import LogicaDeNegocio.AlmacenesBL;
+import static Vista.frmPanel.contador;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
 
@@ -32,6 +35,10 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
     public frmGestAlma() {
         almacenG=new Almacen();
         ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
+        BasicInternalFrameUI basic=((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+        for(MouseListener listener:basic.getNorthPane().getMouseListeners()){
+            basic.getNorthPane().removeMouseListener(listener);
+        }
         initComponents();
         
         AlmacenesBL almacenBL=new AlmacenesBL();
@@ -67,8 +74,8 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(650, 450));
-        setPreferredSize(new java.awt.Dimension(650, 450));
+        setMinimumSize(new java.awt.Dimension(650, 680));
+        setPreferredSize(new java.awt.Dimension(650, 680));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -154,21 +161,21 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(254, 254, 254))
+                .addGap(258, 258, 258))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,6 +295,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        contador--;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 

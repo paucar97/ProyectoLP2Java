@@ -5,16 +5,15 @@
  */
 package Vista;
 
-import LogicaDeNegocio.AlmacenesBL;
 import LogicaDeNegocio.ProductosBL;
+import static Vista.frmPanel.contador;
 import static Vista.frmPanel.i;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import modelo.Almacen;
 import modelo.Producto;
 
 /**
@@ -29,6 +28,10 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
     public Producto producto;
     public frmGestProductos() {
         producto=new Producto();
+        BasicInternalFrameUI basic=((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+        for(MouseListener listener:basic.getNorthPane().getMouseListeners()){
+            basic.getNorthPane().removeMouseListener(listener);
+        }
         initComponents();
         ArrayList<Producto>productos=new ArrayList<Producto>();
         ProductosBL productoBL=new ProductosBL();
@@ -71,11 +74,11 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProd = new javax.swing.JTable();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jCod = new javax.swing.JRadioButton();
+        jNomb = new javax.swing.JRadioButton();
         btnCancelar = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(650, 450));
+        setPreferredSize(new java.awt.Dimension(650, 680));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -117,6 +120,11 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         jButton4.setText("Buscar");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("...");
         jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,19 +152,19 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         tblProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblProd);
 
-        jRadioButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jRadioButton1.setText("Codigo");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jCod.setBackground(new java.awt.Color(204, 204, 204));
+        jCod.setText("Codigo");
+        jCod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jCodActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jRadioButton2.setText("Nombre");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jNomb.setBackground(new java.awt.Color(204, 204, 204));
+        jNomb.setText("Nombre");
+        jNomb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jNombActionPerformed(evt);
             }
         });
 
@@ -175,10 +183,6 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(255, 255, 255))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,32 +197,36 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(jCod)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addComponent(jNomb)))))
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(272, 272, 272))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(66, 66, 66)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCod)
+                    .addComponent(jNomb))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                .addGap(96, 96, 96))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,7 +237,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -365,26 +373,102 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
         i++;
     }//GEN-LAST:event_jTextField1MouseClicked
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton2.isSelected()==true){
-            jRadioButton1.setSelected(true);
-            jRadioButton2.setSelected(false);
+        if(jNomb.isSelected()==true){
+            jCod.setSelected(true);
+            jNomb.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jCodActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void jNombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton1.isSelected()==true){
-            jRadioButton2.setSelected(true);
-            jRadioButton1.setSelected(false);
+        if(jCod.isSelected()==true){
+            jNomb.setSelected(true);
+            jCod.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_jNombActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        contador--;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        try{
+            ArrayList<Producto>listaBusq=new ArrayList<Producto>();
+            ArrayList<Producto>productos=new ArrayList<Producto>();
+            ProductosBL productoBL=new ProductosBL();
+            productos=productoBL.listarProductos();
+            DefaultTableModel model=(DefaultTableModel) tblProd.getModel();
+
+            String criterio;
+            criterio=jTextField1.getText().toString().trim();
+            if(jTextField1.getText().isEmpty()){
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=productos.get(i).getCodigo();
+                    rowData[1]=productos.get(i).getNombre();
+                    rowData[2]=productos.get(i).getDescripcion();
+                    rowData[3]=productos.get(i).getPrecio();
+                    rowData[4]=productos.get(i).getUm();
+                    rowData[5]=productos.get(i).getTipo();
+                    rowData[6]=productos.get(i).getStock();
+                    rowData[7]=productos.get(i).getMinimoStock();   
+                    model.addRow(rowData);
+                }
+            }
+            if(jCod.isSelected()){
+                for(int i=0;i<productos.size();i++){
+                    if(productos.get(i).getCodigo().contains(criterio)){
+                        Producto prod=new Producto();
+                        prod=productos.get(i);
+                        listaBusq.add(prod);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getCodigo();
+                    rowData[1]=listaBusq.get(i).getNombre();
+                    rowData[2]=listaBusq.get(i).getDescripcion();
+                    rowData[3]=listaBusq.get(i).getPrecio();
+                    rowData[4]=listaBusq.get(i).getUm();
+                    rowData[5]=listaBusq.get(i).getTipo();
+                    rowData[6]=listaBusq.get(i).getStock();
+                    rowData[7]=listaBusq.get(i).getMinimoStock();   
+                    model.addRow(rowData);
+                }
+            }
+            if(jNomb.isSelected()){
+                for(int i=0;i<productos.size();i++){
+                    if(productos.get(i).getNombre().contains(criterio)){
+                        Producto prod=new Producto();
+                        prod=productos.get(i);
+                        listaBusq.add(prod);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getCodigo();
+                    rowData[1]=listaBusq.get(i).getNombre();
+                    rowData[2]=listaBusq.get(i).getDescripcion();
+                    rowData[3]=listaBusq.get(i).getPrecio();
+                    rowData[4]=listaBusq.get(i).getUm();
+                    rowData[5]=listaBusq.get(i).getTipo();
+                    rowData[6]=listaBusq.get(i).getStock();
+                    rowData[7]=listaBusq.get(i).getMinimoStock();   
+                    model.addRow(rowData);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -393,9 +477,9 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JRadioButton jCod;
+    private javax.swing.JRadioButton jNomb;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblProd;

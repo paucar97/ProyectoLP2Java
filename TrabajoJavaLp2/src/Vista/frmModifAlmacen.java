@@ -190,6 +190,11 @@ public class frmModifAlmacen extends javax.swing.JDialog {
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().isEmpty())
+            evt.consume();
+        
         String s1=String.valueOf(evt.getKeyChar());
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
             if(!s1.matches("[aA-zZ0-9.]")){

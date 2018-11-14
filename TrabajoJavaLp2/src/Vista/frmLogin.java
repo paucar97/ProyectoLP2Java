@@ -96,7 +96,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblPass);
         lblPass.setBounds(70, 150, 85, 17);
 
-        txtUser.setText("usuarioDeEjemplo_123");
+        txtUser.setText("usuario");
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUserMouseClicked(evt);
@@ -115,7 +115,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(txtUser);
         txtUser.setBounds(70, 100, 289, 35);
 
-        txtPass.setText("Contraseña");
+        txtPass.setText("12345");
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPassMouseClicked(evt);
