@@ -6,8 +6,12 @@
 package Vista;
 
 import LogicaDeNegocio.AlmacenesBL;
+import static Vista.frmPanel.contador;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import modelo.Almacen;
 
@@ -31,6 +35,10 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
     public frmGestAlma() {
         almacenG=new Almacen();
         ArrayList<Almacen> almacenes=new ArrayList<Almacen>();
+        BasicInternalFrameUI basic=((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+        for(MouseListener listener:basic.getNorthPane().getMouseListeners()){
+            basic.getNorthPane().removeMouseListener(listener);
+        }
         initComponents();
         
         AlmacenesBL almacenBL=new AlmacenesBL();
@@ -66,12 +74,12 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(650, 450));
-        setPreferredSize(new java.awt.Dimension(650, 450));
+        setMinimumSize(new java.awt.Dimension(650, 680));
+        setPreferredSize(new java.awt.Dimension(650, 680));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -82,7 +90,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -93,6 +101,11 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
+        jTable1=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,9 +115,11 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
                 "ID_Almacen", "Dirección", "Num. distintos prod"
             }
         ));
+        jTable1.setSurrendersFocusOnKeystroke(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -115,7 +130,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(0, 122, 204));
+        btnCancelar.setBackground(new java.awt.Color(0, 0, 0));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         btnCancelar.setText("Regresar");
         btnCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -146,21 +161,21 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(254, 254, 254))
+                .addGap(258, 258, 258))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +222,7 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int row;
+        if(jTable1.getSelectedRow()!=-1){
         row = jTable1.getSelectedRow();
         
         int id=Integer.parseInt(jTable1.getModel().getValueAt(row, 0).toString());
@@ -240,10 +256,12 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
         }
             
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el almacen","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow()!=-1){
         int resultado=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el almacen?");
         if(resultado==JOptionPane.YES_OPTION){
             int column=0;
@@ -272,10 +290,12 @@ public class frmGestAlma extends javax.swing.JInternalFrame {
             System.out.println("Error de bd");
         }
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el almacen","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        contador--;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 

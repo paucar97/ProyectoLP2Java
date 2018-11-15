@@ -49,7 +49,7 @@ public class ProductosDA {
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock,estado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
-                }else if(unidad.compareTo("CENTENA")==0){
+                }else if(unidad.compareTo("CIENTO")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock,estado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
@@ -82,7 +82,7 @@ public class ProductosDA {
         
         CallableStatement comando=con.prepareCall("{call insertarProducto(?,"
                                                     + "?,?,?,?,?,?,?)}");
-        comando.setString("_id_producto",id);
+        comando.setString("_id_producto",id.toUpperCase());
         comando.setString("_nombre",nombre);
         comando.setString("_UnidMedida",medida);
         comando.setDouble("_precio", precio);
@@ -108,7 +108,7 @@ public class ProductosDA {
         
         CallableStatement comando=con.prepareCall("{call modificarProducto(?,"
                                                     + "?,?,?,?,?,?,?,?)}");
-        comando.setString("_id_producto",prod.getCodigo());
+        comando.setString("_id_producto",prod.getCodigo().toUpperCase());
         comando.setString("_nombre",prod.getNombre());
         comando.setString("_UnidMedida",unidad);
         BigDecimal bd=new BigDecimal(prod.getPrecio());
@@ -119,6 +119,17 @@ public class ProductosDA {
         comando.setInt("_tipo", prod.getTipo());
         comando.setInt("_stokcMinimo", prod.getMinimoStock());
         comando.setString("_idB", idBuscar);
+        comando.execute();
+        con.close();
+    }
+    public void incrementarStock(int stock,String cod)throws Exception{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call incrementarStock(?,"
+                                                    + "?)}");
+        comando.setInt("_stock",stock);
+        comando.setString("_id_producto",cod);
         comando.execute();
         con.close();
     }

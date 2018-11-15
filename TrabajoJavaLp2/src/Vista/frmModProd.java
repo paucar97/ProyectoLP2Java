@@ -6,7 +6,10 @@
 package Vista;
 
 import LogicaDeNegocio.ProductosBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static jdk.nashorn.internal.objects.NativeMath.round;
@@ -57,7 +60,6 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtnombre = new javax.swing.JTextField();
-        txtdesc = new javax.swing.JTextField();
         txtprecio = new javax.swing.JTextField();
         txtmin = new javax.swing.JTextField();
         cbounidad = new javax.swing.JComboBox<>();
@@ -68,6 +70,7 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtcod = new javax.swing.JTextField();
+        txtdesc = new javax.swing.JTextArea(4,50);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar Producto");
@@ -75,7 +78,7 @@ public class frmModProd extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(414, 362));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(null);
 
         jLabel1.setText("Nombre:");
@@ -88,33 +91,53 @@ public class frmModProd extends javax.swing.JDialog {
 
         jLabel3.setText("Precio:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 140, 60, 14);
+        jLabel3.setBounds(50, 180, 60, 14);
 
         jLabel4.setText("Unidad de Medida:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(50, 180, 130, 14);
+        jLabel4.setBounds(50, 220, 130, 14);
 
         jLabel5.setText("Tipo:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(50, 220, 70, 14);
+        jLabel5.setBounds(50, 260, 70, 14);
 
         jLabel6.setText("Stock Mínimo:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(50, 260, 90, 14);
+        jLabel6.setBounds(50, 300, 90, 14);
+
+        txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtnombre);
         txtnombre.setBounds(160, 10, 200, 30);
-        jPanel1.add(txtdesc);
-        txtdesc.setBounds(160, 90, 200, 30);
 
         txtprecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtprecioActionPerformed(evt);
             }
         });
+        txtprecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtprecioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtprecio);
-        txtprecio.setBounds(160, 130, 50, 30);
+        txtprecio.setBounds(160, 170, 50, 30);
+
+        txtmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtminActionPerformed(evt);
+            }
+        });
+        txtmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtminKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtmin);
-        txtmin.setBounds(160, 250, 60, 30);
+        txtmin.setBounds(160, 290, 60, 30);
 
         cbounidad.setBackground(new java.awt.Color(255, 255, 204));
         cbounidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
@@ -124,9 +147,9 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(cbounidad);
-        cbounidad.setBounds(160, 180, 80, 20);
+        cbounidad.setBounds(160, 220, 80, 20);
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -137,9 +160,9 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(200, 310, 100, 33);
+        jButton1.setBounds(250, 350, 100, 33);
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -150,9 +173,9 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(60, 310, 100, 33);
+        jButton2.setBounds(60, 350, 100, 33);
 
-        radalta.setBackground(new java.awt.Color(0, 122, 204));
+        radalta.setBackground(new java.awt.Color(204, 204, 204));
         radalta.setText("Alta demanda");
         radalta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,9 +183,9 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(radalta);
-        radalta.setBounds(160, 220, 110, 23);
+        radalta.setBounds(160, 260, 110, 23);
 
-        rarreg.setBackground(new java.awt.Color(0, 122, 204));
+        rarreg.setBackground(new java.awt.Color(204, 204, 204));
         rarreg.setText("Regular");
         rarreg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,27 +193,47 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(rarreg);
-        rarreg.setBounds(270, 220, 90, 23);
+        rarreg.setBounds(270, 260, 90, 23);
 
         jLabel7.setText("S/.");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(140, 140, 14, 14);
+        jLabel7.setBounds(140, 180, 14, 14);
 
         jLabel8.setText("Codigo:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(50, 60, 80, 14);
+
+        txtcod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtcod);
         txtcod.setBounds(160, 50, 90, 30);
+
+        txtdesc.setWrapStyleWord(true);
+        txtdesc.setLineWrap(true);
+        txtdesc.setColumns(20);
+        txtdesc.setRows(5);
+        txtdesc.setMinimumSize(new java.awt.Dimension(250, 70));
+        txtdesc.setPreferredSize(new java.awt.Dimension(250, 70));
+        txtdesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdescKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtdesc);
+        txtdesc.setBounds(160, 90, 250, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         pack();
@@ -207,7 +250,23 @@ public class frmModProd extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(txtcod.getText().trim().compareTo("")==0||txtdesc.getText().trim().compareTo("")==0||
+           txtmin.getText().trim().compareTo("")==0
+           ||txtnombre.getText().trim().compareTo("")==0||txtprecio.getText().trim().compareTo("")==0){
+            JOptionPane.showMessageDialog(this,
+                "Hay campos vacios","Error",
+                ERROR_MESSAGE);
+        }else if(txtcod.getText().length()!=5){
+            JOptionPane.showMessageDialog(this,
+                "El codigo debe tener 6 caracteres","Error",
+                ERROR_MESSAGE);
         
+        }
+        else if(radalta.isSelected()==false&&rarreg.isSelected()==false)
+            JOptionPane.showMessageDialog(this,
+                "Elija un tipo","Error",
+                ERROR_MESSAGE);
+        else{
         try{
             ProductosBL prodBL=new ProductosBL();           
             String nombre=txtnombre.getText();
@@ -230,7 +289,7 @@ public class frmModProd extends javax.swing.JDialog {
                   INFORMATION_MESSAGE);
         }catch(Exception ex){}
         this.dispose();
-
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void radaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radaltaActionPerformed
@@ -252,6 +311,108 @@ public class frmModProd extends javax.swing.JDialog {
     private void txtprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtprecioActionPerformed
+
+    private void txtnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtnombre.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtnombre.getText().isEmpty())
+            evt.consume();
+        
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten letras a-z","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtnombreKeyTyped
+
+    private void txtcodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtcod.getText().length()>=5){
+                evt.consume();
+            }
+            if(!s1.matches("[aA-zZ0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtcodKeyTyped
+
+    private void txtprecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtprecioKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtprecio.getText().length()>=7){
+                evt.consume();
+            }
+            if(!s1.matches("[0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+            if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+                evt.consume();
+            }
+            if(evt.getKeyChar()=='.'&&txtprecio.getText().contains(".")){
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtprecioKeyTyped
+
+    private void txtminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtminActionPerformed
+
+    private void txtminKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtminKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtmin.getText().length()>=5){
+                evt.consume();
+            
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtminKeyTyped
+
+    private void txtdescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtdesc.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtdesc.getText().isEmpty())
+            evt.consume();
+
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE&&evt.getKeyChar()!=KeyEvent.VK_ENTER){
+            if(txtdesc.getText().length()>=102)
+                evt.consume();
+            if(!s1.matches("[aA-zZ0-9/]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                    "Solo se admiten caracteres alfanumericos","Error",
+                    ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtdescKeyTyped
 
     /**
      * @param args the command line arguments
@@ -311,7 +472,7 @@ public class frmModProd extends javax.swing.JDialog {
     private javax.swing.JRadioButton radalta;
     private javax.swing.JRadioButton rarreg;
     private javax.swing.JTextField txtcod;
-    private javax.swing.JTextField txtdesc;
+    private javax.swing.JTextArea txtdesc;
     private javax.swing.JTextField txtmin;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtprecio;

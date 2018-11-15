@@ -6,7 +6,10 @@
 package Vista;
 
 import LogicaDeNegocio.ProveedoresBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import modelo.Proveedor;
 
@@ -73,7 +76,7 @@ public class frmModifProveedor extends javax.swing.JDialog {
         setTitle("Modificar Proveedor");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Razón Social:");
@@ -88,9 +91,33 @@ public class frmModifProveedor extends javax.swing.JDialog {
         jLabel4.setText("Teléfono:");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setText("Direcciones:");
+        jLabel5.setText("Direccion:");
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        txtraz.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrazKeyTyped(evt);
+            }
+        });
+
+        txtruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtrucKeyTyped(evt);
+            }
+        });
+
+        txtemail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtemailKeyTyped(evt);
+            }
+        });
+
+        txttelf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelfKeyTyped(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText("Cancelar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -101,7 +128,7 @@ public class frmModifProveedor extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 122, 204));
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
         jButton4.setText("Modificar");
         jButton4.setAutoscrolls(true);
@@ -113,6 +140,12 @@ public class frmModifProveedor extends javax.swing.JDialog {
             }
         });
 
+        txtdir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtdirKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -121,29 +154,25 @@ public class frmModifProveedor extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txttelf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtraz)
-                                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtdir))))
+                            .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtraz, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txttelf, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtdir)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +227,27 @@ public class frmModifProveedor extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        if(txtdir.getText().trim().compareTo("")==0||txtemail.getText().trim().compareTo("")==0||
+           txtraz.getText().trim().compareTo("")==0
+           ||txtruc.getText().trim().compareTo("")==0||txttelf.getText().trim().compareTo("")==0){
+            JOptionPane.showMessageDialog(this,
+                "Hay campos vacios","Error",
+                ERROR_MESSAGE);
+        }else if(txtruc.getText().length()!=11){
+            JOptionPane.showMessageDialog(this,
+                "El ruc debe tener 11 digitos","Error",
+                ERROR_MESSAGE);
+        
+        }else if(!txtemail.getText().matches("^.+@.+(\\.[^\\.]+)+$")){
+            JOptionPane.showMessageDialog(this,
+                "Email incorrecto","Error",
+                ERROR_MESSAGE);
+        }else if(txttelf.getText().length()!=7&&txttelf.getText().length()!=9){
+            JOptionPane.showMessageDialog(this,
+                "El telefono debe tener 7 digitos (fijo) o 9 (celular)","Error",
+                ERROR_MESSAGE);
+        }
+        else{
         try{
             ProveedoresBL provBL=new ProveedoresBL();
             String razon=txtraz.getText();
@@ -216,7 +266,93 @@ public class frmModifProveedor extends javax.swing.JDialog {
                   "Se modifico el proveedor correctamente","Aviso",
                   INFORMATION_MESSAGE);
         this.dispose();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void txtrazKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrazKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtraz.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtraz.getText().isEmpty())
+            evt.consume();
+        
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(txtraz.getText().length()>=40)
+                evt.consume();
+            if(!s1.matches("[aA-zZ]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten letras a-z","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtrazKeyTyped
+
+    private void txtrucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtrucKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txtruc.getText().length()>=11){
+                evt.consume();
+                
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtrucKeyTyped
+
+    private void txttelfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelfKeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(txttelf.getText().length()>=9){
+                evt.consume();
+                
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txttelfKeyTyped
+
+    private void txtdirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdirKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtdir.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && txtdir.getText().isEmpty())
+            evt.consume();
+        
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(txtdir.getText().length()>=35)
+                evt.consume();
+            if(!s1.matches("[aA-zZ0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtdirKeyTyped
+
+    private void txtemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtemailKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtemailKeyTyped
 
     /**
      * @param args the command line arguments

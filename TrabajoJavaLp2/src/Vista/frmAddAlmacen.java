@@ -6,6 +6,8 @@
 package Vista;
 
 import LogicaDeNegocio.AlmacenesBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javafx.scene.chart.PieChart;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
@@ -54,12 +57,18 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         setBackground(new java.awt.Color(255, 255, 204));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Dirección:");
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -70,7 +79,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -146,6 +155,16 @@ public class frmAddAlmacen extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int val = -1;
+        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
+            val=(Integer)jSpinner1.getValue();
+        }
+        if(jTextField1.getText().trim().compareTo("")==0)
+            JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
+        else if(val<0){
+            JOptionPane.showMessageDialog(this,"Ingrese un numero positivo","Error",ERROR_MESSAGE);
+        }
+        else{
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             String dir=jTextField1.getText();
@@ -165,12 +184,32 @@ public class frmAddAlmacen extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this,"Error de insercion","Error",WARNING_MESSAGE);
         }
         this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().isEmpty())
+            evt.consume();
+        
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments

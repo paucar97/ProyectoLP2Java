@@ -5,7 +5,10 @@
  */
 package Vista;
 
+import LogicaDeNegocio.UsuarioBL;
+import Modelo.Usuario;
 import com.sun.glass.events.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 
@@ -69,7 +72,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblUser);
         lblUser.setBounds(70, 80, 57, 17);
 
-        btnIngresar.setBackground(new java.awt.Color(0, 122, 204));
+        btnIngresar.setBackground(new java.awt.Color(0, 0, 0));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/006-exit.png"))); // NOI18N
         btnIngresar.setText("Ingresar");
         btnIngresar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -93,7 +96,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(lblPass);
         lblPass.setBounds(70, 150, 85, 17);
 
-        txtUser.setText("usuarioDeEjemplo_123");
+        txtUser.setText("usuario");
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtUserMouseClicked(evt);
@@ -112,7 +115,7 @@ public class frmLogin extends javax.swing.JFrame {
         getContentPane().add(txtUser);
         txtUser.setBounds(70, 100, 289, 35);
 
-        txtPass.setText("Contraseña");
+        txtPass.setText("12345");
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtPassMouseClicked(evt);
@@ -218,30 +221,40 @@ public class frmLogin extends javax.swing.JFrame {
         });
     }
     public void login(){
-        String usuario="admin";
-        String contra="admin123";
-        
-        char[] pass=txtPass.getPassword();
-        String passString=new String(pass);
-        if(txtUser.getText().compareTo("")!=0 && txtUser.getText().compareTo(usuario)==0){
-            if(passString.equals(contra)){
-                frmPanel panel=new frmPanel(this,true);
-                this.dispose();
-                panel.setVisible(true);
+        String usuario=txtUser.getText().toString();
+        char[]pass=txtPass.getPassword();
+        String contra=String.copyValueOf(pass);
+        boolean encontrado=false;
+        ArrayList<Usuario>usuarios=new ArrayList<Usuario>();
+        UsuarioBL userBL=new UsuarioBL();  
+        try{    
+            usuarios=userBL.listarUsuarios();
+            for(int i=0;i<usuarios.size();i++){
+                if(usuario.compareTo("")!=0 && usuario.compareTo(usuarios.get(i).getIdUsuario())==0){
+                    encontrado=true;
+                    if(contra.equals(usuarios.get(i).getContraseña())){
+                    frmPanel panel=new frmPanel(this,true);
+                    this.dispose();
+                    panel.setVisible(true);
                 
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, 
+                        "Contraseña incorrecta","Advertencia",
+                        WARNING_MESSAGE);
+                        break;
+                    }
+                }
             }
-            else{
+            if(!encontrado){
                 JOptionPane.showMessageDialog(this, 
-                  "Contraseña incorrecta","Advertencia",
-                  WARNING_MESSAGE);
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(this, 
                   "Usuario incorrecto","Advertencia",
                   WARNING_MESSAGE);
-            
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

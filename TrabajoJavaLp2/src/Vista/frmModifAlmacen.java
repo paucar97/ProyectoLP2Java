@@ -6,9 +6,12 @@
 package Vista;
 
 import LogicaDeNegocio.AlmacenesBL;
+import com.sun.webkit.event.WCKeyEvent;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import modelo.Almacen;
 
@@ -55,12 +58,18 @@ public class frmModifAlmacen extends javax.swing.JDialog {
         setTitle("Modificar almacen");
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Dirección:");
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton1.setText("Cancelar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -71,7 +80,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/002-checked.png"))); // NOI18N
         jButton2.setText("Aceptar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -148,6 +157,16 @@ public class frmModifAlmacen extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int val = -1;
+        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
+            val=(Integer)jSpinner1.getValue();
+        }
+        if(jTextField1.getText().trim().compareTo("")==0)
+            JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
+        else if(val<0){
+            JOptionPane.showMessageDialog(this,"Ingrese un numero positivo","Error",ERROR_MESSAGE);
+        }
+        else{
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             almacenBL.eliminarAlmacen(idA);
@@ -166,7 +185,27 @@ public class frmModifAlmacen extends javax.swing.JDialog {
                   INFORMATION_MESSAGE);
         }catch(Exception ex){}
         this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().endsWith(" "))
+            evt.consume();
+        if(evt.getKeyChar()==KeyEvent.VK_SPACE && jTextField1.getText().isEmpty())
+            evt.consume();
+        
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(!s1.matches("[aA-zZ0-9.]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten caracteres alfanumericos","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments

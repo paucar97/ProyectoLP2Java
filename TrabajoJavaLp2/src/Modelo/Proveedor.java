@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author PC
  */
 public class Proveedor extends AgenteExterno{
-    private int ruc;
+    private long ruc;
     private String razonSoc;
     private String direccion;
     private int telefono;
@@ -23,14 +23,14 @@ public class Proveedor extends AgenteExterno{
     public Proveedor() {
     }
 
-    public Proveedor(int ruc, String razonSoc, String direccion, int telefono, String email) {
+    public Proveedor(long ruc, String razonSoc, String direccion, int telefono, String email) {
         this.ruc = ruc;
         this.razonSoc = razonSoc;
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
     }
-    public Proveedor(int ruc, String razonSoc, String direccion, int telefono, String email, int estado) {
+    public Proveedor(long ruc, String razonSoc, String direccion, int telefono, String email, int estado) {
         this.ruc = ruc;
         this.razonSoc = razonSoc;
         this.direccion = direccion;
@@ -39,11 +39,11 @@ public class Proveedor extends AgenteExterno{
         this.estado=estado;
     }
 
-    public int getRuc() {
+    public long getRuc() {
         return ruc;
     }
 
-    public void setRuc(int ruc) {
+    public void setRuc(long ruc) {
         this.ruc = ruc;
     }
 
@@ -95,7 +95,7 @@ public class Proveedor extends AgenteExterno{
         this.estado = estado;
     }
 
-    public Proveedor(int ruc, String razonSoc, String direccion, int telefono, String email, ArrayList<String> listaProductos, int estado) {
+    public Proveedor(long ruc, String razonSoc, String direccion, int telefono, String email, ArrayList<String> listaProductos, int estado) {
         this.ruc = ruc;
         this.razonSoc = razonSoc;
         this.direccion = direccion;

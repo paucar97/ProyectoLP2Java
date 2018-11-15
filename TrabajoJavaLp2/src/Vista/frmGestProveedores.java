@@ -5,14 +5,15 @@
  */
 package Vista;
 
-import LogicaDeNegocio.ProductosBL;
 import LogicaDeNegocio.ProveedoresBL;
+import static Vista.frmPanel.contador;
 import static Vista.frmPanel.i;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import modelo.Producto;
 import modelo.Proveedor;
 
 /**
@@ -28,6 +29,10 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
     public frmGestProveedores() {
         proveedor=new Proveedor();
         ArrayList<Proveedor> proveedores=new ArrayList<Proveedor>();
+        BasicInternalFrameUI basic=((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI());
+        for(MouseListener listener:basic.getNorthPane().getMouseListeners()){
+            basic.getNorthPane().removeMouseListener(listener);
+        }
         initComponents();
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         ProveedoresBL proveedorBL=new ProveedoresBL();
@@ -63,18 +68,18 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         lblBusqueda = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRuc = new javax.swing.JRadioButton();
+        jNomb = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
-        setMinimumSize(new java.awt.Dimension(650, 450));
-        setPreferredSize(new java.awt.Dimension(650, 450));
+        setMinimumSize(new java.awt.Dimension(650, 680));
+        setPreferredSize(new java.awt.Dimension(650, 680));
 
-        jPanel1.setBackground(new java.awt.Color(0, 122, 204));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setToolTipText("");
 
-        jButton2.setBackground(new java.awt.Color(0, 122, 204));
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/008-settings.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -85,7 +90,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 122, 204));
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         jButton3.setText(" Eliminar");
         jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -96,7 +101,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 122, 204));
+        jButton4.setBackground(new java.awt.Color(0, 0, 0));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/015-search.png"))); // NOI18N
         jButton4.setText(" Buscar");
         jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -109,6 +114,11 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
+        jTable1=new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTable1.setBackground(new java.awt.Color(255, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,6 +129,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         ));
         jTable1.setGridColor(new java.awt.Color(0, 122, 204));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         lblBusqueda.setText("...");
@@ -133,23 +144,23 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton1.setText("RUC");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRuc.setBackground(new java.awt.Color(204, 204, 204));
+        jRuc.setText("RUC");
+        jRuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jRucActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 122, 204));
-        jRadioButton2.setText("Nombre");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jNomb.setBackground(new java.awt.Color(204, 204, 204));
+        jNomb.setText("Razon Social");
+        jNomb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                jNombActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 122, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/003-plus.png"))); // NOI18N
         jButton1.setText(" Agregar");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -160,7 +171,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancel.setBackground(new java.awt.Color(0, 122, 204));
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
         btnCancel.setText("Regresar");
         btnCancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -175,62 +186,61 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(270, 270, 270))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
+                        .addGap(39, 39, 39)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(jRuc)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton2))
-                            .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270))
+                                .addComponent(jNomb))
+                            .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRuc)
+                            .addComponent(jNomb)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(77, 77, 77))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,6 +294,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow()!=-1){
         int result=JOptionPane.showConfirmDialog(null,"¿Seguro que desea eliminar el proveedor?");
         if(result==JOptionPane.YES_OPTION){
             int column=1;
@@ -315,10 +326,73 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
            System.out.println("Error de bd");
         }
         }
+        }else JOptionPane.showMessageDialog(this,"Seleccione el proveedor","Advertencia",WARNING_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        try{
+            ArrayList<Proveedor>listaBusq=new ArrayList<Proveedor>();
+            ArrayList<Proveedor>proveedores=new ArrayList<Proveedor>();
+            ProveedoresBL provBL=new ProveedoresBL();
+            proveedores=provBL.listarProveedores();
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+
+            String criterio;
+            criterio=lblBusqueda.getText().toString().trim();
+            if(lblBusqueda.getText().isEmpty()){
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+            if(jRuc.isSelected()){
+                for(int i=0;i<proveedores.size();i++){
+                    if(Long.toString(proveedores.get(i).getRuc()).contains(criterio)){
+                        Proveedor prov=new Proveedor();
+                        prov=proveedores.get(i);
+                        listaBusq.add(prov);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getRazonSoc();
+                    rowData[1]=listaBusq.get(i).getRuc();
+                    rowData[2]=listaBusq.get(i).getEmail();
+                    rowData[3]=listaBusq.get(i).getTelefono();
+                    rowData[4]=listaBusq.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+            if(jNomb.isSelected()){
+                for(int i=0;i<proveedores.size();i++){
+                    if(proveedores.get(i).getRazonSoc().contains(criterio)){
+                        Proveedor prov=new Proveedor();
+                        prov=proveedores.get(i);
+                        listaBusq.add(prov);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getRazonSoc();
+                    rowData[1]=listaBusq.get(i).getRuc();
+                    rowData[2]=listaBusq.get(i).getEmail();
+                    rowData[3]=listaBusq.get(i).getTelefono();
+                    rowData[4]=listaBusq.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void lblBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBusquedaMouseClicked
@@ -332,21 +406,21 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblBusquedaActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jRucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRucActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton2.isSelected()==true){
-            jRadioButton1.setSelected(true);
-            jRadioButton2.setSelected(false);
+        if(jNomb.isSelected()==true){
+            jRuc.setSelected(true);
+            jNomb.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jRucActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void jNombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombActionPerformed
         // TODO add your handling code here:
-        if(jRadioButton1.isSelected()==true){
-            jRadioButton2.setSelected(true);
-            jRadioButton1.setSelected(false);
+        if(jRuc.isSelected()==true){
+            jNomb.setSelected(true);
+            jRuc.setSelected(false);
         }
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_jNombActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -376,6 +450,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
+        contador--;
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -386,9 +461,9 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JRadioButton jNomb;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRuc;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lblBusqueda;
