@@ -332,7 +332,8 @@ public class frmLogin extends javax.swing.JFrame {
                         if(tipoUser==0){
                             userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
                             frmPanel panel=new frmPanel(this,false);
-
+                            frmAvisoStock aviso=new frmAvisoStock(this,true);
+                            aviso.setVisible(true);
                             this.dispose();
                             panel.setVisible(true);
                         }

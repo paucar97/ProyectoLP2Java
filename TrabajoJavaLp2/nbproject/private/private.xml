@@ -3,10 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/proyectolp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmMovAlmacen.java</file>
-            <file>file:/D:/proyectolp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmGestProveedores.java</file>
-            <file>file:/D:/proyectolp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmPanel.java</file>
-            <file>file:/D:/proyectolp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmGestProductos.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmPanelOperario.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/AccesoDatos/AlmacenesDA.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmLogin.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmGestProductos.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmMovAlmacen.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmModifProveedor.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmModProd.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmModifAlmacen.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/AccesoDatos/ProductosDA.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmAddProd.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmAddAlmacen.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmPanel.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmAvisoStock.java</file>
+            <file>file:/C:/temp/lp2/ProyectoLP2Java/TrabajoJavaLp2/src/Vista/frmGestProveedores.java</file>
         </group>
     </open-files>
 </project-private>
