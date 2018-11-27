@@ -24,4 +24,7 @@ public class UsuarioBL {
     public void cambiarContraseña(String contra,String respuesta)throws Exception{
         usuarioDA.cambiarContraseña(contra,respuesta);
     }
+    public void iniciarSesion(String idUser,int estado)throws Exception{
+        usuarioDA.iniciarSesion(idUser,estado);
+    }
 }

@@ -54,4 +54,14 @@ public class UsuarioDA {
         comando.execute();
         con.close();
     }
+    public void iniciarSesion(String idUser, int estado)throws Exception{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call iniciarSesion(?,?)}");
+        comando.setString("_idUsuario",idUser);
+        comando.setInt("_estado", estado);
+        comando.execute();
+        con.close();
+    }
 }

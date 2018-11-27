@@ -200,7 +200,7 @@ public class frmLogin extends javax.swing.JFrame {
                 .addComponent(lblOlvidoCnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -329,7 +329,7 @@ public class frmLogin extends javax.swing.JFrame {
                         respuesta=usuarios.get(i).getRespuestaC().toString();
                         if(tipoUser==0){
                         frmPanel panel=new frmPanel(this,true);
-
+                        userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
                         this.dispose();
                         panel.setVisible(true);
                         }

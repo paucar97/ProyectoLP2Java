@@ -71,7 +71,6 @@ public class frmPanelOperario extends javax.swing.JDialog {
         setTitle("SISTEMA DE GESTION DE PEDIDOS SIS CAPA");
         setMaximumSize(new java.awt.Dimension(1000, 680));
         setMinimumSize(new java.awt.Dimension(1000, 680));
-        setPreferredSize(new java.awt.Dimension(1000, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 680));
 
