@@ -8,9 +8,13 @@ package Vista;
 import LogicaDeNegocio.ProductosBL;
 import com.sun.webkit.event.WCKeyEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import modelo.Producto;
 
 /**
  *
@@ -250,15 +254,31 @@ public class frmAddProd extends javax.swing.JDialog {
         int stockMin=Integer.parseInt(txtStockMin.getText());
         
         ProductosBL prodBL=new ProductosBL();
-        try{
-            prodBL.insertarProducto(id, nombre, unidad, precio, desc, stock, tipo, stockMin, 1);
-            JOptionPane.showMessageDialog(this, 
-                  "Se añadio el producto correctamente","Aviso",
-                  INFORMATION_MESSAGE);
-        }catch(Exception ex){}
+        ArrayList<Producto>productos=new ArrayList<Producto>();
+        try {
+            productos=prodBL.listarProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(frmAddProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        boolean repetido=false;
+    
+        for(Producto p:productos){
+            if(p.getCodigo().compareTo(id)==0)
+                repetido=true;
+        }
+        if(!repetido){
+            try{
+                prodBL.insertarProducto(id, nombre, unidad, precio, desc, stock, tipo, stockMin, 1);
+                JOptionPane.showMessageDialog(this, 
+                      "Se añadio el producto correctamente","Aviso",
+                      INFORMATION_MESSAGE);
+                this.dispose();
+            }catch(Exception ex){}
+        }else JOptionPane.showMessageDialog(this,
+                "El codigo ya ha sido registrado","Error",
+                ERROR_MESSAGE);
         
         
-        this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

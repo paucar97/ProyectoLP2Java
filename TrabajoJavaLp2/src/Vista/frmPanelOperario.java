@@ -5,8 +5,12 @@
  */
 package Vista;
 
+import LogicaDeNegocio.UsuarioBL;
+import static Vista.frmPanel.contador;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -17,7 +21,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
  */
 public class frmPanelOperario extends javax.swing.JDialog {
 
-    public static int contador=0;
+    
     public static int i=0;
     public static int j=0;
     /**
@@ -51,7 +55,7 @@ public class frmPanelOperario extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         panel1 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
+        jButton32 = new javax.swing.JButton();
         panel2 = new javax.swing.JPanel();
         jButton17 = new javax.swing.JButton();
         ImageIcon icon=new ImageIcon(getClass().getResource("/Vista/png3/fondo.jpg"));
@@ -64,8 +68,8 @@ public class frmPanelOperario extends javax.swing.JDialog {
         panel3 = new javax.swing.JPanel();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         panel5 = new javax.swing.JPanel();
-        jButton32 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SISTEMA DE GESTION DE PEDIDOS SIS CAPA");
@@ -73,6 +77,11 @@ public class frmPanelOperario extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(1000, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 680));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(1000, 680));
@@ -143,15 +152,15 @@ public class frmPanelOperario extends javax.swing.JDialog {
 
         panel1.setBackground(new java.awt.Color(0, 122, 204));
 
-        jButton8.setBackground(new java.awt.Color(0, 122, 204));
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Almacen");
-        jButton8.setBorder(null);
-        jButton8.setContentAreaFilled(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButton32.setBackground(new java.awt.Color(0, 122, 204));
+        jButton32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton32.setForeground(new java.awt.Color(255, 255, 255));
+        jButton32.setText("Movimiento de Almacenes");
+        jButton32.setBorder(null);
+        jButton32.setContentAreaFilled(false);
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButton32ActionPerformed(evt);
             }
         });
 
@@ -160,14 +169,14 @@ public class frmPanelOperario extends javax.swing.JDialog {
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panel2.setBackground(new java.awt.Color(0, 122, 204));
@@ -207,7 +216,7 @@ public class frmPanelOperario extends javax.swing.JDialog {
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,12 +239,30 @@ public class frmPanelOperario extends javax.swing.JDialog {
         jButton25.setBorder(null);
         jButton25.setContentAreaFilled(false);
 
+        jButton8.setBackground(new java.awt.Color(0, 122, 204));
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(255, 255, 255));
+        jButton8.setText("Almacen");
+        jButton8.setBorder(null);
+        jButton8.setContentAreaFilled(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
         panel3Layout.setHorizontalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panel3Layout.createSequentialGroup()
+                .addGroup(panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,34 +270,23 @@ public class frmPanelOperario extends javax.swing.JDialog {
                 .addGap(0, 0, 0)
                 .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         panel5.setBackground(new java.awt.Color(0, 122, 204));
-
-        jButton32.setBackground(new java.awt.Color(0, 122, 204));
-        jButton32.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton32.setForeground(new java.awt.Color(255, 255, 255));
-        jButton32.setText("Movimiento de Almacenes");
-        jButton32.setBorder(null);
-        jButton32.setContentAreaFilled(false);
-        jButton32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton32ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panel5Layout = new javax.swing.GroupLayout(panel5);
         panel5.setLayout(panel5Layout);
         panel5Layout.setHorizontalGroup(
             panel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         panel5Layout.setVerticalGroup(
             panel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel5Layout.createSequentialGroup()
-                .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 61, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -282,7 +298,7 @@ public class frmPanelOperario extends javax.swing.JDialog {
                 .addComponent(panel0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +308,9 @@ public class frmPanelOperario extends javax.swing.JDialog {
                     .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(desktop)
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +333,8 @@ public class frmPanelOperario extends javax.swing.JDialog {
                                 .addGap(0, 0, 0)
                                 .addComponent(panel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(45, 45, 45))
         );
 
@@ -355,15 +374,14 @@ public class frmPanelOperario extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(panel1.isVisible()==false){
             panel1.setVisible(true);
-            panel5.setLocation(180,60);
-            panel5.setVisible(true);
+            
             desktop.setLocation(330,0);
             desktop.setSize(670,680);
         }
         else{
-            if(panel1.isVisible()==true && panel5.isVisible()==false){
-                panel5.setLocation(180,60);
-                panel5.setVisible(true);
+            if(panel1.isVisible()==true){
+                panel1.setVisible(false);
+                
                 desktop.setLocation(330,0);
                 desktop.setSize(670,680);
             }
@@ -371,7 +389,7 @@ public class frmPanelOperario extends javax.swing.JDialog {
                 panel1.setVisible(false);
                 panel2.setVisible(false);
                 panel3.setVisible(false);
-                panel5.setVisible(false);
+                
                 desktop.setLocation(180,0);
                 desktop.setSize(820,680);
                 desktop.getComponent(0).setSize(desktop.getWidth(),desktop.getHeight());
@@ -380,8 +398,7 @@ public class frmPanelOperario extends javax.swing.JDialog {
         if(panel1.isVisible()==true&& (panel2.isVisible()==true || panel3.isVisible()==true)){
             panel2.setVisible(false);
             panel3.setVisible(false);
-            panel5.setLocation(180,60);
-            panel5.setVisible(true);
+            
             desktop.setLocation(330,0);
             desktop.setSize(670,680);
         }
@@ -392,13 +409,19 @@ public class frmPanelOperario extends javax.swing.JDialog {
         frmLogin nuevo=new frmLogin();
         nuevo.setVisible(true);
         contador=0;
+        String cod=txtusr.getText().toString();
+        UsuarioBL userBL=new UsuarioBL();
+        try {
+            userBL.iniciarSesion(cod,0);
+        } catch (Exception ex) {
+            Logger.getLogger(frmPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
         // TODO add your handling code here:
-        if(contador==0){
+        if(frmPanel.contador==0){
             frmMovAlmacen nuevo=new frmMovAlmacen();
             desktop.add(nuevo);
             nuevo.setVisible(true);
@@ -407,11 +430,27 @@ public class frmPanelOperario extends javax.swing.JDialog {
             nuevo.setSize(desktop.getWidth(),desktop.getHeight());
             nuevo.setLocation(0,0);
 
-            contador++;
+            frmPanel.contador++;
         }else{
             JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+        if(frmPanel.contador==0){
+            frmGestProveedores nuevo=new frmGestProveedores();
+            desktop.add(nuevo);
+            nuevo.setVisible(true);
+            nuevo.setAlignmentX(TOP_ALIGNMENT);
+            nuevo.setAlignmentY(0);
+            nuevo.setSize(desktop.getWidth(),desktop.getHeight());
+            nuevo.setLocation(0,0);
+            frmPanel.contador++;
+        }else{
+            JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -431,21 +470,20 @@ public class frmPanelOperario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if(contador==0){
-            frmGestProveedores nuevo=new frmGestProveedores();
-            desktop.add(nuevo);
-            nuevo.setVisible(true);
-            nuevo.setAlignmentX(TOP_ALIGNMENT);
-            nuevo.setAlignmentY(0);
-            nuevo.setSize(desktop.getWidth(),desktop.getHeight());
-            nuevo.setLocation(0,0);
-            contador++;
-        }else{
-            JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
+        frmLogin nuevo=new frmLogin();
+        nuevo.setVisible(true);
+        contador=0;
+        String cod=txtusr.getText().toString();
+        UsuarioBL userBL=new UsuarioBL();
+        try {
+            userBL.iniciarSesion(cod,0);
+        } catch (Exception ex) {
+            Logger.getLogger(frmPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton17ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

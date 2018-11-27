@@ -11,6 +11,7 @@ import static Vista.frmPanel.contador;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -34,7 +35,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             basic.getNorthPane().removeMouseListener(listener);
         }
         initComponents();
-        
+        aumento.setSelected(true);
         jCod.setSelected(true);
         AlmacenesBL almacenBL=new AlmacenesBL();
         ProductosBL productoBL=new ProductosBL();
@@ -77,25 +78,27 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jCod = new javax.swing.JRadioButton();
         jNomb = new javax.swing.JRadioButton();
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        aumento = new javax.swing.JRadioButton();
+        decremento = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(650, 680));
         setPreferredSize(new java.awt.Dimension(650, 680));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Elija el almacén:");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Elija el almacén al que se ingresara el producto seleccionado:");
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 204));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,8 +106,6 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Elija el Filtro:");
 
         jCod.setBackground(new java.awt.Color(204, 204, 204));
         jCod.setText("Codigo");
@@ -156,7 +157,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Producto", "Stock"
+                "Codigo", "Producto", "Stock General"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -170,9 +171,6 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Coloque el aumento/decremento de stock:");
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/004-error.png"))); // NOI18N
@@ -196,64 +194,100 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }
         });
 
+        aumento.setBackground(new java.awt.Color(204, 204, 204));
+        aumento.setText("Aumento de Stock");
+        aumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aumentoActionPerformed(evt);
+            }
+        });
+
+        decremento.setBackground(new java.awt.Color(204, 204, 204));
+        decremento.setText("Decremento de Stock");
+        decremento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decrementoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Elija un producto para");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("modificar su stock:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(138, 138, 138))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(89, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCod)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jNomb))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(aumento)
+                        .addGap(18, 18, 18)
+                        .addComponent(decremento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(89, 89, 89))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jCod)
+                                .addGap(10, 10, 10)
+                                .addComponent(jNomb))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCod)
-                    .addComponent(jNomb)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCod)
+                            .addComponent(jNomb))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(aumento)
+                    .addComponent(decremento))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -274,30 +308,68 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodActionPerformed
+    private void decrementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decrementoActionPerformed
         // TODO add your handling code here:
-        if(jNomb.isSelected()==true){
-            jCod.setSelected(true);
-            jNomb.setSelected(false);
+        if(aumento.isSelected()){
+            aumento.setSelected(false);
+            decremento.setSelected(true);
+        }else decremento.setSelected(true);
+    }//GEN-LAST:event_decrementoActionPerformed
+
+    private void aumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentoActionPerformed
+        // TODO add your handling code here:
+        if(decremento.isSelected()){
+            aumento.setSelected(true);
+            decremento.setSelected(false);
         }
-    }//GEN-LAST:event_jCodActionPerformed
+        else aumento.setSelected(true);
+    }//GEN-LAST:event_aumentoActionPerformed
 
-    private void jNombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jCod.isSelected()==true){
-            jNomb.setSelected(true);
-            jCod.setSelected(false);
-        }
-    }//GEN-LAST:event_jNombActionPerformed
+        int row;
+        DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
+        if(jTable3.getSelectedRow()!=-1){
+            int valor=(Integer)jSpinner1.getValue();
+            if(valor!=0){
+                if(valor>0 && valor<9999){
+                    row = jTable3.getSelectedRow();
+                    String cod=jTable3.getModel().getValueAt(row,0).toString();
+                    Integer stock=(Integer)jTable3.getModel().getValueAt(row,2);
+                    int stockNuevo=(Integer)jSpinner1.getValue();
+                    ProductosBL prodBL=new ProductosBL();
+                    if(decremento.isSelected())stockNuevo=stockNuevo*-1;
+                    stockNuevo=stock+stockNuevo;
+                    if(stockNuevo>=0){
+                    try{
+                        prodBL.incrementarStock(stockNuevo, cod);
+                        JOptionPane.showMessageDialog(this,
+                            "Se modificó el stock","Aviso",
+                            INFORMATION_MESSAGE);
+                    }catch (Exception ex){}
+                    try{
+                        model.setRowCount(0);
+                        ArrayList<Producto>productos=new ArrayList<Producto>();
+                        productos=prodBL.listarProductos();
+                        Object rowData[]=new Object[8];
+                        for(int i=0;i<productos.size();i++){
+                            rowData[0]=productos.get(i).getCodigo();
+                            rowData[1]=productos.get(i).getNombre();
+                            rowData[2]=productos.get(i).getStock();
+                            model.addRow(rowData);
+                        }
+                    }catch (Exception e){
+                        System.out.println("Error de bd");
+                    }
+                    }else JOptionPane.showMessageDialog(this,"El stock no puede ser negativo","Error",ERROR_MESSAGE);
+                }else{ JOptionPane.showMessageDialog(this,"Ingrese un numero positivo menor a 9999","Advertencia",WARNING_MESSAGE);
+                    jSpinner1.setValue(0);
+                }
+            }
+            else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
+        }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
-        // TODO add your handling code here:
-        jTextField1.setText("");
-    }//GEN-LAST:event_jTextField1MouseClicked
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -305,47 +377,14 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-        int row;
-        DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
-        if(jTable3.getSelectedRow()!=-1){
-            if((Integer)jSpinner1.getValue()!=0){
-            row = jTable3.getSelectedRow();
-            String cod=jTable3.getModel().getValueAt(row,0).toString();
-            Integer stock=(Integer)jTable3.getModel().getValueAt(row,2);
-            int stockNuevo=(Integer)jSpinner1.getValue();
-            ProductosBL prodBL=new ProductosBL();
-            stockNuevo=stock+stockNuevo;
-            try{
-                prodBL.incrementarStock(stockNuevo, cod);
-                JOptionPane.showMessageDialog(this,
-            "Se modificó el stock","Aviso",
-            INFORMATION_MESSAGE);
-            }catch (Exception ex){}
-            try{
-                model.setRowCount(0);
-                ArrayList<Producto>productos=new ArrayList<Producto>();
-                productos=prodBL.listarProductos();
-                Object rowData[]=new Object[8];
-                for(int i=0;i<productos.size();i++){
-                    rowData[0]=productos.get(i).getCodigo();
-                    rowData[1]=productos.get(i).getNombre();
-                    rowData[2]=productos.get(i).getStock();
-                    model.addRow(rowData);
-                }
-            }catch (Exception e){
-            System.out.println("Error de bd");
-        }
-            }else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
-        }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE); 
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        jTextField1.setText("");
+    }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -407,8 +446,30 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jNombActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombActionPerformed
+        // TODO add your handling code here:
+        if(jCod.isSelected()==true){
+            jNomb.setSelected(true);
+            jCod.setSelected(false);
+        }
+    }//GEN-LAST:event_jNombActionPerformed
+
+    private void jCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodActionPerformed
+        // TODO add your handling code here:
+        if(jNomb.isSelected()==true){
+            jCod.setSelected(true);
+            jNomb.setSelected(false);
+        }
+    }//GEN-LAST:event_jCodActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton aumento;
+    private javax.swing.JRadioButton decremento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

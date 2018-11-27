@@ -291,6 +291,9 @@ public class frmModProd extends javax.swing.JDialog {
                   INFORMATION_MESSAGE);
         }catch(Exception ex){}
         this.dispose();
+        
+        
+        
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -8,9 +8,13 @@ package Vista;
 import LogicaDeNegocio.ProveedoresBL;
 import com.sun.webkit.event.WCKeyEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import modelo.Producto;
 import modelo.Proveedor;
 
 /**
@@ -234,6 +238,20 @@ public class frmAddProveedor extends javax.swing.JDialog {
             prov.setRazonSoc(txtrazon.getText());
             prov.setRuc(Long.parseLong(txtruc.getText()));
             prov.setTelefono(Integer.parseInt(txttelf.getText()));
+            
+             ArrayList<Proveedor>proveedores=new ArrayList<Proveedor>();
+        try {
+            proveedores=provBL.listarProveedores();
+        } catch (Exception ex) {
+            Logger.getLogger(frmAddProd.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        boolean repetido=false;
+    
+        for(Proveedor p:proveedores){
+            if(Long.toString(p.getRuc()).compareTo(txtruc.getText().toString())==0)
+                repetido=true;
+        }
+        if(!repetido){
             try{
                 provBL.insertarProveedor(prov);
             }catch(Exception ex){}
@@ -241,6 +259,9 @@ public class frmAddProveedor extends javax.swing.JDialog {
                 "Se añadio el proveedor correctamente","Aviso",
                 INFORMATION_MESSAGE);
             this.dispose();
+        }else JOptionPane.showMessageDialog(this,
+                "El RUC ya ha sido usado","Error",
+                ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

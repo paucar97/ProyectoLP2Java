@@ -5,9 +5,15 @@
  */
 package Vista;
 
+import LogicaDeNegocio.UsuarioBL;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -34,6 +40,8 @@ public class frmPanel extends javax.swing.JDialog {
         panel2.setVisible(false);
         panel3.setVisible(false);
         panel5.setVisible(false);
+        
+        
                 
     }
 
@@ -82,6 +90,11 @@ public class frmPanel extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(1000, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 680));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -184,6 +197,17 @@ public class frmPanel extends javax.swing.JDialog {
         jButton6.setText("Mantenimiento");
         jButton6.setBorder(null);
         jButton6.setContentAreaFilled(false);
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton6MouseMoved(evt);
+            }
+        });
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton6MouseEntered(evt);
+            }
+        });
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -664,9 +688,42 @@ public class frmPanel extends javax.swing.JDialog {
         frmLogin nuevo=new frmLogin();
         nuevo.setVisible(true);
         contador=0;
+        String cod=txtusr.getText().toString();
+        UsuarioBL userBL=new UsuarioBL();
+        try {
+            userBL.iniciarSesion(cod,0);
+        } catch (Exception ex) {
+            Logger.getLogger(frmPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseMoved
+        // TODO add your handling code here:
+        jButton6.setBackground(Color.black);
+        
+    }//GEN-LAST:event_jButton6MouseMoved
+
+    private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
+        // TODO add your handling code here:
+        jButton6.setBackground(Color.black);
+    }//GEN-LAST:event_jButton6MouseEntered
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        frmLogin nuevo=new frmLogin();
+        nuevo.setVisible(true);
+        contador=0;
+        String cod=txtusr.getText().toString();
+        UsuarioBL userBL=new UsuarioBL();
+        try {
+            userBL.iniciarSesion(cod,0);
+        } catch (Exception ex) {
+            Logger.getLogger(frmPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

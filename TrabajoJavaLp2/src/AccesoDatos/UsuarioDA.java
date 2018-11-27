@@ -34,7 +34,7 @@ public class UsuarioDA {
             String idUsuario=rs.getString("IDusuario");
             String contraseña=rs.getString("contrasenia");
             int estado=rs.getInt("estado");
-            int ingreso=rs.getInt("ingreso");
+            int ingreso=rs.getInt("logeado");
             String respuestaC=rs.getString("respuestaConfirmacion");
             Usuario user=new Usuario(tipo, idUsuario, contraseña, estado, ingreso, respuestaC);
             if(user.getEstado()==1){

@@ -20,6 +20,7 @@ public class frmLogin extends javax.swing.JFrame {
     public static String username;
     public static int tipoUser;
     public static String respuesta;
+    public static int conectado;
     public static int i=0;
     public static int j=0;
     /**
@@ -327,20 +328,27 @@ public class frmLogin extends javax.swing.JFrame {
                         username=usuarios.get(i).getIdUsuario().toString();
                         tipoUser=usuarios.get(i).getTipo();
                         respuesta=usuarios.get(i).getRespuestaC().toString();
+                        if(usuarios.get(i).getIngreso()==0){
                         if(tipoUser==0){
-                        frmPanel panel=new frmPanel(this,true);
-                        userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
-                        this.dispose();
-                        panel.setVisible(true);
+                            userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
+                            frmPanel panel=new frmPanel(this,false);
+
+                            this.dispose();
+                            panel.setVisible(true);
                         }
                         else if(tipoUser==2){
-                            frmPanelOperario panel=new frmPanelOperario(this,true);
+                            
+                            userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
+                            frmPanelOperario panel=new frmPanelOperario(this,false);
 
-                        this.dispose();
-                        panel.setVisible(true);
+                            this.dispose();
+                            panel.setVisible(true);
                         }
                         else JOptionPane.showMessageDialog(this, 
                         "Usted no cuenta con los privilegios necesarios para ingresar","Advertencia",
+                        WARNING_MESSAGE);
+                        }else JOptionPane.showMessageDialog(this, 
+                        "El usuario ya se encuentra logeado","Advertencia",
                         WARNING_MESSAGE);
                     }
                     else{
