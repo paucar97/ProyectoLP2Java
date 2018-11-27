@@ -21,4 +21,7 @@ public class UsuarioBL {
     public ArrayList<Usuario>listarUsuarios()throws Exception{
         return usuarioDA.listarUsuarios();
     }
+    public void cambiarContraseña(String contra,String respuesta)throws Exception{
+        usuarioDA.cambiarContraseña(contra,respuesta);
+    }
 }

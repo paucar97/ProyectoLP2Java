@@ -24,6 +24,8 @@ public class frmAddProd extends javax.swing.JDialog {
     public frmAddProd(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        cmbunidad.setSelectedIndex(0);
+        radAlta.setSelected(true);
     }
 
     /**
@@ -289,6 +291,9 @@ public class frmAddProd extends javax.swing.JDialog {
             evt.consume();
         
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
+            if(txtnombre.getText().length()>=20){
+                evt.consume();
+            }
             if(!s1.matches("[aA-zZ]")){
                 evt.consume();
                 getToolkit().beep();
@@ -366,7 +371,7 @@ public class frmAddProd extends javax.swing.JDialog {
         
         String s1=String.valueOf(evt.getKeyChar());
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE&&evt.getKeyChar()!=KeyEvent.VK_ENTER){
-            if(txtdesc.getText().length()>=102)
+            if(txtdesc.getText().length()>=70)
                 evt.consume();
             if(!s1.matches("[aA-zZ0-9/]")){
                 evt.consume();

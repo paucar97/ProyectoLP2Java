@@ -34,6 +34,8 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             basic.getNorthPane().removeMouseListener(listener);
         }
         initComponents();
+        
+        jCod.setSelected(true);
         AlmacenesBL almacenBL=new AlmacenesBL();
         ProductosBL productoBL=new ProductosBL();
         DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
@@ -46,6 +48,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                 rowData[2]=productos.get(i).getStock();
                 model.addRow(rowData);
             }
+            
         }catch (Exception e){
             System.out.println("Error de bd");
         }
@@ -56,6 +59,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             for(Almacen almacen:almacenes){
                 jComboBox1.addItem(almacen.getDireccion());
             }
+            jComboBox1.setSelectedIndex(0);
         }catch (Exception e){
             System.out.println("Error de bd");
         }
@@ -94,7 +98,6 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jLabel1.setText("Elija el almacén:");
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -198,13 +201,10 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(138, 138, 138))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
@@ -219,8 +219,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jCod)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jNomb)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jNomb))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -311,6 +310,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         int row;
         DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
         if(jTable3.getSelectedRow()!=-1){
+            if((Integer)jSpinner1.getValue()!=0){
             row = jTable3.getSelectedRow();
             String cod=jTable3.getModel().getValueAt(row,0).toString();
             Integer stock=(Integer)jTable3.getModel().getValueAt(row,2);
@@ -337,6 +337,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
             }catch (Exception e){
             System.out.println("Error de bd");
         }
+            }else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
         }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE); 
         
         

@@ -17,6 +17,9 @@ import static javax.swing.JOptionPane.WARNING_MESSAGE;
  * @author alulab14
  */
 public class frmLogin extends javax.swing.JFrame {
+    public static String username;
+    public static int tipoUser;
+    public static String respuesta;
     public static int i=0;
     public static int j=0;
     /**
@@ -44,12 +47,14 @@ public class frmLogin extends javax.swing.JFrame {
         txtPass = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
-        setMinimumSize(new java.awt.Dimension(410, 360));
+        setMaximumSize(new java.awt.Dimension(400, 358));
+        setMinimumSize(new java.awt.Dimension(400, 358));
+        setPreferredSize(new java.awt.Dimension(400, 358));
         setResizable(false);
-        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -64,13 +69,8 @@ public class frmLogin extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 400, 60);
-
         lblUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblUser.setText("Usuario:");
-        getContentPane().add(lblUser);
-        lblUser.setBounds(70, 80, 57, 17);
 
         btnIngresar.setBackground(new java.awt.Color(0, 0, 0));
         btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/006-exit.png"))); // NOI18N
@@ -82,19 +82,18 @@ public class frmLogin extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIngresar);
-        btnIngresar.setBounds(140, 230, 110, 28);
 
         lblOlvidoCnt.setForeground(java.awt.Color.blue);
         lblOlvidoCnt.setText("<html><U>¿Olvidó su contraseña?</U></html>");
         lblOlvidoCnt.setToolTipText("");
-        getContentPane().add(lblOlvidoCnt);
-        lblOlvidoCnt.setBounds(140, 270, 141, 14);
+        lblOlvidoCnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOlvidoCntMouseClicked(evt);
+            }
+        });
 
         lblPass.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPass.setText("Contraseña:");
-        getContentPane().add(lblPass);
-        lblPass.setBounds(70, 150, 85, 17);
 
         txtUser.setText("usuario");
         txtUser.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -112,8 +111,6 @@ public class frmLogin extends javax.swing.JFrame {
                 txtUserKeyPressed(evt);
             }
         });
-        getContentPane().add(txtUser);
-        txtUser.setBounds(70, 100, 289, 35);
 
         txtPass.setText("12345");
         txtPass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,16 +128,80 @@ public class frmLogin extends javax.swing.JFrame {
                 txtPassKeyPressed(evt);
             }
         });
-        getContentPane().add(txtPass);
-        txtPass.setBounds(70, 170, 289, 36);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/001-user.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 110, 20, 20);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/007-lock-1.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(50, 180, 16, 20);
+
+        jPanel2.setBackground(new java.awt.Color(0, 122, 204));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(lblOlvidoCnt, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPass)
+                    .addComponent(lblUser)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(lblPass)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblOlvidoCnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -185,6 +246,36 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         login();
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void lblOlvidoCntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvidoCntMouseClicked
+        // TODO add your handling code here:
+        String usuario=txtUser.getText().toString();
+        boolean encontrado=false;
+        ArrayList<Usuario>usuarios=new ArrayList<Usuario>();
+        UsuarioBL userBL=new UsuarioBL();  
+        try{    
+            usuarios=userBL.listarUsuarios();
+            for(int i=0;i<usuarios.size();i++){
+                if(usuario.compareTo("")!=0 && usuario.compareTo(usuarios.get(i).getIdUsuario())==0){
+                    encontrado=true;
+                    
+                        username=usuarios.get(i).getIdUsuario().toString();
+                        tipoUser=usuarios.get(i).getTipo();
+                        respuesta=usuarios.get(i).getRespuestaC().toString();
+                        frmNuevaContra nuevo=new frmNuevaContra(null, true);
+                        nuevo.setVisible(true);
+                }
+            }
+            if(!encontrado){
+                JOptionPane.showMessageDialog(this, 
+                  "Usuario incorrecto","Advertencia",
+                  WARNING_MESSAGE);
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_lblOlvidoCntMouseClicked
 
     /**
      * @param args the command line arguments
@@ -233,10 +324,24 @@ public class frmLogin extends javax.swing.JFrame {
                 if(usuario.compareTo("")!=0 && usuario.compareTo(usuarios.get(i).getIdUsuario())==0){
                     encontrado=true;
                     if(contra.equals(usuarios.get(i).getContraseña())){
-                    frmPanel panel=new frmPanel(this,true);
-                    this.dispose();
-                    panel.setVisible(true);
-                
+                        username=usuarios.get(i).getIdUsuario().toString();
+                        tipoUser=usuarios.get(i).getTipo();
+                        respuesta=usuarios.get(i).getRespuestaC().toString();
+                        if(tipoUser==0){
+                        frmPanel panel=new frmPanel(this,true);
+
+                        this.dispose();
+                        panel.setVisible(true);
+                        }
+                        else if(tipoUser==2){
+                            frmPanelOperario panel=new frmPanelOperario(this,true);
+
+                        this.dispose();
+                        panel.setVisible(true);
+                        }
+                        else JOptionPane.showMessageDialog(this, 
+                        "Usted no cuenta con los privilegios necesarios para ingresar","Advertencia",
+                        WARNING_MESSAGE);
                     }
                     else{
                         JOptionPane.showMessageDialog(this, 
@@ -262,6 +367,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblOlvidoCnt;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblUser;

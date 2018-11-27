@@ -34,6 +34,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             basic.getNorthPane().removeMouseListener(listener);
         }
         initComponents();
+        jRuc.setSelected(true);
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         ProveedoresBL proveedorBL=new ProveedoresBL();
         try{

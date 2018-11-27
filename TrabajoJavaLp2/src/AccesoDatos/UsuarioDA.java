@@ -6,6 +6,7 @@
 package AccesoDatos;
 
 import Modelo.Usuario;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -42,5 +43,15 @@ public class UsuarioDA {
         }
         con.close();
         return usuarios;
+    }
+    public void cambiarContraseña(String contra, String respuesta)throws Exception{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://quilla.lab.inf.pucp.edu.pe/inf282g5","inf282g5","qRs7ue");
+        
+        CallableStatement comando=con.prepareCall("{call cambiarContrasenia(?,?)}");
+        comando.setString("_contrasenia",contra);
+        comando.setString("_respuesta", respuesta);
+        comando.execute();
+        con.close();
     }
 }

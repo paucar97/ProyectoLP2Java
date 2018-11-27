@@ -33,6 +33,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             basic.getNorthPane().removeMouseListener(listener);
         }
         initComponents();
+        jCod.setSelected(true);
         ArrayList<Producto>productos=new ArrayList<Producto>();
         ProductosBL productoBL=new ProductosBL();
         
