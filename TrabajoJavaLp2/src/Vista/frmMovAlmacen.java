@@ -8,6 +8,7 @@ package Vista;
 import LogicaDeNegocio.AlmacenesBL;
 import LogicaDeNegocio.ProductosBL;
 import static Vista.frmPanel.contador;
+import com.sun.webkit.event.WCKeyEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -84,13 +85,13 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jSpinner1 = new javax.swing.JSpinner();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         aumento = new javax.swing.JRadioButton();
         decremento = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(650, 680));
         setPreferredSize(new java.awt.Dimension(650, 680));
@@ -216,6 +217,12 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("modificar su stock:");
 
+        jSpinner1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jSpinner1KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,7 +239,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(decremento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -278,15 +285,15 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(aumento)
-                    .addComponent(decremento))
+                    .addComponent(decremento)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,13 +337,13 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         int row;
         DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
         if(jTable3.getSelectedRow()!=-1){
-            int valor=(Integer)jSpinner1.getValue();
+            int valor=Integer.parseInt(jSpinner1.getText());
             if(valor!=0){
                 if(valor>0 && valor<9999){
                     row = jTable3.getSelectedRow();
                     String cod=jTable3.getModel().getValueAt(row,0).toString();
                     Integer stock=(Integer)jTable3.getModel().getValueAt(row,2);
-                    int stockNuevo=(Integer)jSpinner1.getValue();
+                    int stockNuevo=Integer.parseInt(jSpinner1.getText());
                     ProductosBL prodBL=new ProductosBL();
                     if(decremento.isSelected())stockNuevo=stockNuevo*-1;
                     stockNuevo=stock+stockNuevo;
@@ -363,7 +370,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                     }
                     }else JOptionPane.showMessageDialog(this,"El stock no puede ser negativo","Error",ERROR_MESSAGE);
                 }else{ JOptionPane.showMessageDialog(this,"Ingrese un numero positivo menor a 9999","Advertencia",WARNING_MESSAGE);
-                    jSpinner1.setValue(0);
+                    jSpinner1.setText("0");
                 }
             }
             else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
@@ -466,6 +473,24 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jSpinner1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(jSpinner1.getText().length()>=5){
+                evt.consume();
+            
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jSpinner1KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton aumento;
@@ -481,7 +506,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jNomb;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jSpinner1;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables

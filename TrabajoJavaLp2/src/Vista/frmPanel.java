@@ -63,6 +63,8 @@ public class frmPanel extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         panel1 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -107,7 +109,7 @@ public class frmPanel extends javax.swing.JDialog {
         txtusr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         panel0.setBackground(new java.awt.Color(0, 122, 204));
-        panel0.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panel0.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jButton12.setBackground(new java.awt.Color(0, 122, 204));
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/png3/016-plus-1.png"))); // NOI18N
@@ -160,6 +162,10 @@ public class frmPanel extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("Cerrar");
+
+        jLabel3.setText("Sesion");
+
         javax.swing.GroupLayout panel0Layout = new javax.swing.GroupLayout(panel0);
         panel0.setLayout(panel0Layout);
         panel0Layout.setHorizontalGroup(
@@ -172,6 +178,12 @@ public class frmPanel extends javax.swing.JDialog {
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panel0Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel0Layout.setVerticalGroup(
             panel0Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,8 +196,12 @@ public class frmPanel extends javax.swing.JDialog {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addGap(135, 135, 135))
         );
 
@@ -258,8 +274,10 @@ public class frmPanel extends javax.swing.JDialog {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addGap(407, 407, 407))
         );
+
+        jButton6.getAccessibleContext().setAccessibleDescription("");
 
         panel2.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -520,6 +538,7 @@ public class frmPanel extends javax.swing.JDialog {
             nuevo.setLocation(0,0);
             contador++;
         }else{
+            
             JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton17ActionPerformed
@@ -785,6 +804,8 @@ public class frmPanel extends javax.swing.JDialog {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panel0;
     private javax.swing.JPanel panel1;

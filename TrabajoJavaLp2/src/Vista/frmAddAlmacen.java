@@ -50,7 +50,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Añadir nuevo almacen");
@@ -93,6 +93,12 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Numero de Productos ");
 
+        jSpinner1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jSpinner1KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,7 +109,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,11 +132,11 @@ public class frmAddAlmacen extends javax.swing.JDialog {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -156,8 +162,8 @@ public class frmAddAlmacen extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int val = -1;
-        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
-            val=(Integer)jSpinner1.getValue();
+        if(jSpinner1.getText().toString().trim().compareTo("")!=0){
+            val=Integer.parseInt(jSpinner1.getText());
         }
         if(jTextField1.getText().trim().compareTo("")==0)
             JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
@@ -168,7 +174,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             String dir=jTextField1.getText();
-            int numDif=Integer.parseInt(jSpinner1.getValue().toString());
+            int numDif=Integer.parseInt(jSpinner1.getText().toString());
             Date fecha=new Date();
             Calendar cal=Calendar.getInstance();
             cal.setTime(fecha);
@@ -210,6 +216,24 @@ public class frmAddAlmacen extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jSpinner1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyTyped
+        // TODO add your handling code here:
+        String s1=String.valueOf(evt.getKeyChar());
+        if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
+            if(jSpinner1.getText().length()>=5){
+                evt.consume();
+            
+            }
+            if(!s1.matches("[0-9]")){
+                evt.consume();
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(this,
+                "Solo se admiten numeros","Error",
+                ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jSpinner1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -259,7 +283,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jSpinner1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

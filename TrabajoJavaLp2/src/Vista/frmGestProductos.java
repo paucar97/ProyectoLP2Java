@@ -423,6 +423,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
                 }
             }
             if(jCod.isSelected()){
+                criterio=criterio.toUpperCase();
                 for(int i=0;i<productos.size();i++){
                     if(productos.get(i).getCodigo().contains(criterio)){
                         Producto prod=new Producto();

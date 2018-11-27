@@ -311,7 +311,7 @@ public class frmAddProd extends javax.swing.JDialog {
             evt.consume();
         
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
-            if(txtnombre.getText().length()>=20){
+            if(txtnombre.getText().length()>=45){
                 evt.consume();
             }
             if(!s1.matches("[aA-zZ]")){

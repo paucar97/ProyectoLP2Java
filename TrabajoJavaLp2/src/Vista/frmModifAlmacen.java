@@ -33,7 +33,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
 //        if(gest.almacenG.getDireccion() != null)
 //        jTextField1.setText(gest.almacenG.getDireccion().toString());
         jTextField1.setText(alma.getDireccion().toString());
-        jSpinner1.setValue(alma.getNumDifProd());
+        jSpinner1.setText(Integer.toString(alma.getNumDifProd()));
         idA=alma.getIdalmacen();
     }
 
@@ -52,7 +52,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar almacen");
@@ -115,7 +115,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,10 +126,10 @@ public class frmModifAlmacen extends javax.swing.JDialog {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -158,8 +158,8 @@ public class frmModifAlmacen extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int val = -1;
-        if(jSpinner1.getValue().toString().trim().compareTo("")!=0){
-            val=(Integer)jSpinner1.getValue();
+        if(jSpinner1.getText().toString().trim().compareTo("")!=0){
+            val=Integer.parseInt(jSpinner1.getText());
         }
         if(jTextField1.getText().trim().compareTo("")==0)
             JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
@@ -171,7 +171,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
             AlmacenesBL almacenBL=new AlmacenesBL();
             almacenBL.eliminarAlmacen(idA);
             String dir=jTextField1.getText();
-            int numDif=Integer.parseInt(jSpinner1.getValue().toString());
+            int numDif=Integer.parseInt(jSpinner1.getText().toString());
             Date fecha=new Date();
             Calendar cal=Calendar.getInstance();
             cal.setTime(fecha);
@@ -255,7 +255,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextField jSpinner1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

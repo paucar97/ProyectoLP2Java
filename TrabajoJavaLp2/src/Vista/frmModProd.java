@@ -326,7 +326,7 @@ public class frmModProd extends javax.swing.JDialog {
         
         String s1=String.valueOf(evt.getKeyChar());
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK && evt.getKeyChar()!=KeyEvent.VK_SPACE){
-            if(txtnombre.getText().length()>=20){
+            if(txtnombre.getText().length()>=45){
                 evt.consume();
             }
             if(!s1.matches("[aA-zZ]")){
