@@ -13,6 +13,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import modelo.Almacen;
 
 /**
@@ -161,6 +162,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
         if(jSpinner1.getText().toString().trim().compareTo("")!=0){
             val=Integer.parseInt(jSpinner1.getText());
         }
+        
         if(jTextField1.getText().trim().compareTo("")==0)
             JOptionPane.showMessageDialog(this,"Ingrese Direccion","Error",ERROR_MESSAGE);
         else if(val<0){

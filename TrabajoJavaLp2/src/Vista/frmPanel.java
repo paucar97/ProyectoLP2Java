@@ -91,7 +91,6 @@ public class frmPanel extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SISTEMA DE GESTION DE PEDIDOS SIS CAPA");
         setMinimumSize(new java.awt.Dimension(1000, 680));
-        setPreferredSize(new java.awt.Dimension(1000, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 680));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -335,6 +334,11 @@ public class frmPanel extends javax.swing.JDialog {
         jButton24.setText("Reporte Productos ");
         jButton24.setBorder(null);
         jButton24.setContentAreaFilled(false);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
 
         jButton25.setBackground(new java.awt.Color(0, 122, 204));
         jButton25.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -343,6 +347,11 @@ public class frmPanel extends javax.swing.JDialog {
         jButton25.setBorder(null);
         jButton25.setContentAreaFilled(false);
         jButton25.setPreferredSize(new java.awt.Dimension(150, 61));
+        jButton25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton25ActionPerformed(evt);
+            }
+        });
 
         jButton26.setBackground(new java.awt.Color(0, 122, 204));
         jButton26.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -351,6 +360,11 @@ public class frmPanel extends javax.swing.JDialog {
         jButton26.setBorder(null);
         jButton26.setContentAreaFilled(false);
         jButton26.setPreferredSize(new java.awt.Dimension(150, 61));
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel3Layout = new javax.swing.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -787,6 +801,49 @@ public class frmPanel extends javax.swing.JDialog {
         frmAvisoStock aviso=new frmAvisoStock(null,true);
         aviso.setVisible(true);
     }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+
+        // TODO add your handling code here:
+         if(contador==0){
+            frmRepProd nuevo=new frmRepProd();
+            desktop.add(nuevo);
+            nuevo.setVisible(true);
+            nuevo.setSize(desktop.getWidth(),desktop.getHeight());
+            nuevo.setLocation(0,0);
+            contador++;
+        }else{
+            JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+        if(contador==0){
+            frmRepCli nuevo=new frmRepCli();
+            desktop.add(nuevo);
+            nuevo.setVisible(true);
+            nuevo.setSize(desktop.getWidth(),desktop.getHeight());
+            nuevo.setLocation(0,0);
+            contador++;
+        }else{
+            JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
+        // TODO add your handling code here:
+        if(contador==0){
+            frmRepPagos nuevo=new frmRepPagos();
+            desktop.add(nuevo);
+            nuevo.setVisible(true);
+            nuevo.setSize(desktop.getWidth(),desktop.getHeight());
+            nuevo.setLocation(0,0);
+            contador++;
+        }else{
+            JOptionPane.showMessageDialog(this,"Por favor cierre la ventana actual","Error",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton26ActionPerformed
 
     /**
      * @param args the command line arguments

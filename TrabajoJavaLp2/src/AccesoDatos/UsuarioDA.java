@@ -50,7 +50,7 @@ public class UsuarioDA {
         
         CallableStatement comando=con.prepareCall("{call cambiarContrasenia(?,?)}");
         comando.setString("_contrasenia",contra);
-        comando.setString("_respuesta", respuesta);
+        comando.setString("_respuesta", respuesta.toUpperCase());
         comando.execute();
         con.close();
     }

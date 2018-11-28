@@ -348,6 +348,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
         int row;
         DefaultTableModel model=(DefaultTableModel) jTable3.getModel();
         if(jTable3.getSelectedRow()!=-1){
+            if(!jSpinner1.getText().isEmpty()){
             int valor=Integer.parseInt(jSpinner1.getText());
             if(valor!=0){
                 if(valor>0 && valor<9999){
@@ -386,6 +387,7 @@ public class frmMovAlmacen extends javax.swing.JInternalFrame {
                 }
             }
             else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
+            }else JOptionPane.showMessageDialog(this,"Ingrese una cantidad mayor a 0","Advertencia",WARNING_MESSAGE);
         }else JOptionPane.showMessageDialog(this,"Seleccione el producto","Advertencia",WARNING_MESSAGE);
 
     }//GEN-LAST:event_jButton1ActionPerformed
