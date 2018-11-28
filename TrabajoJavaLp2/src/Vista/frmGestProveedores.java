@@ -144,6 +144,11 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
                 lblBusquedaActionPerformed(evt);
             }
         });
+        lblBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lblBusquedaKeyReleased(evt);
+            }
+        });
 
         jRuc.setBackground(new java.awt.Color(204, 204, 204));
         jRuc.setText("RUC");
@@ -210,7 +215,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
                                 .addComponent(jNomb))
                             .addComponent(lblBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,6 +459,72 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
         contador--;
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void lblBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblBusquedaKeyReleased
+        // TODO add your handling code here:
+        try{
+            ArrayList<Proveedor>listaBusq=new ArrayList<Proveedor>();
+            ArrayList<Proveedor>proveedores=new ArrayList<Proveedor>();
+            ProveedoresBL provBL=new ProveedoresBL();
+            proveedores=provBL.listarProveedores();
+            DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+
+            String criterio;
+            criterio=lblBusqueda.getText().toString().trim();
+            if(lblBusqueda.getText().isEmpty()){
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<proveedores.size();i++){
+                    rowData[0]=proveedores.get(i).getRazonSoc();
+                    rowData[1]=proveedores.get(i).getRuc();
+                    rowData[2]=proveedores.get(i).getEmail();
+                    rowData[3]=proveedores.get(i).getTelefono();
+                    rowData[4]=proveedores.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+            if(jRuc.isSelected()){
+                for(int i=0;i<proveedores.size();i++){
+                    if(Long.toString(proveedores.get(i).getRuc()).contains(criterio)){
+                        Proveedor prov=new Proveedor();
+                        prov=proveedores.get(i);
+                        listaBusq.add(prov);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getRazonSoc();
+                    rowData[1]=listaBusq.get(i).getRuc();
+                    rowData[2]=listaBusq.get(i).getEmail();
+                    rowData[3]=listaBusq.get(i).getTelefono();
+                    rowData[4]=listaBusq.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+            if(jNomb.isSelected()){
+                for(int i=0;i<proveedores.size();i++){
+                    if(proveedores.get(i).getRazonSoc().contains(criterio)){
+                        Proveedor prov=new Proveedor();
+                        prov=proveedores.get(i);
+                        listaBusq.add(prov);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[8];
+                for(int i=0;i<listaBusq.size();i++){
+                    rowData[0]=listaBusq.get(i).getRazonSoc();
+                    rowData[1]=listaBusq.get(i).getRuc();
+                    rowData[2]=listaBusq.get(i).getEmail();
+                    rowData[3]=listaBusq.get(i).getTelefono();
+                    rowData[4]=listaBusq.get(i).getDireccion();
+                    model.addRow(rowData);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_lblBusquedaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

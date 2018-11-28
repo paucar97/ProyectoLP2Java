@@ -93,6 +93,11 @@ public class frmAvisoStock extends javax.swing.JDialog {
                 jTextField1MouseClicked(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -209,7 +214,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -310,6 +315,75 @@ public class frmAvisoStock extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        try{
+            ArrayList<Producto>listaBusq=new ArrayList<Producto>();
+            ArrayList<Producto>productos=new ArrayList<Producto>();
+            ProductosBL productoBL=new ProductosBL();
+            productos=productoBL.listarProductos();
+            DefaultTableModel model=(DefaultTableModel) tblProd.getModel();
+
+            String criterio;
+            criterio=jTextField1.getText().toString().trim();
+            if(jTextField1.getText().isEmpty()){
+                model.setRowCount(0);
+                Object rowData[]=new Object[4];
+                for(int i=0;i<productos.size();i++){
+                    if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    rowData[0]=productos.get(i).getCodigo();
+                    rowData[1]=productos.get(i).getNombre();
+
+                    rowData[2]=productos.get(i).getStock();
+                    rowData[3]=productos.get(i).getMinimoStock();
+                    model.addRow(rowData);
+                    }
+                }
+            }
+            if(jCod.isSelected()){
+                criterio=criterio.toUpperCase();
+                for(int i=0;i<productos.size();i++){
+                    if(productos.get(i).getCodigo().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                        Producto prod=new Producto();
+                        prod=productos.get(i);
+                        listaBusq.add(prod);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[4];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=listaBusq.get(i).getCodigo();
+                    rowData[1]=listaBusq.get(i).getNombre();
+                    
+                    rowData[2]=listaBusq.get(i).getStock();
+                    rowData[3]=listaBusq.get(i).getMinimoStock();
+                    model.addRow(rowData);
+                }
+            }
+            if(jNomb.isSelected()){
+                for(int i=0;i<productos.size();i++){
+                    if(productos.get(i).getNombre().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                        Producto prod=new Producto();
+                        prod=productos.get(i);
+                        listaBusq.add(prod);
+                    }
+                }
+                model.setRowCount(0);
+                Object rowData[]=new Object[4];
+                for(int i=0;i<productos.size();i++){
+                    rowData[0]=listaBusq.get(i).getCodigo();
+                    rowData[1]=listaBusq.get(i).getNombre();
+                    
+                    rowData[2]=listaBusq.get(i).getStock();
+                    rowData[3]=listaBusq.get(i).getMinimoStock();
+                    model.addRow(rowData);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments

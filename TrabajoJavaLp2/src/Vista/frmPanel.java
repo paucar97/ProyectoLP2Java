@@ -281,6 +281,7 @@ public class frmPanel extends javax.swing.JDialog {
         jButton6.getAccessibleContext().setAccessibleDescription("");
 
         panel2.setBackground(new java.awt.Color(0, 122, 204));
+        panel2.setPreferredSize(new java.awt.Dimension(160, 614));
 
         jButton17.setBackground(new java.awt.Color(0, 122, 204));
         jButton17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -325,6 +326,7 @@ public class frmPanel extends javax.swing.JDialog {
         );
 
         panel3.setBackground(new java.awt.Color(0, 122, 204));
+        panel3.setPreferredSize(new java.awt.Dimension(150, 614));
 
         jButton24.setBackground(new java.awt.Color(0, 122, 204));
         jButton24.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -357,6 +359,7 @@ public class frmPanel extends javax.swing.JDialog {
         );
 
         panel5.setBackground(new java.awt.Color(0, 122, 204));
+        panel5.setPreferredSize(new java.awt.Dimension(150, 614));
 
         jButton30.setBackground(new java.awt.Color(0, 122, 204));
         jButton30.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -462,8 +465,8 @@ public class frmPanel extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(panel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -494,6 +497,7 @@ public class frmPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
         if(panel2.isVisible()==false){
             panel2.setVisible(true);
+            panel2.setSize(150,617);
             panel3.setVisible(false);
             panel5.setVisible(false);
             desktop.setLocation(330,0);
@@ -616,6 +620,7 @@ public class frmPanel extends javax.swing.JDialog {
         if(panel1.isVisible()==false){
             panel1.setVisible(true);
             panel2.setVisible(true);
+            panel2.setSize(150,617);
             panel2.setLocation(180, 60);
             desktop.setLocation(330,0);
             desktop.setSize(670,680);
@@ -623,6 +628,7 @@ public class frmPanel extends javax.swing.JDialog {
         else{
             if(panel1.isVisible()==true && panel2.isVisible()==false){
                 panel2.setVisible(true);
+                panel2.setSize(150,617);
                 panel2.setLocation(180, 60);
                 desktop.setLocation(330,0);
             desktop.setSize(670,680);
@@ -641,6 +647,7 @@ public class frmPanel extends javax.swing.JDialog {
             panel3.setVisible(false);
             panel5.setVisible(false);
             panel2.setVisible(true);
+            panel2.setSize(150,617);
             panel2.setLocation(180, 60);
             desktop.setLocation(330,0);
             desktop.setSize(670,680);
