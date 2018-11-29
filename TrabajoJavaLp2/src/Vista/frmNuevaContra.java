@@ -241,7 +241,7 @@ public class frmNuevaContra extends javax.swing.JDialog {
             if(txtUser.getText().compareTo(frmLogin.respuesta)==0){
                 if(contra.equals(contra2)){
                     try {
-                        userBL.cambiarContraseña(contra,frmLogin.respuesta);
+                        userBL.cambiarContraseña(contra,frmLogin.respuesta.toUpperCase());
                         JOptionPane.showMessageDialog(this,"Su contrasenia se cambio exitosamente","Exito",INFORMATION_MESSAGE);
                         this.dispose();
                     } catch (Exception ex) {

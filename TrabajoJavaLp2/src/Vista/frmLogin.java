@@ -5,12 +5,16 @@
  */
 package Vista;
 
+import LogicaDeNegocio.ProductosBL;
 import LogicaDeNegocio.UsuarioBL;
 import Modelo.Usuario;
 import com.sun.glass.events.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import modelo.Producto;
 
 /**
  *
@@ -319,6 +323,18 @@ public class frmLogin extends javax.swing.JFrame {
         boolean encontrado=false;
         ArrayList<Usuario>usuarios=new ArrayList<Usuario>();
         UsuarioBL userBL=new UsuarioBL();  
+        int cont =0;
+        ArrayList<Producto>productos=new ArrayList<Producto>();
+        ProductosBL prodBL=new ProductosBL();
+        try {
+            productos=prodBL.listarProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(Producto p:productos){
+            if(p.getStock()<p.getMinimoStock()&&p.getAlmacenado()==1)
+            cont++;
+        }
         try{    
             usuarios=userBL.listarUsuarios();
             for(int i=0;i<usuarios.size();i++){
@@ -332,8 +348,10 @@ public class frmLogin extends javax.swing.JFrame {
                         if(tipoUser==0){
                             userBL.iniciarSesion(usuarios.get(i).getIdUsuario(),1);
                             frmPanel panel=new frmPanel(this,false);
-                            frmAvisoStock aviso=new frmAvisoStock(this,true);
-                            aviso.setVisible(true);
+                            if (cont!=0){
+                                frmAvisoStock aviso=new frmAvisoStock(this,true);
+                                aviso.setVisible(true);
+                            }
                             this.dispose();
                             panel.setVisible(true);
                         }

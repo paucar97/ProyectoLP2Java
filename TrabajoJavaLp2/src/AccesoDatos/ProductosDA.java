@@ -44,29 +44,36 @@ public class ProductosDA {
                 int stockMin=rs.getInt("stokcMinimo");
                 String unidad=rs.getString("UnidMedida");
                 int estado=rs.getInt("estado");
+                int almacenado=rs.getInt("almacenado");
                 
                 if(unidad.compareTo("UNIDAD")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.unidad,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("CIENTO")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.centena,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("METRO")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.metro,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("BOLSA")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.bolsa,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("DOCENA")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.docena,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }else if(unidad.compareTo("KILOGRAMO")==0){
                     Producto prod=new Producto(codigo,nombre,desc,precio,Medida.kilogramo,tipo,stockMin,stock,estado);
+                    prod.setAlmacenado(almacenado);
                     if(prod.getEstado()==1)
                     productos.add(prod);
                 }            

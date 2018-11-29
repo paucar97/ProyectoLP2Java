@@ -26,6 +26,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
         Producto producto=new Producto();
         
         initComponents();
+        
         jCod.setSelected(true);
         ArrayList<Producto>productos=new ArrayList<Producto>();
         ProductosBL productoBL=new ProductosBL();
@@ -36,7 +37,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
             
             Object rowData[]=new Object[4];
             for(int i=0;i<productos.size();i++){
-                if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                 rowData[0]=productos.get(i).getCodigo();
                 rowData[1]=productos.get(i).getNombre();
 
@@ -45,6 +46,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
                 model.addRow(rowData);
                 }
             }
+            
         }catch (Exception e){
            System.out.println(e.getMessage());
         }
@@ -262,7 +264,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
                 model.setRowCount(0);
                 Object rowData[]=new Object[4];
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                     rowData[0]=productos.get(i).getCodigo();
                     rowData[1]=productos.get(i).getNombre();
 
@@ -275,7 +277,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
             if(jCod.isSelected()){
                 criterio=criterio.toUpperCase();
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getCodigo().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getCodigo().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                         Producto prod=new Producto();
                         prod=productos.get(i);
                         listaBusq.add(prod);
@@ -294,7 +296,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
             }
             if(jNomb.isSelected()){
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getNombre().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getNombre().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                         Producto prod=new Producto();
                         prod=productos.get(i);
                         listaBusq.add(prod);
@@ -331,7 +333,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
                 model.setRowCount(0);
                 Object rowData[]=new Object[4];
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                     rowData[0]=productos.get(i).getCodigo();
                     rowData[1]=productos.get(i).getNombre();
 
@@ -344,7 +346,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
             if(jCod.isSelected()){
                 criterio=criterio.toUpperCase();
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getCodigo().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getCodigo().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                         Producto prod=new Producto();
                         prod=productos.get(i);
                         listaBusq.add(prod);
@@ -363,7 +365,7 @@ public class frmAvisoStock extends javax.swing.JDialog {
             }
             if(jNomb.isSelected()){
                 for(int i=0;i<productos.size();i++){
-                    if(productos.get(i).getNombre().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()){
+                    if(productos.get(i).getNombre().contains(criterio)&&productos.get(i).getStock()<=productos.get(i).getMinimoStock()&&productos.get(i).getAlmacenado()==1){
                         Producto prod=new Producto();
                         prod=productos.get(i);
                         listaBusq.add(prod);

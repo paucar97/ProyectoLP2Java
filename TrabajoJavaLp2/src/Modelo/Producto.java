@@ -61,6 +61,15 @@ public class Producto {
     private int minimoStock;
     private int stock;
     private int estado;
+    private int almacenado;
+
+    public int getAlmacenado() {
+        return almacenado;
+    }
+
+    public void setAlmacenado(int almacenado) {
+        this.almacenado = almacenado;
+    }
 
     public int getEstado() {
         return estado;

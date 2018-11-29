@@ -798,7 +798,7 @@ public class frmPanel extends javax.swing.JDialog {
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         // TODO add your handling code here:
-        frmAvisoStock aviso=new frmAvisoStock(null,true);
+        frmAvisoStock aviso=new frmAvisoStock(null,false);
         aviso.setVisible(true);
     }//GEN-LAST:event_jButton33ActionPerformed
 
