@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteProductos" pageWidth="400" pageHeight="300" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c9890a0-d0ef-463e-95b2-a0300b1b70ef">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BaseDatos"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="BaseDatos" uuid="925dd763-49f7-4623-8623-5438ef1ff692">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BaseDatos"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[select id_producto, sum(subtotal) as Monto_total_ventas
+from n_detalle_pedido group by id_producto]]>
+		</queryString>
+		<field name="id_producto" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="id_producto"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="n_detalle_pedido"/>
+		</field>
+		<field name="Monto_total_ventas" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="Monto_total_ventas"/>
+		</field>
+	</subDataset>
+	<parameter name="fecha_recepcion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha_fin" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select id_producto , sum(subtotal) as Monto_total_ventas 
+from n_detalle_pedido dp, n_pedido p, n_factura_venta v 
+
+where p.fecha_recepcion between $P{fecha_recepcion} and $P{fecha_fin} and v.estadoVenta = '1' and p.id_pedido=v.id_pedido and p.estado='1' 
+
+group by id_producto order by Monto_total_ventas desc limit 5]]>
+	</queryString>
+	<field name="id_producto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id_producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="n_detalle_pedido"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Monto_total_ventas" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="Monto_total_ventas"/>
+	</field>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="360" height="50" uuid="6917895a-bd78-40ab-8a2e-669e3188e98e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Monto de ventas por productos"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="111">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="4" width="360" height="103" uuid="74390399-a72c-4f1f-b0c4-abd653bf5c33"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Productos con mas utilidad"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{id_producto}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Monto_total_ventas}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</columnHeader>
+</jasperReport>
