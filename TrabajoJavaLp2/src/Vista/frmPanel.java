@@ -27,6 +27,7 @@ public class frmPanel extends javax.swing.JDialog {
     /**
      * Creates new form Panel
      */
+    public static int abre=0;
     public static int contador=0;
     public static int i=0;
     public static int j=0;
@@ -798,8 +799,11 @@ public class frmPanel extends javax.swing.JDialog {
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         // TODO add your handling code here:
-        frmAvisoStock aviso=new frmAvisoStock(null,false);
-        aviso.setVisible(true);
+        if(abre==0){
+            abre++;
+            frmAvisoStock aviso=new frmAvisoStock(null,false);
+            aviso.setVisible(true);
+        }
     }//GEN-LAST:event_jButton33ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
