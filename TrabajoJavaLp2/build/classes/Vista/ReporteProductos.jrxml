@@ -31,6 +31,7 @@ from n_detalle_pedido group by id_producto]]>
 from n_detalle_pedido dp, n_pedido p, n_factura_venta v 
 
 where p.fecha_recepcion between $P{fecha_recepcion} and $P{fecha_fin} and v.estadoVenta = '1' and p.id_pedido=v.id_pedido and p.estado='1' 
+
 group by id_producto order by Monto_total_ventas desc limit 5]]>
 	</queryString>
 	<field name="id_producto" class="java.lang.String">
