@@ -73,6 +73,11 @@ public class frmModProd extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtcod = new javax.swing.JTextField();
         txtdesc = new javax.swing.JTextArea(4,50);
+        dze1 = new java.awt.Label();
+        dze2 = new java.awt.Label();
+        dze3 = new java.awt.Label();
+        dze4 = new java.awt.Label();
+        dze5 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar Producto");
@@ -85,27 +90,27 @@ public class frmModProd extends javax.swing.JDialog {
 
         jLabel1.setText("Nombre:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(50, 20, 80, 14);
+        jLabel1.setBounds(10, 10, 80, 14);
 
         jLabel2.setText("Descrpición:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(50, 100, 90, 14);
+        jLabel2.setBounds(10, 100, 90, 14);
 
         jLabel3.setText("Precio:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 180, 60, 14);
+        jLabel3.setBounds(10, 170, 60, 14);
 
         jLabel4.setText("Unidad de Medida:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(50, 220, 130, 14);
+        jLabel4.setBounds(10, 220, 130, 14);
 
         jLabel5.setText("Tipo:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(50, 260, 70, 14);
+        jLabel5.setBounds(10, 260, 70, 14);
 
         jLabel6.setText("Stock Mínimo:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(50, 300, 90, 14);
+        jLabel6.setBounds(10, 300, 90, 14);
 
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -139,7 +144,7 @@ public class frmModProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(txtmin);
-        txtmin.setBounds(160, 290, 60, 30);
+        txtmin.setBounds(160, 300, 60, 30);
 
         cbounidad.setBackground(new java.awt.Color(255, 255, 204));
         cbounidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
@@ -203,7 +208,7 @@ public class frmModProd extends javax.swing.JDialog {
 
         jLabel8.setText("Codigo:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(50, 60, 80, 14);
+        jLabel8.setBounds(10, 50, 80, 14);
 
         txtcod.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -226,6 +231,31 @@ public class frmModProd extends javax.swing.JDialog {
         });
         jPanel1.add(txtdesc);
         txtdesc.setBounds(160, 90, 250, 70);
+
+        dze1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        dze1.setText("(enteros positivos)");
+        jPanel1.add(dze1);
+        dze1.setBounds(20, 320, 114, 18);
+
+        dze2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        dze2.setText("(5 caracteros alfanumericos)");
+        jPanel1.add(dze2);
+        dze2.setBounds(20, 70, 138, 18);
+
+        dze3.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        dze3.setText("(caracteros alfanumericos)");
+        jPanel1.add(dze3);
+        dze3.setBounds(20, 120, 129, 18);
+
+        dze4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        dze4.setText("(caracteros alfabeticos)");
+        jPanel1.add(dze4);
+        dze4.setBounds(20, 30, 114, 18);
+
+        dze5.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        dze5.setText("(numeros real)");
+        jPanel1.add(dze5);
+        dze5.setBounds(20, 190, 114, 18);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,6 +298,11 @@ public class frmModProd extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this,
                 "Elija un tipo","Error",
                 ERROR_MESSAGE);
+        else if(Integer.parseInt(txtmin.getText())>500)
+            JOptionPane.showMessageDialog(this,
+                "Stock minimo debe ser menor a 500","Error",
+                ERROR_MESSAGE);
+        
         else{
         try{
             ProductosBL prodBL=new ProductosBL();           
@@ -332,9 +367,7 @@ public class frmModProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten letras a-z","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtnombreKeyTyped
@@ -349,9 +382,7 @@ public class frmModProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten caracteres alfanumericos","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtcodKeyTyped
@@ -366,9 +397,7 @@ public class frmModProd extends javax.swing.JDialog {
             if(!s1.matches("[0-9.]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+               
             }
             if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
                 evt.consume();
@@ -387,16 +416,14 @@ public class frmModProd extends javax.swing.JDialog {
         // TODO add your handling code here:
         String s1=String.valueOf(evt.getKeyChar());
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
-            if(txtmin.getText().length()>=5){
+            if(txtmin.getText().length()>=3){
                 evt.consume();
             
             }
             if(!s1.matches("[0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtminKeyTyped
@@ -415,9 +442,7 @@ public class frmModProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ0-9/]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                    "Solo se admiten caracteres alfanumericos","Error",
-                    ERROR_MESSAGE);
+              
             }
         }
     }//GEN-LAST:event_txtdescKeyTyped
@@ -466,6 +491,11 @@ public class frmModProd extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbounidad;
+    private java.awt.Label dze1;
+    private java.awt.Label dze2;
+    private java.awt.Label dze3;
+    private java.awt.Label dze4;
+    private java.awt.Label dze5;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
