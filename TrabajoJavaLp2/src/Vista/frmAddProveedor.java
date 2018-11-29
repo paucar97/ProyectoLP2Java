@@ -233,9 +233,9 @@ public class frmAddProveedor extends javax.swing.JDialog {
         else{
             Proveedor prov=new Proveedor();
             ProveedoresBL provBL=new ProveedoresBL();
-            prov.setDireccion(txtdir.getText());
+            prov.setDireccion(txtdir.getText().toUpperCase());
             prov.setEmail(txtemail.getText());
-            prov.setRazonSoc(txtrazon.getText());
+            prov.setRazonSoc(txtrazon.getText().toUpperCase());
             prov.setRuc(Long.parseLong(txtruc.getText()));
             prov.setTelefono(Integer.parseInt(txttelf.getText()));
             

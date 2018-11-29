@@ -250,10 +250,10 @@ public class frmModifProveedor extends javax.swing.JDialog {
         else{
         try{
             ProveedoresBL provBL=new ProveedoresBL();
-            String razon=txtraz.getText();
+            String razon=txtraz.getText().toUpperCase();
             String email=txtemail.getText();
             String ruc=txtruc.getText();
-            String dir=txtdir.getText();
+            String dir=txtdir.getText().toUpperCase();
             int telf=Integer.parseInt(txttelf.getText().toString());
             Proveedor prov=new Proveedor();
             prov.setRazonSoc(razon);

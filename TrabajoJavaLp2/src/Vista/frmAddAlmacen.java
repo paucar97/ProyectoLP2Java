@@ -175,7 +175,7 @@ public class frmAddAlmacen extends javax.swing.JDialog {
         else{
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
-            String dir=jTextField1.getText();
+            String dir=jTextField1.getText().toUpperCase();
             int numDif=Integer.parseInt(jSpinner1.getText().toString());
             Date fecha=new Date();
             Calendar cal=Calendar.getInstance();

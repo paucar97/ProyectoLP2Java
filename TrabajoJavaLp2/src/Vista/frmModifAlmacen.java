@@ -172,7 +172,7 @@ public class frmModifAlmacen extends javax.swing.JDialog {
         try{
             AlmacenesBL almacenBL=new AlmacenesBL();
             almacenBL.eliminarAlmacen(idA);
-            String dir=jTextField1.getText();
+            String dir=jTextField1.getText().toUpperCase();
             int numDif=Integer.parseInt(jSpinner1.getText().toString());
             Date fecha=new Date();
             Calendar cal=Calendar.getInstance();

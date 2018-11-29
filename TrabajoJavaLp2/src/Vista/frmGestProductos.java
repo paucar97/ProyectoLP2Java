@@ -487,7 +487,7 @@ public class frmGestProductos extends javax.swing.JInternalFrame {
             DefaultTableModel model=(DefaultTableModel) tblProd.getModel();
 
             String criterio;
-            criterio=jTextField1.getText().toString().trim();
+            criterio=jTextField1.getText().toString().trim().toUpperCase();
             if(jTextField1.getText().isEmpty()){
                 model.setRowCount(0);
                 Object rowData[]=new Object[8];

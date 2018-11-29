@@ -241,8 +241,8 @@ public class frmAddProd extends javax.swing.JDialog {
                 "Elija un tipo","Error",
                 ERROR_MESSAGE);
         else{
-        String nombre=txtnombre.getText();
-        String desc=txtdesc.getText();
+        String nombre=txtnombre.getText().toUpperCase();
+        String desc=txtdesc.getText().toUpperCase();
         String id=txtcodigo.getText().toUpperCase();
         String unidad=cmbunidad.getSelectedItem().toString().toUpperCase();
         double precio=Double.parseDouble(txtprecio.getText());

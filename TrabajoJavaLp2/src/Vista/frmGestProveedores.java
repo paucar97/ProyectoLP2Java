@@ -470,7 +470,7 @@ public class frmGestProveedores extends javax.swing.JInternalFrame {
             DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
 
             String criterio;
-            criterio=lblBusqueda.getText().toString().trim();
+            criterio=lblBusqueda.getText().toString().trim().toUpperCase();
             if(lblBusqueda.getText().isEmpty()){
                 model.setRowCount(0);
                 Object rowData[]=new Object[8];

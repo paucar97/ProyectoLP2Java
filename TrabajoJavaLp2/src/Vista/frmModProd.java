@@ -271,8 +271,8 @@ public class frmModProd extends javax.swing.JDialog {
         else{
         try{
             ProductosBL prodBL=new ProductosBL();           
-            String nombre=txtnombre.getText();
-            String desc=txtdesc.getText();
+            String nombre=txtnombre.getText().toUpperCase();
+            String desc=txtdesc.getText().toUpperCase();
             String id=txtcod.getText().toUpperCase();
             String unidad=cbounidad.getSelectedItem().toString().toUpperCase();
             double precio=Double.parseDouble(txtprecio.getText());
