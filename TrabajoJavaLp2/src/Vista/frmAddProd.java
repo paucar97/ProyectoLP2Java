@@ -60,6 +60,11 @@ public class frmAddProd extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
         txtdesc = new javax.swing.JTextArea(4,50);
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar Producto");
@@ -70,7 +75,7 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jLabel2.setText("Nombre:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 30, 60, 20);
+        jLabel2.setBounds(10, 20, 60, 20);
 
         txtnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -82,11 +87,11 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jLabel3.setText("Descripción:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(40, 104, 80, 20);
+        jLabel3.setBounds(10, 100, 80, 20);
 
         jLabel4.setText("Precio:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(40, 190, 60, 20);
+        jLabel4.setBounds(10, 180, 60, 20);
 
         txtprecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -98,7 +103,7 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jLabel5.setText("Unidad de Medida:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(40, 230, 110, 14);
+        jLabel5.setBounds(10, 230, 110, 14);
 
         cmbunidad.setBackground(new java.awt.Color(255, 255, 204));
         cmbunidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "unidad", "ciento", "metro", "bolsa", "docena", "kilogramo" }));
@@ -107,11 +112,11 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jLabel6.setText("Tipo:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(40, 270, 70, 14);
+        jLabel6.setBounds(10, 270, 70, 14);
 
         jLabel7.setText("Stock Mínimo:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(40, 310, 90, 14);
+        jLabel7.setBounds(10, 300, 90, 14);
 
         txtStockMin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -155,7 +160,7 @@ public class frmAddProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(radAlta);
-        radAlta.setBounds(150, 270, 110, 23);
+        radAlta.setBounds(140, 270, 110, 23);
 
         radRegular.setBackground(new java.awt.Color(204, 204, 204));
         radRegular.setText("Regular");
@@ -165,7 +170,7 @@ public class frmAddProd extends javax.swing.JDialog {
             }
         });
         jPanel1.add(radRegular);
-        radRegular.setBounds(270, 270, 80, 23);
+        radRegular.setBounds(260, 270, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("S/.");
@@ -174,7 +179,7 @@ public class frmAddProd extends javax.swing.JDialog {
 
         jLabel8.setText("Codigo:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(40, 70, 70, 20);
+        jLabel8.setBounds(10, 60, 70, 20);
 
         txtcodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +207,31 @@ public class frmAddProd extends javax.swing.JDialog {
         });
         jPanel1.add(txtdesc);
         txtdesc.setBounds(150, 100, 250, 70);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel9.setText("(Caracteres alfanumericos)");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(10, 120, 140, 13);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel10.setText("(5 Caracteres alfanumericos)");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(10, 80, 130, 13);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel11.setText("(Caracteres alfabeticos)");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(10, 40, 140, 13);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel12.setText("(Entero positivo)");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(10, 320, 90, 13);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel13.setText("(Numero real)");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(10, 200, 90, 13);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,6 +269,10 @@ public class frmAddProd extends javax.swing.JDialog {
         else if(radAlta.isSelected()==false&&radRegular.isSelected()==false)
             JOptionPane.showMessageDialog(this,
                 "Elija un tipo","Error",
+                ERROR_MESSAGE);
+        else if(Integer.parseInt(txtStockMin.getText())>500)
+            JOptionPane.showMessageDialog(this,
+                "Stock minimo debe ser menor a 500","Error",
                 ERROR_MESSAGE);
         else{
         String nombre=txtnombre.getText().toUpperCase();
@@ -317,9 +351,7 @@ public class frmAddProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten letras a-z","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtnombreKeyTyped
@@ -334,9 +366,7 @@ public class frmAddProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten caracteres alfanumericos","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtcodigoKeyTyped
@@ -351,9 +381,7 @@ public class frmAddProd extends javax.swing.JDialog {
             if(!s1.matches("[0-9.]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+                
             }
             if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
                 evt.consume();
@@ -368,16 +396,14 @@ public class frmAddProd extends javax.swing.JDialog {
         // TODO add your handling code here:
         String s1=String.valueOf(evt.getKeyChar());
         if(evt.getKeyChar()!=WCKeyEvent.VK_BACK){
-            if(txtStockMin.getText().length()>=5){
+            if(txtStockMin.getText().length()>=3){
                 evt.consume();
             
             }
             if(!s1.matches("[0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtStockMinKeyTyped
@@ -396,9 +422,7 @@ public class frmAddProd extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ0-9/]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten caracteres alfanumericos","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtdescKeyTyped
@@ -450,6 +474,10 @@ public class frmAddProd extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,6 +485,7 @@ public class frmAddProd extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton radAlta;
     private javax.swing.JRadioButton radRegular;

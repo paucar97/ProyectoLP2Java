@@ -288,9 +288,7 @@ public class frmAddProveedor extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten letras a-z","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtrazonKeyTyped
@@ -306,9 +304,7 @@ public class frmAddProveedor extends javax.swing.JDialog {
             if(!s1.matches("[0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtrucKeyTyped
@@ -324,9 +320,7 @@ public class frmAddProveedor extends javax.swing.JDialog {
             if(!s1.matches("[0-9]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten numeros","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txttelfKeyTyped
@@ -345,9 +339,7 @@ public class frmAddProveedor extends javax.swing.JDialog {
             if(!s1.matches("[aA-zZ0-9.]")){
                 evt.consume();
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(this,
-                "Solo se admiten caracteres alfanumericos","Error",
-                ERROR_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_txtdirKeyTyped
